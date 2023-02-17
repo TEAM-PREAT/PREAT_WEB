@@ -29,7 +29,7 @@ const Wrapper = styled.div`
     position: absolute;
     width: 6px;
     height: 6px;
-    background: #fff;
+    background: #ff6c22;
     border-radius: 50%;
     animation: lds-default 1.2s linear infinite;
   }
