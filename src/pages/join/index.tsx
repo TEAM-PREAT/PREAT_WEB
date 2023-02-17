@@ -6,7 +6,7 @@ import { useState } from 'react';
 type StepStatusType = 'nickname-setting' | 'nickname-setting-complete';
 
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('nickname-setting-complete');
+  const [step, setStep] = useState<StepStatusType>('nickname-setting');
 
   const handleStep = (step: StepStatusType) => {
     setStep(step);

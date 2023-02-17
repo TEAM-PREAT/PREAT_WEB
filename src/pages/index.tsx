@@ -1,7 +1,8 @@
+import withLayout from '@/hoc/withLayout';
 import Head from 'next/head';
 import Link from 'next/link';
-
-export default function Home() {
+import styled from 'styled-components';
+function Home() {
   return (
     <>
       <Head>
@@ -10,12 +11,24 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <Link href="/join">회원가입</Link>
-        <Link href="/login">카카오 로그인</Link>
-        <Link href="/login/complete">카카오로그인 완료</Link>
-        <Link href="/login/loading">로딩</Link>
-        <Link href="/preat">preat</Link>
+        <Wrapper>
+          <Link href="/join">회원가입</Link>
+          <Link href="/login">카카오 로그인</Link>
+          <Link href="/login/complete">카카오로그인 완료</Link>
+          <Link href="/login/loading">로딩</Link>
+          <Link href="/preat">preat</Link>
+        </Wrapper>
       </main>
     </>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  font-size: 20px;
+`;
+
+export default withLayout(Home, 'home', 'home', false);
