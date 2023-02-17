@@ -12,7 +12,9 @@ const tokenSetting = async (code: string) => {
   const data = await getToken(code);
   console.log('data: ', data);
 
-  window.location.href = '/';
+  window.location.href = '/login/complete';
+
+  // TODO: 백엔드로 api 요청해서 회원가입
   //   {
   //     "access_token": "kp_JNl4LYdPKq9YSTzSjtUj1fV42s6a7Be_uEnnvCiolUwAAAYZaOZ2Y",
   //     "token_type": "bearer",

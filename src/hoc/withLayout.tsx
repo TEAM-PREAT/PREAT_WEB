@@ -5,11 +5,12 @@ function withLayout(
   Component: (props: any) => JSX.Element,
   title: string,
   description: string,
+  isHeader = true,
 ) {
   const C = (props: any) => {
     return (
       <Wrapper>
-        <Header>{title}</Header>
+        {isHeader && <Header>{title}</Header>}
         <Component {...props} />
       </Wrapper>
     );
