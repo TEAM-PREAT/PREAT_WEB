@@ -7,7 +7,10 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
       }
       body{
-        font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        font-family:'Noto Sans KR', -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      
+        /* NOTE: 삭제 */
+        background-color: #353535;
       }
       a {
         color: inherit;
