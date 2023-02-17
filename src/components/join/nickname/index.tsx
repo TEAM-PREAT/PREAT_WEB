@@ -3,7 +3,10 @@ import { ButtonStyled } from '@/styles/core';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
-function NickNameInputPage() {
+interface NickNameInputPageProps {
+  onNextStep: () => void;
+}
+function NickNameInputPage({ onNextStep }: NickNameInputPageProps) {
   const [inputs, setInputs] = useState({
     nickname: '',
   });
@@ -20,6 +23,10 @@ function NickNameInputPage() {
     setIsError(!isError);
   };
 
+  const onAction = () => {
+    onNextStep();
+  };
+
   return (
     <Wrapper>
       <Title>닉네임을</Title>
@@ -34,7 +41,9 @@ function NickNameInputPage() {
           isCorrect={isCorrect}
         />
       </InputWrapper>
-      <Button disabled={!isCorrect}>확인</Button>
+      <Button disabled={!isCorrect} onClick={onAction}>
+        확인
+      </Button>
     </Wrapper>
   );
 }
