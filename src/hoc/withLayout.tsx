@@ -5,7 +5,7 @@ function withLayout(
   Component: (props: any) => JSX.Element,
   title: string,
   description: string,
-  isHeader = true,
+  isHeader = false,
 ) {
   const C = (props: any) => {
     return (

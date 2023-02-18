@@ -1,4 +1,4 @@
-import login from '@/api';
+import kakaoLogin from '@/api/kakao';
 import withLayout from '@/hoc/withLayout';
 import Image from 'next/image';
 import styled from 'styled-components';
@@ -14,7 +14,7 @@ function LoginPage() {
           height={400}
         />
       </MainImageWrapper>
-      <KakaoButton onClick={login}>
+      <KakaoButton onClick={kakaoLogin}>
         <Image
           src="/assets/images/kakao_login_medium_narrow.png"
           alt="kakao-login"
@@ -42,4 +42,4 @@ const KakaoButton = styled.button`
   cursor: pointer;
 `;
 
-export default withLayout(LoginPage, '로그인', '로그인');
+export default withLayout(LoginPage, '로그인', '로그인', true);
