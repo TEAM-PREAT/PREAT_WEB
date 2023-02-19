@@ -35,10 +35,10 @@ export default function SpicySlider() {
         <FontSize5>100</FontSize5>
       </StepWrapper>
       <StepTextWrapper>
-        <FontSize8>맵찔이</FontSize8>
-        <FontSize8>신라면</FontSize8>
-        <FontSize8>불닭볶음면</FontSize8>
-        <FontSize8>맵고수</FontSize8>
+        <span>맵찔이</span>
+        <span>신라면</span>
+        <span>불닭볶음면</span>
+        <span>맵고수</span>
       </StepTextWrapper>
     </>
   );
@@ -149,8 +149,8 @@ const StepWrapper = styled.div`
 const StepTextWrapper = styled.div`
   display: flex;
   font-weight: 600;
-  width: 210px;
-  font-size: 8px;
+  width: 200px;
+  font-size: 10px;
   margin: auto;
   justify-content: space-between;
 
