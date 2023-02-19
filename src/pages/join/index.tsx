@@ -59,7 +59,7 @@ function JoinPage() {
     case 'nickname-complete':
       return (
         <NicknameSettingComplete
-          onNextStep={() => setStep('tastes')}
+          onNextStep={() => setStep('hate')}
           onPrevStep={() => setStep('nickname')}
         />
       );
