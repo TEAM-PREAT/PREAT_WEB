@@ -3,38 +3,20 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 
-const DUMMY = [
-  {
-    key: '1',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    key: '2',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    key: '3',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    key: '4',
-    label: 'food item',
-  },
-];
-
 interface FoodListProps {
+  list: {
+    label: string;
+    key: string;
+    src?: string;
+  }[];
   selectList: string[];
   handleSelectList: (newSelectList: string[]) => void;
 }
 export default function FoodList({
   selectList,
   handleSelectList,
+  list,
 }: FoodListProps) {
-  const [list, setList] = useState(DUMMY);
-
   const handleSelectItem = (key: string) => {
     if (selectList.includes(key)) {
       const newSelectList = selectList.filter((element) => element !== key);

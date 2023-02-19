@@ -2,13 +2,20 @@ import styled from 'styled-components';
 
 interface SearchTagProps {
   content: string;
+  onAction: (key: string, content: string) => void;
 }
 
-export default function SearchTag({ content }: SearchTagProps) {
-  return <Wrapper>{content}</Wrapper>;
+export default function SearchTag({ content, onAction }: SearchTagProps) {
+  const onClick = () => {
+    //  TODO 수정
+    onAction(content, content);
+  };
+
+  return <Wrapper onClick={onClick}>{content}</Wrapper>;
 }
 
 const Wrapper = styled.div`
+  cursor: pointer;
   width: fit-content;
   height: 24px;
   min-width: fit-content;

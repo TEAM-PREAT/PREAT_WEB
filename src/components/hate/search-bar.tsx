@@ -7,21 +7,24 @@ import styled from 'styled-components';
 interface SearchBarProps {
   handleSearchMode: () => void;
   isSearchMode: boolean;
+  onAction: (key: string, content: string) => void;
 }
 export default function SearchBar({
   handleSearchMode,
   isSearchMode,
+  onAction,
 }: SearchBarProps) {
   const [searchKeyword, setSearchKeyword] = useState('');
 
   const isShowTagList = searchKeyword === '';
+
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
   };
 
   const onBlur = () => {
-    handleSearchMode();
-    setSearchKeyword('');
+    // handleSearchMode();
+    // setSearchKeyword('');
   };
 
   return (
@@ -37,11 +40,18 @@ export default function SearchBar({
           <SearchIcon />
         </IconWrapper>
       </InputWrapper>
-      {isSearchMode && (isShowTagList ? <SearchTagList /> : <SearchList />)}
+      {isSearchMode &&
+        (isShowTagList ? (
+          <SearchTagList onAction={onAction} />
+        ) : (
+          <SearchList onAction={onAction} />
+        ))}
     </Wrapper>
   );
 }
+
 const Wrapper = styled.div``;
+
 const InputWrapper = styled.div`
   width: 290px;
   height: 34px;
