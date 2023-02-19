@@ -1,18 +1,18 @@
 import SearchTag from '@/components/hate/search-tag';
 import styled from 'styled-components';
 
-export default function SearchTagList() {
+interface SearchTagListProps {
+  onAction: (key: string, content: string) => void;
+}
+export default function SearchTagList({ onAction }: SearchTagListProps) {
   return (
     <>
       <Title>다른 사용자가 많이 찾고있어요!</Title>
       <ListWrapper>
-        <SearchTag content="김치 볶음밥" />
-        <SearchTag content="김치 볶음밥" />
-        <SearchTag content="김치 볶음밥" />
-        <SearchTag content="김치 볶음밥" />
-        <SearchTag content="김치 볶음밥" />
-        <SearchTag content="김치 볶음밥" />
-        <SearchTag content="김치 볶음밥" />
+        <SearchTag content="김치 볶음밥" onAction={onAction} />
+        <SearchTag content="김치 볶음밥2" onAction={onAction} />
+        <SearchTag content="김치 볶음밥5" onAction={onAction} />
+        <SearchTag content="김치 볶음밥3" onAction={onAction} />
       </ListWrapper>
     </>
   );

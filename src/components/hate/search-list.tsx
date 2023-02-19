@@ -1,20 +1,32 @@
+import { DUMMY } from '@/components/hate';
 import SmallSearchIcon from '@/components/icons/small-search-icon';
 import styled from 'styled-components';
+interface SearchListProps {
+  onAction: (key: string, content: string) => void;
+}
 
-export default function SearchList() {
+export default function SearchList({ onAction }: SearchListProps) {
   return (
     <ListWrapper>
-      <SearchItem content="복숭아" />
-      <SearchItem content="복숭아" />
-      <SearchItem content="복숭아" />
-      <SearchItem content="복숭아" />
+      {DUMMY.map(({ key, label }) => (
+        <SearchItem
+          content={label}
+          onClick={() => onAction(`${key}1`, label)}
+        />
+      ))}
     </ListWrapper>
   );
 }
 
-function SearchItem({ content }: { content: string }) {
+function SearchItem({
+  content,
+  onClick,
+}: {
+  content: string;
+  onClick: () => void;
+}) {
   return (
-    <ItemWrapper>
+    <ItemWrapper onClick={onClick}>
       <SmallSearchIcon />
       <span>{content}</span>
     </ItemWrapper>
