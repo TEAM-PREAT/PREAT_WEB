@@ -6,11 +6,17 @@ interface FoodItemProps {
   label: string;
   src?: string;
   isSelected: boolean;
+  onSelect: () => void;
 }
 
-export default function FoodItem({ label, src, isSelected }: FoodItemProps) {
+export default function FoodItem({
+  label,
+  src,
+  isSelected,
+  onSelect,
+}: FoodItemProps) {
   return (
-    <FoodItemWrapper>
+    <FoodItemWrapper onClick={onSelect}>
       <FoodImageWrapper>
         {src && <Image src={src} alt={label} width={96} height={94} />}
         {isSelected && (

@@ -1,25 +1,56 @@
 import FoodItem from '@/components/hate/food-item';
+import { useState } from 'react';
 import styled from 'styled-components';
 
+const DUMMY = [
+  {
+    key: '1',
+    label: 'food item',
+    src: '/assets/images/pine.png',
+  },
+  {
+    key: '2',
+    label: 'food item',
+    src: '/assets/images/pine.png',
+  },
+  {
+    key: '3',
+    label: 'food item',
+    src: '/assets/images/pine.png',
+  },
+  {
+    key: '4',
+    label: 'food item',
+  },
+];
+
 export default function FoodList() {
+  const [list, setList] = useState(DUMMY);
+  const [selectList, setSelectList] = useState<string[]>([]);
+
+  const handleSelectItem = (key: string) => {
+    if (selectList.includes(key)) {
+      const newSelectList = selectList.filter((element) => element !== key);
+      setSelectList(newSelectList);
+    } else {
+      setSelectList([...selectList, key]);
+    }
+  };
+
   return (
     <Wrapper>
-      <FoodItem
-        label={'food item'}
-        isSelected={false}
-        src="/assets/images/pine.png"
-      />
-      <FoodItem
-        label={'food item'}
-        isSelected={false}
-        src="/assets/images/pine.png"
-      />
-      <FoodItem
-        label={'food item'}
-        isSelected={true}
-        src="/assets/images/pine.png"
-      />
-      <FoodItem label={'food item'} isSelected={false} />
+      {list.map(({ key, label, src }) => {
+        const isSelected = selectList.includes(key);
+        return (
+          <FoodItem
+            key={key}
+            label={label}
+            isSelected={isSelected}
+            src={src}
+            onSelect={() => handleSelectItem(key)}
+          />
+        );
+      })}
     </Wrapper>
   );
 }
