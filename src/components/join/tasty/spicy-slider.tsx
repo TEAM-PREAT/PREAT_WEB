@@ -1,24 +1,46 @@
+import { FontSize5, FontSize8 } from '@/styles/font';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function SpicySlider() {
+  const [value, setValue] = useState(0);
+  function handleInputChange(e) {
+    let target = e.target;
+    if (e.target.type !== 'range') {
+      target = document.getElementById('range');
+    }
+    const min = target.min;
+    const max = target.max;
+    const val = target.value;
+    setValue(target.value);
+    target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
+  }
+
   return (
     <>
       <SliderInputWrapper>
-        <SliderInput name="range" type="range" min="0" max="100" step="25" />
+        <SliderInput
+          type="range"
+          value={value}
+          min="0"
+          max="100"
+          step={25}
+          onChange={handleInputChange}
+        />
       </SliderInputWrapper>
 
       <StepWrapper>
-        <span>0</span>
-        <span>30</span>
-        <span>50</span>
-        <span>70</span>
-        <span>100</span>
+        <FontSize5>0</FontSize5>
+        <FontSize5>30</FontSize5>
+        <FontSize5>50</FontSize5>
+        <FontSize5>70</FontSize5>
+        <FontSize5>100</FontSize5>
       </StepWrapper>
       <StepTextWrapper>
-        <span>맵찔이</span>
-        <span>신라면</span>
-        <span>불닭볶음면</span>
-        <span>맵고수</span>
+        <FontSize8>맵찔이</FontSize8>
+        <FontSize8>신라면</FontSize8>
+        <FontSize8>불닭볶음면</FontSize8>
+        <FontSize8>맵고수</FontSize8>
       </StepTextWrapper>
     </>
   );
@@ -27,11 +49,84 @@ export default function SpicySlider() {
 const SliderInputWrapper = styled.div`
   margin-top: 30px;
 `;
+
 const SliderInput = styled.input`
-  accent-color: #ef511e;
-  outline: none;
-  width: 215px;
-  margin: auto;
+  -webkit-appearance: none;
+  width: 200px;
+  height: 7px;
+  background: #d9d9d9;
+  border-radius: 5px;
+  background-image: linear-gradient(#ff6c3e, #ff6c3e);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+
+  /* Input Thumb */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ff6c3e;
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background 0.3s ease-in-out;
+  }
+
+  &::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ff6c3e;
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background 0.3s ease-in-out;
+  }
+
+  &::-ms-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #ff4500;
+    cursor: ew-resize;
+    box-shadow: 0 0 2px 0 #555;
+    transition: background 0.3s ease-in-out;
+  }
+
+  &::-webkit-slider-thumb:hover {
+    background: #ff0200;
+  }
+
+  &::-moz-range-thumb:hover {
+    background: #ff0200;
+  }
+
+  &::-ms-thumb:hover {
+    background: #ff0200;
+  }
+
+  /* Input Track */
+  &::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  &::-moz-range-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+
+  &::-ms-track {
+    -webkit-appearance: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
 `;
 
 const StepWrapper = styled.div`
@@ -40,7 +135,6 @@ const StepWrapper = styled.div`
 
   color: #ababab;
   font-weight: 600;
-  font-size: 8px;
   margin: 5px;
 
   span:nth-child(n + 2) {
@@ -49,12 +143,14 @@ const StepWrapper = styled.div`
   }
 `;
 
-const StepTextWrapper = styled.div`
+const StepTextWrapper = styled(FontSize8)`
   display: flex;
   font-weight: 600;
   font-size: 8px;
   justify-content: space-between;
-  margin: 10px 0;
+
+  font-size: 10px;
+  transform: scale(0.8); //0.
 
   span:nth-child(1) {
     color: #ababab;
