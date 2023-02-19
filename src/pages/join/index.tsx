@@ -8,29 +8,36 @@ type StepStatusType = 'nickname' | 'nickname-setting-complete' | 'tastes';
 
 function JoinPage() {
   const [step, setStep] = useState<StepStatusType>('tastes');
+  const [settingValues, setSettingValues] = useState<Record<string, unknown>>();
 
-  const handleStep = (step: StepStatusType) => {
+  const handleStep = (
+    step: StepStatusType,
+    newSettingValues: Record<string, unknown>,
+  ) => {
     setStep(step);
+    setSettingValues({ ...settingValues, ...newSettingValues });
+  };
+
+  const handleTasteNextStep = (spicyStep: number, sugarStep: number) => {
+    handleStep('nickname-setting-complete', { spicyStep, sugarStep });
   };
 
   if (step === 'nickname') {
     return (
       <NickNameInputPage
-        onNextStep={() => handleStep('nickname-setting-complete')}
+        onNextStep={() => handleStep('nickname-setting-complete', {})}
       />
     );
   }
   if (step === 'nickname-setting-complete') {
     return (
       <NicknameSettingComplete
-        onNextStep={() => handleStep('nickname-setting-complete')}
+        onNextStep={() => handleStep('nickname-setting-complete', {})}
       />
     );
   }
 
-  return (
-    <TasteSetting onNextStep={() => handleStep('nickname-setting-complete')} />
-  );
+  return <TasteSetting onNextStep={handleTasteNextStep} />;
 }
 
 export default withLayout(JoinPage, '회원가입', '회원가입', false);
