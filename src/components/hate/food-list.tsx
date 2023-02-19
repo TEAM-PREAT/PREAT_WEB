@@ -1,5 +1,6 @@
 import FoodItem from '@/components/hate/food-item';
 import { useState } from 'react';
+import Image from 'next/image';
 import styled from 'styled-components';
 
 const DUMMY = [
@@ -45,23 +46,43 @@ export default function FoodList({
 
   return (
     <Wrapper>
-      {list.map(({ key, label, src }) => {
-        const isSelected = selectList.includes(key);
-        return (
-          <FoodItem
-            key={key}
-            label={label}
-            isSelected={isSelected}
-            src={src}
-            onSelect={() => handleSelectItem(key)}
-          />
-        );
-      })}
+      <Title>
+        호불호 음식
+        <Image src="/assets/images/jwt.png" alt="jwt" width={71} height={40} />
+      </Title>
+      <FoodListWrapper>
+        {list.map(({ key, label, src }) => {
+          const isSelected = selectList.includes(key);
+          return (
+            <FoodItem
+              key={key}
+              label={label}
+              isSelected={isSelected}
+              src={src}
+              onSelect={() => handleSelectItem(key)}
+            />
+          );
+        })}
+      </FoodListWrapper>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div``;
+
+const Title = styled.h2`
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 34px;
+  margin-top: 35px;
+
+  img {
+    position: relative;
+    top: 10px;
+  }
+`;
+
+const FoodListWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
