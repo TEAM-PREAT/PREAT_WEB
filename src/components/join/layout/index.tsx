@@ -15,17 +15,17 @@ export const Container = styled.div`
   min-height: 100vh;
 `;
 
-const ContainerWithHeaderStyled = styled(Container)`
-  min-height: calc(100vh - 80px);
+export const ContainerWithHeaderStyled = styled(Container)`
+  min-height: calc(100vh - 50px);
 `;
 
 const Header = styled.div`
   max-width: 320px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 0 10px;
+  padding: 30px 0 0px;
 
-  height: 80px;
+  /* height: 50px; */
 `;
 
 export function ContainerWithHeader({ children }: ChildrenProps) {
