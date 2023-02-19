@@ -1,19 +1,17 @@
 import { FontSize5, FontSize8 } from '@/styles/font';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 export default function SpicySlider() {
-  const [value, setValue] = useState(0);
-  function handleInputChange(e) {
-    let target = e.target;
-    if (e.target.type !== 'range') {
-      target = document.getElementById('range');
-    }
-    const min = target.min;
-    const max = target.max;
-    const val = target.value;
-    setValue(target.value);
-    target.style.backgroundSize = ((val - min) * 100) / (max - min) + '% 100%';
+  const [value, setValue] = useState('0');
+
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const { min, max, value } = e.target;
+    setValue(value);
+    e.target.style.backgroundSize =
+      ((parseInt(value) - parseInt(min)) * 100) /
+        (parseInt(max) - parseInt(min)) +
+      '% 100%';
   }
 
   return (
