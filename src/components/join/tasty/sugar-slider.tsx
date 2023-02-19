@@ -2,15 +2,17 @@ import { FontSize8 } from '@/styles/font';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
-export default function SugarSlider() {
-  const [step, setStep] = useState(0);
-
+interface SugarSliderProps {
+  step: number | null;
+  handleStep: (step: number) => void;
+}
+export default function SugarSlider({ step, handleStep }: SugarSliderProps) {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    console.log('value: ', value);
 
-    setStep(parseInt(value) - 1);
+    handleStep(parseInt(value) - 1);
   };
+
   return (
     <Wrapper>
       <LabelWrapper>
@@ -29,7 +31,6 @@ export default function SugarSlider() {
             value="1"
             required
             onChange={handleInputChange}
-            defaultChecked
           />
           <RadioInput
             type="radio"
@@ -67,7 +68,7 @@ export default function SugarSlider() {
           />
         </RadioInputWrapper>
         <SlideBar />
-        <SlideBarColor step={step} />
+        <SlideBarColor step={step ?? 0} />
       </SliderWrapper>
 
       <TextLabelWrapper>
@@ -81,6 +82,7 @@ export default function SugarSlider() {
 const Wrapper = styled.div`
   margin-top: 30px;
 `;
+
 const TextLabelWrapper = styled.div`
   width: 200px;
   margin: auto;
@@ -96,6 +98,7 @@ const TextLabelWrapper = styled.div`
     color: #ff6c3e;
   }
 `;
+
 const LabelWrapper = styled.div`
   color: #848484;
   display: flex;

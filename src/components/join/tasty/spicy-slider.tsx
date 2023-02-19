@@ -2,12 +2,17 @@ import { FontSize5, FontSize8 } from '@/styles/font';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
-export default function SpicySlider() {
-  const [value, setValue] = useState('0');
+interface SpicySliderProps {
+  value: number;
+  handleValue: (value: number) => void;
+}
+export default function SpicySlider({ value, handleValue }: SpicySliderProps) {
+  // const [value, setValue] = useState(0);
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const { min, max, value } = e.target;
-    setValue(value);
+    handleValue(parseInt(value));
+
     e.target.style.backgroundSize =
       ((parseInt(value) - parseInt(min)) * 100) /
         (parseInt(max) - parseInt(min)) +

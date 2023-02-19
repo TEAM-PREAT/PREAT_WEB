@@ -53,6 +53,7 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled(ButtonStyled)``;
+
 const Title = styled.p`
   font-size: 25px;
   font-weight: 900;
