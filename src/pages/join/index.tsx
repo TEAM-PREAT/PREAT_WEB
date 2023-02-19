@@ -1,3 +1,4 @@
+import Hate from '@/components/hate';
 import NickNameInputPage from '@/components/join/nickname';
 import NicknameSettingComplete from '@/components/join/nickname/setting-complete';
 import TasteSetting from '@/components/join/tasty';
@@ -9,10 +10,10 @@ import {
 } from '@/utils/storage';
 import { useEffect, useState } from 'react';
 
-type StepStatusType = 'nickname' | 'nickname-complete' | 'tastes';
+type StepStatusType = 'nickname' | 'nickname-complete' | 'tastes' | 'hate';
 
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('nickname-complete');
+  const [step, setStep] = useState<StepStatusType>('hate');
   const [settingValues, setSettingValues] = useState<Record<string, unknown>>();
 
   const handleStep = (
@@ -54,7 +55,7 @@ function JoinPage() {
       return <TasteSetting onNextStep={handleTasteNextStep} />;
 
     default:
-      return <TasteSetting onNextStep={handleTasteNextStep} />;
+      return <Hate onNextStep={() => {}} />;
   }
 }
 
