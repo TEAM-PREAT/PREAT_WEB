@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { ButtonStyled } from '@/styles/core';
+import { Container, ContainerWithHeader } from '@/components/join/layout';
 
 interface NicknameSettingCompleteProps {
   onNextStep: () => void;
+  onPrevStep: () => void;
 }
 
-function NicknameSettingComplete({ onNextStep }: NicknameSettingCompleteProps) {
+function NicknameSettingComplete({
+  onNextStep,
+  onPrevStep,
+}: NicknameSettingCompleteProps) {
   return (
-    <Wrapper>
+    <ContainerWithHeader>
       <InnerBox>
         <Title>
           <strong>맛집매니아</strong>님
@@ -22,10 +27,9 @@ function NicknameSettingComplete({ onNextStep }: NicknameSettingCompleteProps) {
             height={111}
           />
         </ImageWrapper>
-        <Button>확인</Button>
-        <Text>다시 설정하기.</Text>
+        <Button onClick={onNextStep}>확인</Button>
       </InnerBox>
-    </Wrapper>
+    </ContainerWithHeader>
   );
 }
 

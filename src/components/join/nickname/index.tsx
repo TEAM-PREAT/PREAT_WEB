@@ -4,27 +4,40 @@ import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 interface NickNameInputPageProps {
-  onNextStep: () => void;
+  onNextStep: (nickname: string) => void;
 }
-function NickNameInputPage({ onNextStep }: NickNameInputPageProps) {
-  const [inputs, setInputs] = useState({
-    nickname: '',
-  });
 
-  const { nickname } = inputs;
+function NickNameInputPage({ onNextStep }: NickNameInputPageProps) {
+  const [nickname, setNickname] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+
+  const checkNicknameDuplicate = (nickname: string) => {
+    // TODO : 닉네임 중복확인
+    return nickname == 'dpfj';
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setInputs({ ...inputs, [name]: value });
+    const { value } = e.target;
+
+    if (checkNicknameDuplicate(value)) {
+      setIsCorrect(false);
+      setIsError(true);
+      setNickname('');
+      return;
+    }
+
+    setIsCorrect(value !== '');
+
+    setNickname(value);
   };
-  const [isError, setIsError] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(true);
+
   const handleError = () => {
     setIsError(!isError);
   };
 
   const onAction = () => {
-    onNextStep();
+    onNextStep(nickname);
   };
 
   return (

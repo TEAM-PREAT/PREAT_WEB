@@ -2,12 +2,17 @@ import NickNameInputPage from '@/components/join/nickname';
 import NicknameSettingComplete from '@/components/join/nickname/setting-complete';
 import TasteSetting from '@/components/join/tasty';
 import withLayout from '@/hoc/withLayout';
-import { useState } from 'react';
+import {
+  getStorage,
+  JOIN_SETTING_VALUE_KEY,
+  setStorage,
+} from '@/utils/storage';
+import { useEffect, useState } from 'react';
 
-type StepStatusType = 'nickname' | 'nickname-setting-complete' | 'tastes';
+type StepStatusType = 'nickname' | 'nickname-complete' | 'tastes';
 
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('tastes');
+  const [step, setStep] = useState<StepStatusType>('nickname-complete');
   const [settingValues, setSettingValues] = useState<Record<string, unknown>>();
 
   const handleStep = (
@@ -15,29 +20,42 @@ function JoinPage() {
     newSettingValues: Record<string, unknown>,
   ) => {
     setStep(step);
-    setSettingValues({ ...settingValues, ...newSettingValues });
+
+    const newSettingValueTemp = { ...settingValues, ...newSettingValues };
+    setSettingValues(newSettingValueTemp);
+    setStorage(JOIN_SETTING_VALUE_KEY, newSettingValueTemp);
+  };
+
+  const handleNickNameNextStep = (nickname: string) => {
+    handleStep('nickname-complete', { nickname });
   };
 
   const handleTasteNextStep = (spicyStep: number, sugarStep: number) => {
-    handleStep('nickname-setting-complete', { spicyStep, sugarStep });
+    handleStep('nickname-complete', { spicyStep, sugarStep });
   };
 
-  if (step === 'nickname') {
-    return (
-      <NickNameInputPage
-        onNextStep={() => handleStep('nickname-setting-complete', {})}
-      />
-    );
-  }
-  if (step === 'nickname-setting-complete') {
-    return (
-      <NicknameSettingComplete
-        onNextStep={() => handleStep('nickname-setting-complete', {})}
-      />
-    );
-  }
+  useEffect(() => {
+    const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);
 
-  return <TasteSetting onNextStep={handleTasteNextStep} />;
+    setSettingValues(initSettingValue);
+  }, []);
+
+  switch (step) {
+    case 'nickname':
+      return <NickNameInputPage onNextStep={handleNickNameNextStep} />;
+    case 'nickname-complete':
+      return (
+        <NicknameSettingComplete
+          onNextStep={() => setStep('tastes')}
+          onPrevStep={() => setStep('nickname')}
+        />
+      );
+    case 'tastes':
+      return <TasteSetting onNextStep={handleTasteNextStep} />;
+
+    default:
+      return <TasteSetting onNextStep={handleTasteNextStep} />;
+  }
 }
 
 export default withLayout(JoinPage, '회원가입', '회원가입', false);
