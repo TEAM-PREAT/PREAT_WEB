@@ -1,4 +1,4 @@
-import { DUMMY } from '@/components/hate';
+import { DUMMY } from '@/components/join/hate';
 import SmallSearchIcon from '@/components/icons/small-search-icon';
 import styled from 'styled-components';
 interface SearchListProps {

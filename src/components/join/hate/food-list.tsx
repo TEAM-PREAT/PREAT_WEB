@@ -1,4 +1,4 @@
-import FoodItem from '@/components/hate/food-item';
+import FoodItem from '@/components/join/hate/food-item';
 import { useState } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';

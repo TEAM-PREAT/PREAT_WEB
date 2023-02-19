@@ -1,6 +1,7 @@
-import Hate from '@/components/hate';
+import Hate from '@/components/join/hate';
 import NickNameInputPage from '@/components/join/nickname';
 import NicknameSettingComplete from '@/components/join/nickname/setting-complete';
+import RestaurantEvaluating from '@/components/join/restaurant';
 import TasteSetting from '@/components/join/tasty';
 import withLayout from '@/hoc/withLayout';
 import {
@@ -10,10 +11,16 @@ import {
 } from '@/utils/storage';
 import { useEffect, useState } from 'react';
 
-type StepStatusType = 'nickname' | 'nickname-complete' | 'tastes' | 'hate';
+type StepStatusType =
+  | 'nickname'
+  | 'nickname-complete'
+  | 'hate'
+  | 'tastes'
+  | 'restaurant'
+  | 'final';
 
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('hate');
+  const [step, setStep] = useState<StepStatusType>('nickname');
   const [settingValues, setSettingValues] = useState<Record<string, unknown>>();
 
   const handleStep = (
@@ -31,12 +38,17 @@ function JoinPage() {
     handleStep('nickname-complete', { nickname });
   };
 
+  const handleHateNextStep = (hateFoodList: string[]) => {
+    handleStep('tastes', { hateFoodList });
+  };
+
   const handleTasteNextStep = (spicyStep: number, sugarStep: number) => {
-    handleStep('nickname-complete', { spicyStep, sugarStep });
+    handleStep('restaurant', { spicyStep, sugarStep });
   };
 
   useEffect(() => {
     const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);
+    console.log('initSettingValue: ', initSettingValue);
 
     setSettingValues(initSettingValue);
   }, []);
@@ -51,11 +63,13 @@ function JoinPage() {
           onPrevStep={() => setStep('nickname')}
         />
       );
+    case 'hate':
+      return <Hate onNextStep={handleHateNextStep} />;
     case 'tastes':
       return <TasteSetting onNextStep={handleTasteNextStep} />;
 
     default:
-      return <Hate onNextStep={() => {}} />;
+      return <RestaurantEvaluating />;
   }
 }
 

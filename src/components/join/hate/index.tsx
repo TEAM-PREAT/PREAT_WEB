@@ -1,6 +1,6 @@
-import FoodList from '@/components/hate/food-list';
-import OverlayLogo from '@/components/hate/overlay-logo';
-import SearchBar from '@/components/hate/search-bar';
+import FoodList from '@/components/join/hate/food-list';
+import OverlayLogo from '@/components/join/hate/overlay-logo';
+import SearchBar from '@/components/join/hate/search-bar';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import { ButtonStyled } from '@/styles/core';
 import { useState } from 'react';
@@ -29,10 +29,10 @@ export const DUMMY = [
 ];
 
 interface HateSettingProps {
-  onNextStep: () => void;
+  onNextStep: (hateFoodList: string[]) => void;
 }
 
-export default function HateSetting({}: HateSettingProps) {
+export default function HateSetting({ onNextStep }: HateSettingProps) {
   const [selectList, setSelectList] = useState<string[]>([]);
   const [foodList, setFoodList] = useState(DUMMY);
 
@@ -43,6 +43,10 @@ export default function HateSetting({}: HateSettingProps) {
   const handleVisibleLogo = () => {
     setIsVisibleLogo(true);
     setTimeout(() => setIsVisibleLogo(false), 2500);
+  };
+
+  const onButtonClick = () => {
+    onNextStep(selectList);
   };
 
   const newFoodAdd = (key: string, content: string) => {
@@ -75,7 +79,9 @@ export default function HateSetting({}: HateSettingProps) {
         )}
       </Wrapper>
       <ButtonWrapper>
-        <ButtonStyled disabled={isDisabled}>확인</ButtonStyled>
+        <ButtonStyled disabled={isDisabled} onClick={onButtonClick}>
+          확인
+        </ButtonStyled>
       </ButtonWrapper>
 
       {isVisibleLogo && <OverlayLogo />}
