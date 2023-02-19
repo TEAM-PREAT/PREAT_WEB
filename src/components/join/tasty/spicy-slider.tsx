@@ -130,27 +130,31 @@ const SliderInput = styled.input`
 `;
 
 const StepWrapper = styled.div`
+  width: 193px;
+
   display: flex;
   justify-content: space-between;
 
   color: #ababab;
   font-weight: 600;
-  margin: 5px;
-
-  span:nth-child(n + 2) {
+  margin: 5px 15px;
+  span {
     position: relative;
-    left: 5px;
+  }
+  span:nth-child(2),
+  span:nth-child(3),
+  span:nth-child(4) {
+    left: 3px;
   }
 `;
 
-const StepTextWrapper = styled(FontSize8)`
+const StepTextWrapper = styled.div`
   display: flex;
   font-weight: 600;
+  width: 210px;
   font-size: 8px;
+  margin: auto;
   justify-content: space-between;
-
-  font-size: 10px;
-  transform: scale(0.8); //0.
 
   span:nth-child(1) {
     color: #ababab;
