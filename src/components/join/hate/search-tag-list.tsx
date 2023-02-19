@@ -1,4 +1,4 @@
-import SearchTag from '@/components/hate/search-tag';
+import SearchTag from '@/components/join/hate/search-tag';
 import styled from 'styled-components';
 
 interface SearchTagListProps {
