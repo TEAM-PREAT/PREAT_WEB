@@ -34,7 +34,7 @@ function Input({
               height={24}
             />
           </XMarker>
-          <ErrorMsg>error</ErrorMsg>
+          <ErrorMsg>중복된 닉네임입니다.</ErrorMsg>
         </>
       )}
     </Wrapper>

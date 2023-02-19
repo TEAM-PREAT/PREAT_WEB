@@ -22,6 +22,7 @@ export default function TasteSetting({ onNextStep }: TasteSettingProps) {
       onNextStep(spicyStep, sugarStep);
     }
   };
+
   return (
     <Container>
       <div>
