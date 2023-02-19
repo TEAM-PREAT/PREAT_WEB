@@ -1,5 +1,3 @@
-import BackIcon from '@/components/icons/back-icon';
-import { ChildrenProps } from '@/types';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -14,27 +12,3 @@ export const Container = styled.div`
   height: 100%;
   min-height: 100vh;
 `;
-
-export const ContainerWithHeaderStyled = styled(Container)`
-  min-height: calc(100vh - 50px);
-`;
-
-const Header = styled.div`
-  max-width: 320px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 30px 0 0px;
-
-  /* height: 50px; */
-`;
-
-export function ContainerWithHeader({ children }: ChildrenProps) {
-  return (
-    <>
-      <Header>
-        <BackIcon />
-      </Header>
-      <ContainerWithHeaderStyled>{children}</ContainerWithHeaderStyled>
-    </>
-  );
-}

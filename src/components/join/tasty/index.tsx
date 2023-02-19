@@ -1,5 +1,4 @@
-import { Container, ContainerWithHeader } from '@/components/join/layout';
-import { ContainerWithHeading } from '@/components/join/layout/ContainerWithHeading';
+import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import Box from '@/components/join/tasty/box';
 import SpicySlider from '@/components/join/tasty/spicy-slider';
 import SugarSlider from '@/components/join/tasty/sugar-slider';
@@ -25,7 +24,7 @@ export default function TasteSetting({ onNextStep }: TasteSettingProps) {
   };
 
   return (
-    <ContainerWithHeading title={'입맛을 설정해주세요.'} step={2}>
+    <SettingContainer title="입맛을 설정해주세요." step={2}>
       <div>
         <Title>
           맵기
@@ -62,7 +61,7 @@ export default function TasteSetting({ onNextStep }: TasteSettingProps) {
       <Button disabled={isSubmitDisabled} onClick={onButtonClick}>
         확인
       </Button>
-    </ContainerWithHeading>
+    </SettingContainer>
   );
 }
 
@@ -77,6 +76,10 @@ const Title = styled.h2`
 
   margin-bottom: 28px;
   margin-top: 51px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `;
 
 const ImageWrapper1 = styled(Image)`
