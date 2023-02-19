@@ -60,6 +60,7 @@ const InnerBox = styled.div`
   box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, 0.1);
   border-radius: 27px;
   padding: 40px 24px;
+  margin-top: 50px;
 `;
 
 const Button = styled(ButtonStyled)``;

@@ -1,4 +1,5 @@
-import { Container } from '@/components/join/layout';
+import { Container, ContainerWithHeader } from '@/components/join/layout';
+import { ContainerWithHeading } from '@/components/join/layout/ContainerWithHeading';
 import Box from '@/components/join/tasty/box';
 import SpicySlider from '@/components/join/tasty/spicy-slider';
 import SugarSlider from '@/components/join/tasty/sugar-slider';
@@ -24,7 +25,7 @@ export default function TasteSetting({ onNextStep }: TasteSettingProps) {
   };
 
   return (
-    <Container>
+    <ContainerWithHeading title={'입맛을 설정해주세요.'} step={2}>
       <div>
         <Title>
           맵기
@@ -61,7 +62,7 @@ export default function TasteSetting({ onNextStep }: TasteSettingProps) {
       <Button disabled={isSubmitDisabled} onClick={onButtonClick}>
         확인
       </Button>
-    </Container>
+    </ContainerWithHeading>
   );
 }
 

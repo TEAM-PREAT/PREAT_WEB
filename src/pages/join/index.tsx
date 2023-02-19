@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 type StepStatusType = 'nickname' | 'nickname-complete' | 'tastes';
 
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('nickname-complete');
+  const [step, setStep] = useState<StepStatusType>('tastes');
   const [settingValues, setSettingValues] = useState<Record<string, unknown>>();
 
   const handleStep = (
