@@ -24,16 +24,22 @@ const DUMMY = [
   },
 ];
 
-export default function FoodList() {
+interface FoodListProps {
+  selectList: string[];
+  handleSelectList: (newSelectList: string[]) => void;
+}
+export default function FoodList({
+  selectList,
+  handleSelectList,
+}: FoodListProps) {
   const [list, setList] = useState(DUMMY);
-  const [selectList, setSelectList] = useState<string[]>([]);
 
   const handleSelectItem = (key: string) => {
     if (selectList.includes(key)) {
       const newSelectList = selectList.filter((element) => element !== key);
-      setSelectList(newSelectList);
+      handleSelectList(newSelectList);
     } else {
-      setSelectList([...selectList, key]);
+      handleSelectList([...selectList, key]);
     }
   };
 

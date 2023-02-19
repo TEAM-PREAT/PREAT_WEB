@@ -3,6 +3,7 @@ import SearchBar from '@/components/hate/search-bar';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import { ButtonStyled } from '@/styles/core';
 import Image from 'next/image';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 interface HateSettingProps {
@@ -10,6 +11,10 @@ interface HateSettingProps {
 }
 
 export default function HateSetting({}: HateSettingProps) {
+  const [selectList, setSelectList] = useState<string[]>([]);
+
+  const isDisabled = selectList.length === 0;
+
   return (
     <SettingContainer title={'싫어하는 음식을 알려주세요.'} step={1}>
       <div>
@@ -23,10 +28,13 @@ export default function HateSetting({}: HateSettingProps) {
             height={40}
           />
         </Title>
-        <FoodList />
+        <FoodList
+          selectList={selectList}
+          handleSelectList={(newSelectList) => setSelectList(newSelectList)}
+        />
       </div>
       <ButtonWrapper>
-        <ButtonStyled>확인</ButtonStyled>
+        <ButtonStyled disabled={isDisabled}>확인</ButtonStyled>
       </ButtonWrapper>
     </SettingContainer>
   );
