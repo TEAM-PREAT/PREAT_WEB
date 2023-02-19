@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import { ButtonStyled } from '@/styles/core';
-import { Container, ContainerWithHeader } from '@/components/join/layout';
+import { Container } from '@/components/join/layout';
+import BackIcon from '@/components/icons/back-icon';
 
 interface NicknameSettingCompleteProps {
   onNextStep: () => void;
@@ -13,28 +14,42 @@ function NicknameSettingComplete({
   onPrevStep,
 }: NicknameSettingCompleteProps) {
   return (
-    <ContainerWithHeader>
-      <InnerBox>
-        <Title>
-          <strong>맛집매니아</strong>님
-        </Title>
-        <Title>환영합니다!</Title>
-        <ImageWrapper>
-          <Image
-            src="/assets/images/preat_2.png"
-            alt="preat"
-            width={104}
-            height={111}
-          />
-        </ImageWrapper>
-        <Button onClick={onNextStep}>확인</Button>
-      </InnerBox>
-    </ContainerWithHeader>
+    <>
+      <Header>
+        <div onClick={onPrevStep}>
+          <BackIcon />
+        </div>
+      </Header>
+      <Wrapper>
+        <InnerBox>
+          <Title>
+            <strong>맛집매니아</strong>님
+          </Title>
+          <Title>환영합니다!</Title>
+          <ImageWrapper>
+            <Image
+              src="/assets/images/preat_2.png"
+              alt="preat"
+              width={104}
+              height={111}
+            />
+          </ImageWrapper>
+          <Button onClick={onNextStep}>확인</Button>
+        </InnerBox>
+      </Wrapper>
+    </>
   );
 }
 
-const Wrapper = styled.div`
-  padding: 90px 35px;
+const Header = styled.div`
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 0 0px;
+`;
+
+const Wrapper = styled(Container)`
+  min-height: calc(100vh - 50px);
 `;
 
 const Title = styled.p`
