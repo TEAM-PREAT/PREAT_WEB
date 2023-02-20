@@ -2,16 +2,20 @@ import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import Box from '@/components/join/tasty/box';
 import SpicySlider from '@/components/join/tasty/spicy-slider';
 import SugarSlider from '@/components/join/tasty/sugar-slider';
+import { StepStatueProps } from '@/components/join/types';
 import { ButtonStyled } from '@/styles/core';
 import Image from 'next/image';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-interface TasteSettingProps {
+interface TasteSettingProps extends StepStatueProps {
   onNextStep: (spicyStep: number, sugarStep: number) => void;
 }
 
-export default function TasteSetting({ onNextStep }: TasteSettingProps) {
+export default function TasteSetting({
+  onNextStep,
+  onPrevStep,
+}: TasteSettingProps) {
   const [spicyStep, setSpicyStep] = useState<number | null>(null);
   const [sugarStep, setSugarStep] = useState<number | null>(null);
 
@@ -24,7 +28,11 @@ export default function TasteSetting({ onNextStep }: TasteSettingProps) {
   };
 
   return (
-    <SettingContainer title="입맛을 설정해주세요." step={2}>
+    <SettingContainer
+      title="입맛을 설정해주세요."
+      step={2}
+      onPrevStep={onPrevStep}
+    >
       <div>
         <Title>
           맵기

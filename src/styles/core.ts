@@ -25,3 +25,12 @@ export const ButtonStyled = styled.button<{}>`
     background-color: #c7c4c4;
   }
 `;
+
+export const Flex = styled.div`
+  display: flex;
+`;
+
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

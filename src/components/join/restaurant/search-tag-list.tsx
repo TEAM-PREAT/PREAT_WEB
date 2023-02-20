@@ -4,15 +4,15 @@ import styled from 'styled-components';
 
 const DUMMY_TAG_LIST = [
   {
-    key: 'new_tag_1',
+    id: 'new_tag_1',
     content: 'string',
   },
   {
-    key: 'new_tag_2',
+    id: 'new_tag_2',
     content: '김치볶음밥',
   },
   {
-    key: 'new_tag_3',
+    id: 'new_tag_3',
     content: '김치2',
   },
 ];
@@ -35,7 +35,7 @@ export default function SearchTagList({ onAction }: SearchTagListProps) {
 
           return (
             <SearchTag
-              key={tagData.key}
+              id={tagData.id}
               content={tagData.content}
               onClick={handleClick}
             />
