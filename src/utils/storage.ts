@@ -3,9 +3,17 @@ export const JOIN_STEP_KEY = 'join-step';
 
 export const setStorage = (
   key: string,
-  item: Record<string, unknown> | string,
+  item: Record<string, unknown> | string | number,
 ) => {
-  localStorage.setItem(key, JSON.stringify(item));
+  if (typeof item === 'object') {
+    localStorage.setItem(key, JSON.stringify(item));
+  }
+  if (typeof item === 'number') {
+    localStorage.setItem(key, item + '');
+  }
+  if (typeof item === 'string') {
+    localStorage.setItem(key, item);
+  }
 };
 
 export const getStorage = (key: string) => {

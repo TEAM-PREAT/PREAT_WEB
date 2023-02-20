@@ -5,6 +5,11 @@ import RestaurantEvaluating from '@/components/join/restaurant';
 import TasteSetting from '@/components/join/tasty';
 import withLayout from '@/hoc/withLayout';
 import {
+  INIT_SETTING_VALUES,
+  SettingValueListType,
+  StepStatus,
+} from '@/components/join/types';
+import {
   getStorage,
   JOIN_SETTING_VALUE_KEY,
   JOIN_STEP_KEY,
@@ -12,102 +17,90 @@ import {
 } from '@/utils/storage';
 import { useEffect, useState } from 'react';
 
-enum StepStatus {
-  nickname,
-  nicknameComplete,
-  hate,
-  tastes,
-  restaurant,
-  final,
-}
-
-type StepStatusType =
-  | 'nickname'
-  | 'nickname-complete'
-  | 'hate'
-  | 'tastes'
-  | 'restaurant'
-  | 'final';
-
-interface ReviewType {
-  restaurantId: number;
-  rating: number;
-}
-
-interface SettingValueListType {
-  nickname: string;
-  salty: number;
-  sweet: number;
-  spicy: number;
-  hateFoods: number[];
-  reviews: ReviewType[];
-}
-
-const INIT_SETTING_VALUES = {
-  nickname: ' ',
-  salty: 0,
-  sweet: 0,
-  spicy: 0,
-  hateFoods: [],
-  reviews: [],
-};
-
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('nickname');
+  const [step, setStep] = useState<StepStatus>(0);
   const [settingValues, setSettingValues] =
     useState<SettingValueListType>(INIT_SETTING_VALUES);
 
-  const handleStep = (
-    step: StepStatusType,
-    newSettingValues: Record<string, unknown>,
-  ) => {
-    setStep(step);
+  const handleNextStep = (newSettingValues?: Record<string, unknown>) => {
+    const nextStep = step + 1;
+    setStep(nextStep);
+    setStorage(JOIN_STEP_KEY, nextStep);
 
-    const newSettingValueTemp = { ...settingValues, ...newSettingValues };
-    setSettingValues(newSettingValueTemp);
-    setStorage(JOIN_SETTING_VALUE_KEY, newSettingValueTemp);
-    setStorage(JOIN_STEP_KEY, step);
+    if (newSettingValues) {
+      const newSettingValueTemp = { ...settingValues, ...newSettingValues };
+      setSettingValues(newSettingValueTemp);
+      setStorage(JOIN_SETTING_VALUE_KEY, newSettingValueTemp);
+    }
+  };
+
+  const handlePrevStep = () => {
+    const prevStep = step - 1;
+
+    setStep(prevStep);
+    setStorage(JOIN_STEP_KEY, prevStep);
   };
 
   const handleNickNameNextStep = (nickname: string) => {
-    handleStep('nickname-complete', { nickname });
+    handleNextStep({ nickname });
   };
 
   const handleHateNextStep = (hateFoods: number[]) => {
-    handleStep('tastes', { hateFoods });
+    handleNextStep({ hateFoods });
   };
 
   const handleTasteNextStep = (spicyStep: number, sugarStep: number) => {
-    handleStep('restaurant', { spicyStep, sugarStep });
+    handleNextStep({ spicyStep, sugarStep });
   };
 
+  const handleRestrantNextStep = () => {};
   useEffect(() => {
     const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);
     const initStep = getStorage(JOIN_STEP_KEY);
-    console.log('initSettingValue: ', initSettingValue);
+    console.log('initSettingValue: ', initSettingValue, initStep);
 
     setSettingValues(initSettingValue);
     setStep(initStep);
   }, []);
 
   switch (step) {
-    case 'nickname':
+    case StepStatus.nickname:
       return <NickNameInputPage onNextStep={handleNickNameNextStep} />;
-    case 'nickname-complete':
+    case StepStatus.nicknameComplete:
       return (
         <NicknameSettingComplete
           nickname={settingValues?.nickname ?? ''}
-          onNextStep={() => setStep('hate')}
-          onPrevStep={() => setStep('nickname')}
+          onNextStep={() => handleNextStep()}
+          onPrevStep={handlePrevStep}
         />
       );
-    case 'hate':
-      return <Hate onNextStep={handleHateNextStep} />;
-    case 'tastes':
-      return <TasteSetting onNextStep={handleTasteNextStep} />;
+    case StepStatus.hate:
+      return (
+        <Hate onNextStep={handleHateNextStep} onPrevStep={handlePrevStep} />
+      );
 
+    case StepStatus.tastes:
+      return (
+        <TasteSetting
+          onNextStep={handleTasteNextStep}
+          onPrevStep={handlePrevStep}
+        />
+      );
+
+    case StepStatus.restaurant:
+      return (
+        <RestaurantEvaluating
+          onNextStep={handleRestrantNextStep}
+          onPrevStep={handlePrevStep}
+        />
+      );
     default:
-      return <RestaurantEvaluating />;
+      return (
+        <RestaurantEvaluating
+          onNextStep={handleRestrantNextStep}
+          onPrevStep={handlePrevStep}
+        />
+      );
   }
 }
 

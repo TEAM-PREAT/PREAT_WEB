@@ -1,15 +1,19 @@
 import { getHateFoodAPI, HateFoodType } from '@/api/join-setting';
 import FoodList from '@/components/join/hate/food-list';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
+import { StepStatueProps } from '@/components/join/types';
 import { ButtonStyled } from '@/styles/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-interface HateSettingProps {
+interface HateSettingProps extends StepStatueProps {
   onNextStep: (hateFoodList: number[]) => void;
 }
 
-export default function HateSetting({ onNextStep }: HateSettingProps) {
+export default function HateSetting({
+  onNextStep,
+  onPrevStep,
+}: HateSettingProps) {
   const [selectList, setSelectList] = useState<number[]>([]);
   const [foodList, setFoodList] = useState<HateFoodType[]>([]);
 
@@ -29,7 +33,11 @@ export default function HateSetting({ onNextStep }: HateSettingProps) {
   }, []);
 
   return (
-    <SettingContainer title={'싫어하는 음식을 알려주세요.'} step={1}>
+    <SettingContainer
+      title={'싫어하는 음식을 알려주세요.'}
+      step={1}
+      onPrevStep={onPrevStep}
+    >
       <Wrapper>
         <FoodList
           list={foodList}

@@ -6,17 +6,21 @@ import styled from 'styled-components';
 interface SettingContainerProps extends ChildrenProps {
   title: string;
   step: number;
+  onPrevStep: () => void;
 }
 
 export default function SettingContainer({
   title,
   step,
   children,
+  onPrevStep,
 }: SettingContainerProps) {
   return (
     <Wrapper>
       <Header>
-        <BackIcon />
+        <IconWrapper onClick={onPrevStep}>
+          <BackIcon />
+        </IconWrapper>
       </Header>
       <Heading>{title}</Heading>
       <ProgressContainer step={step} />
@@ -32,6 +36,9 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
+const IconWrapper = styled.div`
+  width: fit-content;
+`;
 const ContainerWithHeaderStyled = styled(Container)`
   min-height: calc(100vh - 130px);
 `;
@@ -60,7 +67,7 @@ const ProgressContainer = styled.div<{ step: number }>`
     top: 0;
     left: 0;
     bottom: 0;
-    width: ${(props) => `${props.step * 33}%`};
+    width: ${(props) => `${props.step * 33 + 1}%`};
     display: block;
 
     background: #ff6c3e;

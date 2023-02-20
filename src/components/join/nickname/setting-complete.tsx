@@ -3,10 +3,9 @@ import Image from 'next/image';
 import { ButtonStyled } from '@/styles/core';
 import { Container } from '@/components/join/layout';
 import BackIcon from '@/components/icons/back-icon';
+import { StepStatueProps } from '@/components/join/types';
 
-interface NicknameSettingCompleteProps {
-  onNextStep: () => void;
-  onPrevStep: () => void;
+interface NicknameSettingCompleteProps extends StepStatueProps {
   nickname: string;
 }
 
