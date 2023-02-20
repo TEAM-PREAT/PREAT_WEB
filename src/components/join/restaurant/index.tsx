@@ -71,6 +71,8 @@ export default function RestaurantEvaluating({
       title={'방문했던 식당을 평가해주세요.'}
       step={3}
       onPrevStep={onPrevStep}
+      isButtonDisabled={false}
+      onButtonClick={onButtonClick}
     >
       <div>
         <SearchBar

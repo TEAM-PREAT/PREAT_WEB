@@ -32,6 +32,8 @@ export default function TasteSetting({
       title="입맛을 설정해주세요."
       step={2}
       onPrevStep={onPrevStep}
+      isButtonDisabled={isSubmitDisabled}
+      onButtonClick={onButtonClick}
     >
       <div>
         <Title>
@@ -65,10 +67,6 @@ export default function TasteSetting({
           />
         </Box>
       </div>
-
-      <Button disabled={isSubmitDisabled} onClick={onButtonClick}>
-        확인
-      </Button>
     </SettingContainer>
   );
 }
