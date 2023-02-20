@@ -35,7 +35,7 @@ export interface StepStatueProps {
   onPrevStep: () => void;
 }
 export interface RestaurantItemType {
-  id: string;
+  id: number;
   name: string;
   type: string;
   location: string;
@@ -45,3 +45,25 @@ export interface RestaurantItemType {
 export interface RestaurantScoreItemType extends RestaurantItemType {
   score: number;
 }
+
+export const SEARCH_DUMMY: RestaurantItemType[] = [
+  {
+    id: 11,
+    name: '성심당 본점',
+    type: '베이커리',
+    location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
+    src: '/assets/images/bread.png',
+  },
+  {
+    id: 22,
+    name: '성심당 본점',
+    type: '베이커리',
+    location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
+  },
+  {
+    id: 33,
+    name: '성심당 본점',
+    type: '베이커리',
+    location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
+  },
+];

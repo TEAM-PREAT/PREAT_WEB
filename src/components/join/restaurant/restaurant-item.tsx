@@ -7,7 +7,9 @@ import { Flex, FlexColumn } from '@/styles/core';
 import Image from 'next/image';
 import styled from 'styled-components';
 
-interface RestaurantItemProps extends RestaurantScoreItemType {}
+interface RestaurantItemProps extends RestaurantScoreItemType {
+  handleReview: (id: number, score: number) => void;
+}
 
 export default function RestaurantItem({
   src,
@@ -15,7 +17,13 @@ export default function RestaurantItem({
   location,
   name,
   score,
+  handleReview,
+  id,
 }: RestaurantItemProps) {
+  const onReview = (score: number) => {
+    handleReview(id, score);
+  };
+
   return (
     <Wrapper>
       <ImageWrapper>
@@ -29,7 +37,7 @@ export default function RestaurantItem({
 
         <Loaction>{location}</Loaction>
         <StarListWrapper>
-          <EvalutaionScore score={score} />
+          <EvalutaionScore score={score} onReview={onReview} />
         </StarListWrapper>
       </RightWrapper>
     </Wrapper>

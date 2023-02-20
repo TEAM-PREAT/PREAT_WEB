@@ -1,12 +1,12 @@
+import { RestaurantItemType } from '@/components/join/types';
 import styled from 'styled-components';
 
-interface SearchTagProps {
-  content: string;
+interface SearchTagProps extends RestaurantItemType {
   onClick: () => void;
 }
 
-export default function SearchTag({ content, onClick }: SearchTagProps) {
-  return <Wrapper onClick={onClick}>{content}</Wrapper>;
+export default function SearchTag({ name, onClick }: SearchTagProps) {
+  return <Wrapper onClick={onClick}>{name}</Wrapper>;
 }
 
 const Wrapper = styled.div`

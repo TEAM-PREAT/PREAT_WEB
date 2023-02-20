@@ -1,9 +1,11 @@
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import RestaurantItem from '@/components/join/restaurant/restaurant-item';
+import RestaurantList from '@/components/join/restaurant/restaurant-list';
 import SearchBar from '@/components/join/restaurant/search-bar';
 import {
   RestaurantItemType,
   RestaurantScoreItemType,
+  ReviewType,
   StepStatueProps,
 } from '@/components/join/types';
 import { useState } from 'react';
@@ -11,9 +13,9 @@ import styled from 'styled-components';
 
 interface RestaurantEvaluatingProps extends StepStatueProps {}
 
-const DUMMY = [
+const DUMMY: RestaurantScoreItemType[] = [
   {
-    id: '1',
+    id: 1,
     name: '성심당 본점',
     type: '베이커리',
     location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
@@ -21,14 +23,14 @@ const DUMMY = [
     score: 1,
   },
   {
-    id: '2',
+    id: 2,
     name: '성심당 본점',
     type: '베이커리',
     location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
     score: 5,
   },
   {
-    id: '3',
+    id: 3,
     name: '성심당 본점',
     type: '베이커리',
     location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
@@ -42,16 +44,28 @@ export default function RestaurantEvaluating({
 }: RestaurantEvaluatingProps) {
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [list, setList] = useState<RestaurantScoreItemType[]>(DUMMY);
-  const [selectList, setSelectList] = useState<RestaurantScoreItemType[]>([]);
 
-  const newRestaurantAdd = (id: string, name: string, type: string) => {
-    // TODO: 수정 필요
-    // const restaurantKeyList = list.map(({ id }) => id);
-    // if (restaurantKeyList.includes(id)) return;
-    // const newRestaurant = { id, name, type, score: 0 };
-    // setList([...list, newRestaurant]);
+  const newRestaurantAdd = (obj: RestaurantItemType) => {
+    const restaurantKeyList = list.map(({ id }) => id);
+    if (restaurantKeyList.includes(obj.id)) {
+      alert('이미 선택된 식당입니다. ');
+      return;
+    }
+
+    const newRestaurant = { ...obj, score: 0 };
+    setList([...list, newRestaurant]);
+    setIsSearchMode(false);
   };
 
+  const handleReview = (newReviewId: number, score: number) => {
+    const newList = list.map((item) => {
+      if (item.id !== newReviewId) return item;
+      return { ...item, score };
+    });
+    setList(newList);
+  };
+
+  const onButtonClick = () => {};
   return (
     <SettingContainer
       title={'방문했던 식당을 평가해주세요.'}
@@ -64,16 +78,10 @@ export default function RestaurantEvaluating({
           handleSearchMode={() => setIsSearchMode(true)}
           onAction={newRestaurantAdd}
         />
-        <ListWrapper>
-          {list.map((item) => (
-            <RestaurantItem {...item} />
-          ))}
-        </ListWrapper>
+        {!isSearchMode && (
+          <RestaurantList list={list} handleReview={handleReview} />
+        )}
       </div>
     </SettingContainer>
   );
 }
-
-const ListWrapper = styled.div`
-  margin: 28px 0;
-`;
