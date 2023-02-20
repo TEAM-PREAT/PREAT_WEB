@@ -1,38 +1,16 @@
 import styled from 'styled-components';
 import SearchItem from '@/components/join/restaurant/search-item';
+import { RestaurantItemType, SEARCH_DUMMY } from '@/components/join/types';
+
 interface SearchListProps {
-  onAction: (obj: Record<string, string>) => void;
+  onAction: (obj: RestaurantItemType) => void;
 }
-const DUMMY = [
-  {
-    id: '1',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    id: '2',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    id: '3',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    id: '4',
-    label: 'food item',
-  },
-];
 
 export default function SearchList({ onAction }: SearchListProps) {
   return (
     <ListWrapper>
-      {DUMMY.map(({ id, label }) => (
-        <SearchItem
-          content={label}
-          onClick={() => onAction({ id: id, label })}
-        />
+      {SEARCH_DUMMY.map((item) => (
+        <SearchItem {...item} onClick={() => onAction(item)} />
       ))}
     </ListWrapper>
   );

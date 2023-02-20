@@ -1,11 +1,14 @@
 import SearchIcon from '@/components/icons/search-icon';
+import SearchList from '@/components/join/restaurant/search-list';
+import SearchTagList from '@/components/join/restaurant/search-tag-list';
+import { RestaurantItemType } from '@/components/join/types';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 interface SearchBarProps {
   handleSearchMode: () => void;
   isSearchMode: boolean;
-  onAction: (key: string, title: string, desc: string) => void;
+  onAction: (obj: RestaurantItemType) => void;
 }
 
 export default function SearchBar({
@@ -33,12 +36,12 @@ export default function SearchBar({
           <SearchIcon />
         </IconWrapper>
       </InputWrapper>
-      {/* {isSearchMode &&
+      {isSearchMode &&
         (isShowTagList ? (
           <SearchTagList onAction={onAction} />
         ) : (
           <SearchList onAction={onAction} />
-        ))} */}
+        ))}
     </Wrapper>
   );
 }

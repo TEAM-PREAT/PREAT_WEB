@@ -1,17 +1,15 @@
 import SmallSearchIcon from '@/components/icons/small-search-icon';
+import { RestaurantItemType } from '@/components/join/types';
 import styled from 'styled-components';
 
-export default function SearchItem({
-  content,
-  onClick,
-}: {
-  content: string;
+interface SearchItemProps extends RestaurantItemType {
   onClick: () => void;
-}) {
+}
+export default function SearchItem({ name, onClick }: SearchItemProps) {
   return (
     <ItemWrapper onClick={onClick}>
       <SmallSearchIcon />
-      <span>{content}</span>
+      <span>{name}</span>
     </ItemWrapper>
   );
 }
