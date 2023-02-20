@@ -3,7 +3,6 @@ import Box from '@/components/join/tasty/box';
 import SpicySlider from '@/components/join/tasty/spicy-slider';
 import SugarSlider from '@/components/join/tasty/sugar-slider';
 import { StepStatueProps } from '@/components/join/types';
-import { ButtonStyled } from '@/styles/core';
 import Image from 'next/image';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -70,8 +69,6 @@ export default function TasteSetting({
     </SettingContainer>
   );
 }
-
-const Button = styled(ButtonStyled)``;
 
 const Title = styled.h2`
   font-weight: 900;
