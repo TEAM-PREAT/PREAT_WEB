@@ -8,7 +8,7 @@ import {
   ReviewType,
   StepStatueProps,
 } from '@/components/join/types';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 interface RestaurantEvaluatingProps extends StepStatueProps {}
@@ -44,6 +44,15 @@ export default function RestaurantEvaluating({
 }: RestaurantEvaluatingProps) {
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [list, setList] = useState<RestaurantScoreItemType[]>(DUMMY);
+
+  const reviewList: ReviewType[] = useMemo(
+    () =>
+      list.map(({ id, score }) => ({
+        restaurantId: id,
+        rating: score,
+      })),
+    [list],
+  );
 
   const newRestaurantAdd = (obj: RestaurantItemType) => {
     const restaurantKeyList = list.map(({ id }) => id);

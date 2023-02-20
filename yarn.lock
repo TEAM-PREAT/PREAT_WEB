@@ -341,7 +341,7 @@
 
 "@types/geojson@*":
   version "7946.0.10"
-  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.10.tgz#6dfbf5ea17142f7f9a043809f1cd4c448cb68249"
+  resolved "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.10.tgz"
   integrity sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==
 
 "@types/hoist-non-react-statics@*":
@@ -364,7 +364,7 @@
 
 "@types/navermaps@^3.6.2":
   version "3.6.2"
-  resolved "https://registry.yarnpkg.com/@types/navermaps/-/navermaps-3.6.2.tgz#bd595c3570e027864beabfc06d48b066ba2373d8"
+  resolved "https://registry.npmjs.org/@types/navermaps/-/navermaps-3.6.2.tgz"
   integrity sha512-5VFBicdIQ2FaBbawWZA9h6N8g4odPTzexiShc9cDLtj5Xsx+Dj9fMiHxE4G8Tthn0v0a4D6zaMwyjwIWsQJlzw==
   dependencies:
     "@types/geojson" "*"
@@ -1068,9 +1068,14 @@ eslint-plugin-prettier@^4.2.1:
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
-eslint-plugin-react-hooks@^4.5.0, eslint-plugin-react-hooks@^4.6.0:
+eslint-plugin-react-hooks@^4.5.0:
   version "4.6.0"
   resolved "https://registry.npmjs.org/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.6.0.tgz"
+  integrity sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==
+
+eslint-plugin-react-hooks@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.6.0.tgz#4c3e697ad95b77e93f8646aaa1630c1ba607edd3"
   integrity sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==
 
 eslint-plugin-react@^7.31.7, eslint-plugin-react@^7.32.1:

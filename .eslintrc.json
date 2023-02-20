@@ -1,9 +1,12 @@
 {
-  "extends": ["react-app", "prettier/prettier"],
+  "extends": [
+    "react-app",
+    "prettier/prettier",
+    "plugin:react-hooks/recommended"
+  ],
   "plugins": ["react-hooks", "simple-import-sort", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "react-hooks/rules-of-hooks": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
@@ -22,6 +25,8 @@
       "error",
       { "blankLine": "always", "prev": "*", "next": "return" }
     ],
-    "@typescript-eslint/no-redeclare": 0
+    "@typescript-eslint/no-redeclare": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
