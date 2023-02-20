@@ -1,6 +1,10 @@
 export const JOIN_SETTING_VALUE_KEY = 'setting-value';
+export const JOIN_STEP_KEY = 'join-step';
 
-export const setStorage = (key: string, item: Record<string, unknown>) => {
+export const setStorage = (
+  key: string,
+  item: Record<string, unknown> | string,
+) => {
   localStorage.setItem(key, JSON.stringify(item));
 };
 
