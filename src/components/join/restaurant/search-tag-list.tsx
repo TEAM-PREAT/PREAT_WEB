@@ -15,7 +15,11 @@ export default function SearchTagList({ onAction }: SearchTagListProps) {
       <Title>다른 사용자가 많이 찾고있어요!</Title>
       <ListWrapper>
         {tagList.map((tagData) => (
-          <SearchTag {...tagData} onClick={() => onAction(tagData)} />
+          <SearchTag
+            key={tagData.id}
+            {...tagData}
+            onClick={() => onAction(tagData)}
+          />
         ))}
       </ListWrapper>
     </>
@@ -28,6 +32,7 @@ const Title = styled.p`
   line-height: 34px;
 
   color: #ff6c3e;
+  margin-top: 15px;
 `;
 
 const ListWrapper = styled.div`
