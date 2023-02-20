@@ -2,7 +2,7 @@ import { DUMMY } from '@/components/join/hate';
 import SmallSearchIcon from '@/components/icons/small-search-icon';
 import styled from 'styled-components';
 interface SearchListProps {
-  onAction: (key: string, content: string) => void;
+  onAction: (obj: Record<string, string>) => void;
 }
 
 export default function SearchList({ onAction }: SearchListProps) {
@@ -11,7 +11,7 @@ export default function SearchList({ onAction }: SearchListProps) {
       {DUMMY.map(({ key, label }) => (
         <SearchItem
           content={label}
-          onClick={() => onAction(`${key}1`, label)}
+          onClick={() => onAction({ key: `${key}1`, label })}
         />
       ))}
     </ListWrapper>

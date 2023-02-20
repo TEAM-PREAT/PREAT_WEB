@@ -49,11 +49,13 @@ export default function HateSetting({ onNextStep }: HateSettingProps) {
     onNextStep(selectList);
   };
 
-  const newFoodAdd = (key: string, content: string) => {
+  const newFoodAdd = (obj: Record<string, string>) => {
+    const key = obj.key;
+
     const foodKeyList = foodList.map(({ key }) => key);
     if (foodKeyList.includes(key)) return;
 
-    const newFood = { key, label: content };
+    const newFood = { key: obj.key, label: obj.content };
     console.log('newFood: ', newFood);
 
     setSelectList([...selectList, key]);
