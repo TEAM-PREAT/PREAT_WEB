@@ -11,10 +11,6 @@ import {
 } from '@/components/join/types';
 import { useMemo, useState } from 'react';
 
-interface RestaurantEvaluatingProps extends StepStatueProps {
-  onNextStep: (reviews: ReviewType[]) => void;
-}
-
 const DUMMY: RestaurantScoreItemType[] = [
   {
     id: 1,
@@ -39,6 +35,10 @@ const DUMMY: RestaurantScoreItemType[] = [
     score: 0,
   },
 ];
+
+interface RestaurantEvaluatingProps extends StepStatueProps {
+  onNextStep: (reviews: ReviewType[]) => void;
+}
 
 export default function RestaurantEvaluating({
   onNextStep,
