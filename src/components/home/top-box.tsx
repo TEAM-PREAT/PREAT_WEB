@@ -1,6 +1,6 @@
+import SearchInput from '@/components/common/search-input';
 import HamburgerIcon from '@/components/icons/hamburger-icon';
 import ListIcon from '@/components/icons/list-icon';
-import SearchInput from '@/components/search-input';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 

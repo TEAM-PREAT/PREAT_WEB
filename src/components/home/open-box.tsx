@@ -30,7 +30,7 @@ const Wrapper = styled.div<{ openStatus: OpenStatusType }>`
   right: 0;
   background-color: #fff;
   transition: bottom 1s;
-
+  z-index: 20;
   ${(props) =>
     props.openStatus === 'close' &&
     css`
