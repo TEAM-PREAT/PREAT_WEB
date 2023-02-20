@@ -6,5 +6,9 @@ export const setStorage = (key: string, item: Record<string, unknown>) => {
 
 export const getStorage = (key: string) => {
   const item = localStorage.getItem(key) ?? '';
-  return JSON.parse(item);
+  if (item) {
+    return JSON.parse(item);
+  } else {
+    return null;
+  }
 };

@@ -7,6 +7,7 @@ interface FoodItemProps {
   src?: string;
   isSelected: boolean;
   onSelect: () => void;
+  id: number;
 }
 
 export default function FoodItem({
@@ -18,7 +19,8 @@ export default function FoodItem({
   return (
     <FoodItemWrapper onClick={onSelect}>
       <FoodImageWrapper>
-        {src && <Image src={src} alt={label} width={96} height={94} />}
+        {/* TODO : 이미지 활성화 */}
+        {/* {src && <Image src={src} alt={label} width={96} height={94} />} */}
         {isSelected && (
           <SelectedOverlay>
             <CheckIcon />

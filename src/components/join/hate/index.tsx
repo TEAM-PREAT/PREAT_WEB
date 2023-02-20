@@ -1,46 +1,32 @@
+import { getHateFoodAPI, HateFoodType } from '@/api/join-setting';
 import FoodList from '@/components/join/hate/food-list';
-import OverlayLogo from '@/components/join/hate/overlay-logo';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import { ButtonStyled } from '@/styles/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export const DUMMY = [
-  {
-    key: '1',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    key: '2',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    key: '3',
-    label: 'food item',
-    src: '/assets/images/pine.png',
-  },
-  {
-    key: '4',
-    label: 'food item',
-  },
-];
-
 interface HateSettingProps {
-  onNextStep: (hateFoodList: string[]) => void;
+  onNextStep: (hateFoodList: number[]) => void;
 }
 
 export default function HateSetting({ onNextStep }: HateSettingProps) {
-  const [selectList, setSelectList] = useState<string[]>([]);
-  const [foodList, setFoodList] = useState(DUMMY);
+  const [selectList, setSelectList] = useState<number[]>([]);
+  const [foodList, setFoodList] = useState<HateFoodType[]>([]);
 
-  const [isVisibleLogo, setIsVisibleLogo] = useState(false);
   const isDisabled = selectList.length === 0;
 
   const onButtonClick = () => {
     onNextStep(selectList);
   };
+
+  const setHateFood = async () => {
+    const hateFoodList: HateFoodType[] = await getHateFoodAPI();
+    setFoodList(hateFoodList);
+  };
+
+  useEffect(() => {
+    setHateFood();
+  }, []);
 
   return (
     <SettingContainer title={'싫어하는 음식을 알려주세요.'} step={1}>
@@ -56,8 +42,6 @@ export default function HateSetting({ onNextStep }: HateSettingProps) {
           확인
         </ButtonStyled>
       </ButtonWrapper>
-
-      {isVisibleLogo && <OverlayLogo />}
     </SettingContainer>
   );
 }

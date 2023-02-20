@@ -15,8 +15,7 @@ function KakaoLogin() {
 
       const isNewUser = await requestKakaoLogin(kakao_access_token);
       if (isNewUser) {
-        // TODO : 회원가입으로 이동
-        window.location.href = '/login/complete';
+        window.location.href = '/join';
       } else {
         window.location.href = '/login/complete';
       }
@@ -28,10 +27,7 @@ function KakaoLogin() {
   useEffect(() => {
     if (window) {
       const code = getURLparams(window.location);
-      if (code) {
-        localStorage.setItem('code', code);
-        login(code);
-      }
+      code && login(code);
     }
   }, []);
 
