@@ -1,5 +1,6 @@
 import BackIcon from '@/components/icons/back-icon';
 import { Container } from '@/components/join/layout';
+import { ButtonStyled } from '@/styles/core';
 import { ChildrenProps } from '@/types';
 import styled from 'styled-components';
 
@@ -7,6 +8,9 @@ interface SettingContainerProps extends ChildrenProps {
   title: string;
   step: number;
   onPrevStep: () => void;
+
+  isButtonDisabled: boolean;
+  onButtonClick: () => void;
 }
 
 export default function SettingContainer({
@@ -14,6 +18,8 @@ export default function SettingContainer({
   step,
   children,
   onPrevStep,
+  isButtonDisabled,
+  onButtonClick,
 }: SettingContainerProps) {
   return (
     <Wrapper>
@@ -25,7 +31,15 @@ export default function SettingContainer({
       <Heading>{title}</Heading>
       <ProgressContainer step={step} />
 
-      <ContainerWithHeaderStyled>{children}</ContainerWithHeaderStyled>
+      <ContainerWithHeaderStyled>
+        {children}
+
+        <ButtonWrapper>
+          <ButtonStyled disabled={isButtonDisabled} onClick={onButtonClick}>
+            확인
+          </ButtonStyled>
+        </ButtonWrapper>
+      </ContainerWithHeaderStyled>
     </Wrapper>
   );
 }
@@ -73,4 +87,12 @@ const ProgressContainer = styled.div<{ step: number }>`
     background: #ff6c3e;
     border-radius: 3px;
   }
+`;
+const ButtonWrapper = styled.div`
+  position: fixed;
+  bottom: 28px;
+  width: 272px;
+  left: 0;
+  right: 0;
+  margin: auto;
 `;

@@ -37,6 +37,8 @@ export default function HateSetting({
       title={'싫어하는 음식을 알려주세요.'}
       step={1}
       onPrevStep={onPrevStep}
+      isButtonDisabled={isDisabled}
+      onButtonClick={onButtonClick}
     >
       <Wrapper>
         <FoodList
@@ -45,11 +47,6 @@ export default function HateSetting({
           handleSelectList={(newSelectList) => setSelectList(newSelectList)}
         />
       </Wrapper>
-      <ButtonWrapper>
-        <ButtonStyled disabled={isDisabled} onClick={onButtonClick}>
-          확인
-        </ButtonStyled>
-      </ButtonWrapper>
     </SettingContainer>
   );
 }
@@ -57,13 +54,4 @@ export default function HateSetting({
 const Wrapper = styled.div`
   width: 290px;
   margin: 0 auto;
-`;
-
-const ButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 28px;
-  width: 272px;
-  left: 0;
-  right: 0;
-  margin: auto;
 `;
