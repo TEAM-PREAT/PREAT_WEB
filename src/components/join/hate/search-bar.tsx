@@ -1,5 +1,4 @@
 import SearchList from '@/components/join/hate/search-list';
-import SearchTagList from '@/components/join/hate/search-tag-list';
 import SearchIcon from '@/components/icons/search-icon';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
