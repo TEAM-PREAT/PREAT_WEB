@@ -1,6 +1,8 @@
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
+import OverlayLogo from '@/components/join/restaurant/overlay-logo';
 import RestaurantList from '@/components/join/restaurant/restaurant-list';
 import SearchBar from '@/components/join/restaurant/search-bar';
+import useOverlayLogo from '@/components/join/restaurant/useOverlayLogo';
 import {
   RestaurantItemType,
   RestaurantScoreItemType,
@@ -43,6 +45,7 @@ export default function RestaurantEvaluating({
   onPrevStep,
 }: RestaurantEvaluatingProps) {
   const [isSearchMode, setIsSearchMode] = useState(false);
+  const { isVisibleLogo, handleVisibleLogo } = useOverlayLogo(2500);
   const [list, setList] = useState<RestaurantScoreItemType[]>(DUMMY);
 
   const reviewList: ReviewType[] = useMemo(
@@ -66,6 +69,7 @@ export default function RestaurantEvaluating({
     const newRestaurant = { ...obj, score: 0 };
     setList([...list, newRestaurant]);
     setIsSearchMode(false);
+    handleVisibleLogo();
   };
 
   const handleReview = (newReviewId: number, score: number) => {
@@ -98,6 +102,7 @@ export default function RestaurantEvaluating({
           <RestaurantList list={list} handleReview={handleReview} />
         )}
       </div>
+      {isVisibleLogo && <OverlayLogo />}
     </SettingContainer>
   );
 }
