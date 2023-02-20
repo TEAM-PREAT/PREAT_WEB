@@ -1,10 +1,10 @@
 export enum StepStatus {
-  nickname,
-  nicknameComplete,
-  hate,
-  tastes,
-  restaurant,
-  final,
+  Nickname,
+  NicknameComplete,
+  Hate,
+  Tastes,
+  Restaurant,
+  Final,
 }
 
 export interface ReviewType {

@@ -53,7 +53,8 @@ function JoinPage() {
     handleNextStep({ spicyStep, sugarStep });
   };
 
-  const handleRestrantNextStep = () => {};
+  const handleRestaurantNextStep = () => {};
+
   useEffect(() => {
     const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);
     const initStep = getStorage(JOIN_STEP_KEY);
@@ -64,9 +65,9 @@ function JoinPage() {
   }, []);
 
   switch (step) {
-    case StepStatus.nickname:
+    case StepStatus.Nickname:
       return <NickNameInputPage onNextStep={handleNickNameNextStep} />;
-    case StepStatus.nicknameComplete:
+    case StepStatus.NicknameComplete:
       return (
         <NicknameSettingComplete
           nickname={settingValues?.nickname ?? ''}
@@ -74,12 +75,12 @@ function JoinPage() {
           onPrevStep={handlePrevStep}
         />
       );
-    case StepStatus.hate:
+    case StepStatus.Hate:
       return (
         <Hate onNextStep={handleHateNextStep} onPrevStep={handlePrevStep} />
       );
 
-    case StepStatus.tastes:
+    case StepStatus.Tastes:
       return (
         <TasteSetting
           onNextStep={handleTasteNextStep}
@@ -87,17 +88,17 @@ function JoinPage() {
         />
       );
 
-    case StepStatus.restaurant:
+    case StepStatus.Restaurant:
       return (
         <RestaurantEvaluating
-          onNextStep={handleRestrantNextStep}
+          onNextStep={handleRestaurantNextStep}
           onPrevStep={handlePrevStep}
         />
       );
     default:
       return (
         <RestaurantEvaluating
-          onNextStep={handleRestrantNextStep}
+          onNextStep={handleRestaurantNextStep}
           onPrevStep={handlePrevStep}
         />
       );
