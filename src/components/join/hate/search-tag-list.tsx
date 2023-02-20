@@ -1,19 +1,46 @@
-import SearchTag from '@/components/join/hate/search-tag';
+import SearchTag from '@/components/join/search-tag';
+import { useState } from 'react';
 import styled from 'styled-components';
 
+const DUMMY_TAG_LIST = [
+  {
+    key: 'new_tag_1',
+    content: 'string',
+  },
+  {
+    key: 'new_tag_2',
+    content: '김치볶음밥',
+  },
+  {
+    key: 'new_tag_3',
+    content: '김치2',
+  },
+];
+
 interface SearchTagListProps {
-  onAction: (key: string, content: string) => void;
+  onAction: (obj: Record<string, string>) => void;
 }
 
 export default function SearchTagList({ onAction }: SearchTagListProps) {
+  const [tagList, setTagList] = useState(DUMMY_TAG_LIST);
   return (
     <>
       <Title>다른 사용자가 많이 찾고있어요!</Title>
       <ListWrapper>
-        <SearchTag content="김치 볶음밥" onAction={onAction} />
-        <SearchTag content="김치 볶음밥2" onAction={onAction} />
-        <SearchTag content="김치 볶음밥5" onAction={onAction} />
-        <SearchTag content="김치 볶음밥3" onAction={onAction} />
+        {tagList.map((tagData) => {
+          const handleClick = () => {
+            console.log('tagData: ', tagData);
+            onAction(tagData);
+          };
+
+          return (
+            <SearchTag
+              key={tagData.key}
+              content={tagData.content}
+              onClick={handleClick}
+            />
+          );
+        })}
       </ListWrapper>
     </>
   );

@@ -2,15 +2,10 @@ import styled from 'styled-components';
 
 interface SearchTagProps {
   content: string;
-  onAction: (key: string, content: string) => void;
+  onClick: () => void;
 }
 
-export default function SearchTag({ content, onAction }: SearchTagProps) {
-  const onClick = () => {
-    //  TODO 수정
-    onAction(content, content);
-  };
-
+export default function SearchTag({ content, onClick }: SearchTagProps) {
   return <Wrapper onClick={onClick}>{content}</Wrapper>;
 }
 

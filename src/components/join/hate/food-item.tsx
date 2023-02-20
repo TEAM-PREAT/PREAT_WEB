@@ -25,7 +25,7 @@ export default function FoodItem({
           </SelectedOverlay>
         )}
       </FoodImageWrapper>
-      <Label>FoodItem</Label>
+      <Label>{label}</Label>
     </FoodItemWrapper>
   );
 }
