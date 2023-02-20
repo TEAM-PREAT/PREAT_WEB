@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface SearchTagListProps {
   onAction: (key: string, content: string) => void;
 }
+
 export default function SearchTagList({ onAction }: SearchTagListProps) {
   return (
     <>

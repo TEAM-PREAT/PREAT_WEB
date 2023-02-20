@@ -20,7 +20,7 @@ type StepStatusType =
   | 'final';
 
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('nickname');
+  const [step, setStep] = useState<StepStatusType>('hate');
   const [settingValues, setSettingValues] = useState<Record<string, unknown>>();
 
   const handleStep = (
