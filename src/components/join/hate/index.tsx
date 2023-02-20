@@ -1,6 +1,5 @@
 import FoodList from '@/components/join/hate/food-list';
 import OverlayLogo from '@/components/join/hate/overlay-logo';
-import SearchBar from '@/components/join/hate/search-bar';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import { ButtonStyled } from '@/styles/core';
 import { useState } from 'react';
@@ -36,49 +35,21 @@ export default function HateSetting({ onNextStep }: HateSettingProps) {
   const [selectList, setSelectList] = useState<string[]>([]);
   const [foodList, setFoodList] = useState(DUMMY);
 
-  const [isSearchMode, setIsSearchMode] = useState(false);
   const [isVisibleLogo, setIsVisibleLogo] = useState(false);
   const isDisabled = selectList.length === 0;
-
-  const handleVisibleLogo = () => {
-    setIsVisibleLogo(true);
-    setTimeout(() => setIsVisibleLogo(false), 2500);
-  };
 
   const onButtonClick = () => {
     onNextStep(selectList);
   };
 
-  const newFoodAdd = (obj: Record<string, string>) => {
-    const key = obj.key;
-
-    const foodKeyList = foodList.map(({ key }) => key);
-    if (foodKeyList.includes(key)) return;
-
-    const newFood = { key: obj.key, label: obj.content };
-    console.log('newFood: ', newFood);
-
-    setSelectList([...selectList, key]);
-    setFoodList([...foodList, newFood]);
-    setIsSearchMode(false);
-    handleVisibleLogo();
-  };
-
   return (
     <SettingContainer title={'싫어하는 음식을 알려주세요.'} step={1}>
       <Wrapper>
-        <SearchBar
-          isSearchMode={isSearchMode}
-          handleSearchMode={() => setIsSearchMode(true)}
-          onAction={newFoodAdd}
+        <FoodList
+          list={foodList}
+          selectList={selectList}
+          handleSelectList={(newSelectList) => setSelectList(newSelectList)}
         />
-        {!isSearchMode && (
-          <FoodList
-            list={foodList}
-            selectList={selectList}
-            handleSelectList={(newSelectList) => setSelectList(newSelectList)}
-          />
-        )}
       </Wrapper>
       <ButtonWrapper>
         <ButtonStyled disabled={isDisabled} onClick={onButtonClick}>
