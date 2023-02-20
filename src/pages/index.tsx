@@ -17,6 +17,7 @@ function Home() {
           <Link href="/login/complete">카카오로그인 완료</Link>
           <Link href="/login/loading">로딩</Link>
           <Link href="/preat">preat</Link>
+          <Link href="/home">home</Link>
         </Wrapper>
       </main>
     </>
