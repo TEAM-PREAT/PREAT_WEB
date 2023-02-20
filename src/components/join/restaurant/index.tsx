@@ -1,5 +1,4 @@
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
-import RestaurantItem from '@/components/join/restaurant/restaurant-item';
 import RestaurantList from '@/components/join/restaurant/restaurant-list';
 import SearchBar from '@/components/join/restaurant/search-bar';
 import {
@@ -9,9 +8,8 @@ import {
   StepStatueProps,
 } from '@/components/join/types';
 import { useMemo, useState } from 'react';
-import styled from 'styled-components';
 
-interface RestaurantEvaluatingProps extends StepStatueProps {}
+type RestaurantEvaluatingProps = StepStatueProps;
 
 const DUMMY: RestaurantScoreItemType[] = [
   {
