@@ -31,6 +31,7 @@ export default function SearchBar({
           value={searchKeyword}
           onChange={onInputChange}
           onFocus={handleSearchMode}
+          placeholder="맛집을 검색해보세요"
         />
         <IconWrapper>
           <SearchIcon />
@@ -74,6 +75,13 @@ const Input = styled.input`
   font-size: 15px;
   line-height: 30px;
   color: #ff6c3e;
+
+  &::placeholder {
+    font-weight: 500;
+    font-size: 10px;
+
+    color: #8b8b8b;
+  }
 
   &:focus {
     background: #ffffff;

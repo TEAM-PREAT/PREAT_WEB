@@ -6,6 +6,7 @@ import TasteSetting from '@/components/join/tasty';
 import withLayout from '@/hoc/withLayout';
 import {
   INIT_SETTING_VALUES,
+  ReviewType,
   SettingValueListType,
   StepStatus,
 } from '@/components/join/types';
@@ -53,7 +54,9 @@ function JoinPage() {
     handleNextStep({ spicyStep, sugarStep });
   };
 
-  const handleRestaurantNextStep = () => {};
+  const handleRestaurantNextStep = (reviews: ReviewType[]) => {
+    handleNextStep({ reviews });
+  };
 
   useEffect(() => {
     const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);

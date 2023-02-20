@@ -9,7 +9,9 @@ import {
 } from '@/components/join/types';
 import { useMemo, useState } from 'react';
 
-type RestaurantEvaluatingProps = StepStatueProps;
+interface RestaurantEvaluatingProps extends StepStatueProps {
+  onNextStep: (reviews: ReviewType[]) => void;
+}
 
 const DUMMY: RestaurantScoreItemType[] = [
   {
@@ -52,6 +54,8 @@ export default function RestaurantEvaluating({
     [list],
   );
 
+  const isButtonDisabled = reviewList.length < 2;
+
   const newRestaurantAdd = (obj: RestaurantItemType) => {
     const restaurantKeyList = list.map(({ id }) => id);
     if (restaurantKeyList.includes(obj.id)) {
@@ -72,13 +76,16 @@ export default function RestaurantEvaluating({
     setList(newList);
   };
 
-  const onButtonClick = () => {};
+  const onButtonClick = () => {
+    onNextStep(reviewList);
+  };
+
   return (
     <SettingContainer
       title={'방문했던 식당을 평가해주세요.'}
       step={3}
       onPrevStep={onPrevStep}
-      isButtonDisabled={false}
+      isButtonDisabled={isButtonDisabled || isSearchMode}
       onButtonClick={onButtonClick}
     >
       <div>
