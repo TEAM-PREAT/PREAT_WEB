@@ -1,28 +1,25 @@
 import FoodItem from '@/components/join/hate/food-item';
-import { useState } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
+import { HateFoodType } from '@/api/join-setting';
 
 interface FoodListProps {
-  list: {
-    label: string;
-    key: string;
-    src?: string;
-  }[];
-  selectList: string[];
-  handleSelectList: (newSelectList: string[]) => void;
+  list: HateFoodType[];
+  selectList: number[];
+  handleSelectList: (newSelectList: number[]) => void;
 }
+
 export default function FoodList({
   selectList,
   handleSelectList,
   list,
 }: FoodListProps) {
-  const handleSelectItem = (key: string) => {
-    if (selectList.includes(key)) {
-      const newSelectList = selectList.filter((element) => element !== key);
+  const handleSelectItem = (id: number) => {
+    if (selectList.includes(id)) {
+      const newSelectList = selectList.filter((element) => element !== id);
       handleSelectList(newSelectList);
     } else {
-      handleSelectList([...selectList, key]);
+      handleSelectList([...selectList, id]);
     }
   };
 
@@ -33,15 +30,18 @@ export default function FoodList({
         <Image src="/assets/images/jwt.png" alt="jwt" width={71} height={40} />
       </Title>
       <FoodListWrapper>
-        {list.map(({ key, label, src }) => {
-          const isSelected = selectList.includes(key);
+        {list.map(({ id, food, imgUrl }) => {
+          const isSelected = selectList.includes(id);
+          const onSelect = () => handleSelectItem(id);
+
           return (
             <FoodItem
-              key={key}
-              label={label}
+              key={id}
+              id={id}
+              label={food}
+              src={imgUrl}
               isSelected={isSelected}
-              src={src}
-              onSelect={() => handleSelectItem(key)}
+              onSelect={onSelect}
             />
           );
         })}
@@ -56,7 +56,7 @@ const Title = styled.h2`
   font-weight: 900;
   font-size: 20px;
   line-height: 34px;
-  margin-top: 35px;
+  margin-top: 10px;
 
   img {
     position: relative;

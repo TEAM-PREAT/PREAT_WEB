@@ -38,8 +38,8 @@ function JoinPage() {
     handleStep('nickname-complete', { nickname });
   };
 
-  const handleHateNextStep = (hateFoodList: string[]) => {
-    handleStep('tastes', { hateFoodList });
+  const handleHateNextStep = (hateFoods: number[]) => {
+    handleStep('tastes', { hateFoods });
   };
 
   const handleTasteNextStep = (spicyStep: number, sugarStep: number) => {

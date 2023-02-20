@@ -1,4 +1,5 @@
 import { requestPOST } from '@/api';
+import { setStorage } from '@/utils/storage';
 const LOGIN_PATH = '/v1/auth/login';
 
 interface LoginProps {
@@ -26,11 +27,9 @@ export const requestKakaoLogin = async (kakao_access_token: string) => {
       socialToken: kakao_access_token,
     });
 
-    const { accessToken, newUser } = res.data;
-
-    localStorage.setItem('accessToken', accessToken);
-
-    return newUser;
+    const { accessToken, isNewUser } = res.data;
+    setStorage('accessToken', accessToken);
+    return isNewUser;
   } catch (error) {
     throw new Error('로그인에 실패하셨습니다!');
   }
