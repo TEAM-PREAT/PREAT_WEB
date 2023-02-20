@@ -3,7 +3,7 @@ import SearchTagList from '@/components/join/hate/search-tag-list';
 import SearchIcon from '@/components/icons/search-icon';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
-import SearchInput from '@/components/search-input';
+import SearchInput from '@/components/common/search-input';
 
 interface SearchBarProps {
   isSearchMode: boolean;

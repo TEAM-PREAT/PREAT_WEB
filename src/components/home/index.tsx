@@ -2,6 +2,7 @@ import OpenBox, { OpenStatusType } from '@/components/home/open-box';
 import TopBox from '@/components/home/top-box';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Map from '@/components/common/map';
 
 export default function Home() {
   const [openStatus, setOpenStatus] = useState<OpenStatusType>('close');
@@ -15,7 +16,7 @@ export default function Home() {
       <TopBoxWrapper>
         <TopBox />
       </TopBoxWrapper>
-      {/* <Map /> */}
+      <Map />
       <OpenBox
         openStatus={openStatus}
         onClick={() => handleOpenStatus('open')}

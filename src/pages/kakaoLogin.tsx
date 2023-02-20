@@ -1,6 +1,6 @@
 import { requestKakaoLogin } from '@/api/auth';
 import { tokenSetting } from '@/api/kakao';
-import Loading from '@/components/loading';
+import Loading from '@/components/common/loading';
 import withLayout from '@/hoc/withLayout';
 import { AbsoluteCenterStyled } from '@/styles/core';
 import { useEffect } from 'react';

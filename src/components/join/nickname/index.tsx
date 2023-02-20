@@ -1,4 +1,4 @@
-import Input from '@/components/input';
+import Input from '@/components/common/input';
 import { ButtonStyled } from '@/styles/core';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
