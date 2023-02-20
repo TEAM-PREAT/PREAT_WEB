@@ -17,6 +17,7 @@ import {
   setStorage,
 } from '@/utils/storage';
 import { useEffect, useState } from 'react';
+import Final from '@/components/join/final';
 
 function JoinPage() {
   const [step, setStep] = useState<StepStatus>(0);
@@ -58,10 +59,13 @@ function JoinPage() {
     handleNextStep({ reviews });
   };
 
+  const handleSubmit = () => {
+    const value = getStorage(JOIN_SETTING_VALUE_KEY);
+    console.log('value: ', value);
+  };
   useEffect(() => {
     const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);
     const initStep = getStorage(JOIN_STEP_KEY);
-    console.log('initSettingValue: ', initSettingValue, initStep);
 
     setSettingValues(initSettingValue);
     setStep(initStep);
@@ -99,12 +103,7 @@ function JoinPage() {
         />
       );
     default:
-      return (
-        <RestaurantEvaluating
-          onNextStep={handleRestaurantNextStep}
-          onPrevStep={handlePrevStep}
-        />
-      );
+      return <Final onAction={handleSubmit} />;
   }
 }
 

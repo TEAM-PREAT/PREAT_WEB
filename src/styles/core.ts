@@ -11,13 +11,13 @@ export const AbsoluteCenterStyled = styled.div`
   margin: auto;
 `;
 
-export const ButtonStyled = styled.button<{}>`
+export const ButtonStyled = styled.button`
+  cursor: pointer;
   width: 100%;
   height: 53px;
   background-color: #ff6c3e;
   border-radius: 18px;
   color: #fff;
-
   font-size: 20px;
   font-weight: 700;
 
