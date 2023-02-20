@@ -1,14 +1,25 @@
+import OpenBox, { OpenStatusType } from '@/components/home/open-box';
 import TopBox from '@/components/home/top-box';
-import Map from '@/components/map';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function Home() {
+  const [openStatus, setOpenStatus] = useState<OpenStatusType>('close');
+
+  const handleOpenStatus = (status: OpenStatusType) => {
+    setOpenStatus(status);
+  };
+
   return (
     <Wrapper>
       <TopBoxWrapper>
         <TopBox />
       </TopBoxWrapper>
-      <Map />
+      {/* <Map /> */}
+      <OpenBox
+        openStatus={openStatus}
+        onClick={() => handleOpenStatus('open')}
+      />
     </Wrapper>
   );
 }
@@ -17,7 +28,8 @@ const Wrapper = styled.div`
   height: 100%;
   min-height: 100vh;
   position: relative;
-  /* background-color: #353553; */
+  background-color: #353553;
+  overflow: hidden;
 `;
 
 const TopBoxWrapper = styled.div`
