@@ -1,5 +1,7 @@
+import { checkNicknameAPI } from '@/api/join-setting';
 import Input from '@/components/common/input';
 import { ButtonStyled } from '@/styles/core';
+import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
@@ -12,23 +14,14 @@ function NickNameInputPage({ onNextStep }: NickNameInputPageProps) {
   const [isError, setIsError] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
-  const checkNicknameDuplicate = (nickname: string) => {
-    // TODO : 닉네임 중복확인
-    return nickname == 'dpfj';
+  const checkNicknameDuplicate = async (nickname: string) => {
+    const { isAvailable } = await checkNicknameAPI(nickname);
+    return !isAvailable;
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-
-    if (checkNicknameDuplicate(value)) {
-      setIsCorrect(false);
-      setIsError(true);
-      setNickname('');
-      return;
-    }
-
     setIsCorrect(value !== '');
-
     setNickname(value);
   };
 
@@ -36,14 +29,31 @@ function NickNameInputPage({ onNextStep }: NickNameInputPageProps) {
     setIsError(!isError);
   };
 
-  const onAction = () => {
+  const onAction = async () => {
+    const isAvailable = await checkNicknameDuplicate(nickname);
+    if (isAvailable) {
+      setIsCorrect(false);
+      setIsError(true);
+      setNickname('');
+      return;
+    }
+
     onNextStep(nickname);
   };
 
   return (
     <Wrapper>
-      <Title>닉네임을</Title>
-      <Title>입력해보세요</Title>
+      <TitleWrapper>
+        <Title>닉네임을</Title>
+        <Title>입력해주세요</Title>
+        <Image
+          src="/assets/images/smile.png"
+          alt="smile"
+          width={44}
+          height={40}
+        />
+      </TitleWrapper>
+
       <InputWrapper>
         <Input
           name="nickname"
@@ -66,6 +76,17 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled(ButtonStyled)``;
+
+const TitleWrapper = styled.div`
+  position: relative;
+  width: fit-content;
+
+  img {
+    position: absolute;
+    bottom: 1px;
+    right: -50px;
+  }
+`;
 
 const Title = styled.p`
   font-size: 25px;

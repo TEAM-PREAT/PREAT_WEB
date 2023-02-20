@@ -7,11 +7,13 @@ import BackIcon from '@/components/icons/back-icon';
 interface NicknameSettingCompleteProps {
   onNextStep: () => void;
   onPrevStep: () => void;
+  nickname: string;
 }
 
 function NicknameSettingComplete({
   onNextStep,
   onPrevStep,
+  nickname,
 }: NicknameSettingCompleteProps) {
   return (
     <>
@@ -23,7 +25,7 @@ function NicknameSettingComplete({
       <Wrapper>
         <InnerBox>
           <Title>
-            <strong>맛집매니아</strong>님
+            <strong>{nickname}</strong>님
           </Title>
           <Title>환영합니다!</Title>
           <ImageWrapper>

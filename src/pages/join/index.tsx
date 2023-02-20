@@ -7,9 +7,19 @@ import withLayout from '@/hoc/withLayout';
 import {
   getStorage,
   JOIN_SETTING_VALUE_KEY,
+  JOIN_STEP_KEY,
   setStorage,
 } from '@/utils/storage';
 import { useEffect, useState } from 'react';
+
+enum StepStatus {
+  nickname,
+  nicknameComplete,
+  hate,
+  tastes,
+  restaurant,
+  final,
+}
 
 type StepStatusType =
   | 'nickname'
@@ -19,9 +29,33 @@ type StepStatusType =
   | 'restaurant'
   | 'final';
 
+interface ReviewType {
+  restaurantId: number;
+  rating: number;
+}
+
+interface SettingValueListType {
+  nickname: string;
+  salty: number;
+  sweet: number;
+  spicy: number;
+  hateFoods: number[];
+  reviews: ReviewType[];
+}
+
+const INIT_SETTING_VALUES = {
+  nickname: ' ',
+  salty: 0,
+  sweet: 0,
+  spicy: 0,
+  hateFoods: [],
+  reviews: [],
+};
+
 function JoinPage() {
-  const [step, setStep] = useState<StepStatusType>('hate');
-  const [settingValues, setSettingValues] = useState<Record<string, unknown>>();
+  const [step, setStep] = useState<StepStatusType>('nickname');
+  const [settingValues, setSettingValues] =
+    useState<SettingValueListType>(INIT_SETTING_VALUES);
 
   const handleStep = (
     step: StepStatusType,
@@ -32,6 +66,7 @@ function JoinPage() {
     const newSettingValueTemp = { ...settingValues, ...newSettingValues };
     setSettingValues(newSettingValueTemp);
     setStorage(JOIN_SETTING_VALUE_KEY, newSettingValueTemp);
+    setStorage(JOIN_STEP_KEY, step);
   };
 
   const handleNickNameNextStep = (nickname: string) => {
@@ -48,9 +83,11 @@ function JoinPage() {
 
   useEffect(() => {
     const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);
+    const initStep = getStorage(JOIN_STEP_KEY);
     console.log('initSettingValue: ', initSettingValue);
 
     setSettingValues(initSettingValue);
+    setStep(initStep);
   }, []);
 
   switch (step) {
@@ -59,6 +96,7 @@ function JoinPage() {
     case 'nickname-complete':
       return (
         <NicknameSettingComplete
+          nickname={settingValues?.nickname ?? ''}
           onNextStep={() => setStep('hate')}
           onPrevStep={() => setStep('nickname')}
         />
