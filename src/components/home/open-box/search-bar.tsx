@@ -1,4 +1,3 @@
-import SearchBackIcon from '@/components/icons/search-back-icon';
 import SearchIcon from '@/components/icons/search-icon';
 import SearchList from '@/components/join/restaurant/search-list';
 import SearchTagList from '@/components/join/restaurant/search-tag-list';
@@ -7,14 +6,13 @@ import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 interface SearchBarProps {
-  searchModeOn: () => void;
-  searchModeOff: () => void;
+  handleSearchMode: () => void;
   isSearchMode: boolean;
   onAction: (obj: RestaurantItemType) => void;
 }
 
 export default function SearchBar({
-  searchModeOn,
+  handleSearchMode,
   isSearchMode,
   onAction,
 }: SearchBarProps) {
@@ -32,15 +30,12 @@ export default function SearchBar({
         <Input
           value={searchKeyword}
           onChange={onInputChange}
-          onFocus={searchModeOn}
+          onFocus={handleSearchMode}
           placeholder="맛집을 검색해보세요"
         />
-        <SearchBackIconWrapper>
-          <SearchBackIcon />
-        </SearchBackIconWrapper>
-        <SearchIconWrapper>
+        <IconWrapper>
           <SearchIcon />
-        </SearchIconWrapper>
+        </IconWrapper>
       </InputWrapper>
       {isSearchMode &&
         (isShowTagList ? (
@@ -64,15 +59,10 @@ const InputWrapper = styled.div`
   position: relative;
 `;
 
-const SearchBackIconWrapper = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 10px;
-`;
-const SearchIconWrapper = styled.div`
+const IconWrapper = styled.div`
   position: absolute;
   top: 5px;
-  right: 10px;
+  left: 10px;
 `;
 
 const Input = styled.input`
