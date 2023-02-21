@@ -9,4 +9,4 @@ function HomePage() {
   );
 }
 
-export default withLayout(Home, 'home', 'home');
+export default withLayout(HomePage, 'home', 'home');

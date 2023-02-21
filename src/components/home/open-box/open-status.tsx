@@ -44,11 +44,7 @@ export default function OpenStatus({
       )}
       {!isSearchMode && (
         <>
-          <ListEditButton onClick={searchModeOn}>
-            맛집 리스트 수정하기
-            <PenIcon />
-          </ListEditButton>
-          <ListWrapper current={current} />
+          <ListWrapper current={current} searchModeOn={searchModeOn} />
         </>
       )}
     </div>
@@ -63,20 +59,4 @@ const Title = styled.h2`
   color: #000000;
   text-align: center;
   margin-top: 25px;
-`;
-
-const ListEditButton = styled.div`
-  font-weight: 500;
-  font-size: 10px;
-  margin: auto;
-  width: fit-content;
-  padding-bottom: 1px;
-  border-bottom: 1px solid #ff6c3e;
-  color: #8e8d8d;
-  position: relative;
-  svg {
-    position: absolute;
-    right: -12px;
-    bottom: -1px;
-  }
 `;

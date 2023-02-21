@@ -17,6 +17,7 @@ export default function SearchBar({
   searchModeOn,
   isSearchMode,
   onAction,
+  searchModeOff,
 }: SearchBarProps) {
   const [searchKeyword, setSearchKeyword] = useState('');
 
@@ -35,7 +36,7 @@ export default function SearchBar({
           onFocus={searchModeOn}
           placeholder="맛집을 검색해보세요"
         />
-        <SearchBackIconWrapper>
+        <SearchBackIconWrapper onClick={searchModeOff}>
           <SearchBackIcon />
         </SearchBackIconWrapper>
         <SearchIconWrapper>

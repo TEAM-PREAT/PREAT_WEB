@@ -23,7 +23,7 @@ export default function OpenBox({
   openStatus,
   handleToggleOpen,
 }: OpenBoxProps) {
-  const [current, setCurrent] = useState<CurrentStep>(0);
+  const [current, setCurrent] = useState<CurrentStep>(1);
 
   const handleCurrent = (next: CurrentStep) => {
     setCurrent(next);
