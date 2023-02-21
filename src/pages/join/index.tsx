@@ -18,6 +18,7 @@ import {
 } from '@/utils/storage';
 import { useEffect, useState } from 'react';
 import Final from '@/components/join/final';
+import { signup } from '@/api/auth';
 
 function JoinPage() {
   const [step, setStep] = useState<StepStatus>(0);
@@ -44,6 +45,7 @@ function JoinPage() {
   };
 
   const handleNickNameNextStep = (nickname: string) => {
+    console.log('nickname: ', nickname);
     handleNextStep({ nickname });
   };
 
@@ -59,13 +61,18 @@ function JoinPage() {
     handleNextStep({ reviews });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const value = getStorage(JOIN_SETTING_VALUE_KEY);
     console.log('value: ', value);
+
+    const res = await signup(value);
+    console.log('res: ', res);
   };
+
   useEffect(() => {
-    const initSettingValue = getStorage(JOIN_SETTING_VALUE_KEY);
-    const initStep = getStorage(JOIN_STEP_KEY);
+    const initSettingValue =
+      getStorage(JOIN_SETTING_VALUE_KEY) ?? INIT_SETTING_VALUES;
+    const initStep = getStorage(JOIN_STEP_KEY) ?? 0;
 
     setSettingValues(initSettingValue);
     setStep(initStep);
