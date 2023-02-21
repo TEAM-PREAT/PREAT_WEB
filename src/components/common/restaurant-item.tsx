@@ -7,7 +7,7 @@ import styled from 'styled-components';
 interface RestaurantItemProps extends RestaurantScoreItemType {
   handleReview?: (id: number, score: number) => void;
   isChecked?: boolean;
-  toggleCheck: () => void;
+  toggleCheck?: () => void;
 }
 
 export default function RestaurantItem({
@@ -49,7 +49,7 @@ const Wrapper = styled.div`
   padding: 12px 0;
 
   & + & {
-    border-top: 1px solid #cccccc;
+    border-top: 0.8px solid #cccccc;
   }
 `;
 
@@ -89,4 +89,5 @@ const Location = styled.div`
 
   color: #5a5a5a;
 `;
+
 const StarListWrapper = styled.div``;

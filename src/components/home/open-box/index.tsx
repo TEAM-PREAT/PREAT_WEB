@@ -1,8 +1,18 @@
 import OpenStatus from '@/components/home/open-box/open-status';
+import { CurrentStep } from '@/components/home/types';
+import BigHeartIcon from '@/components/icons/map/big-heart-icon';
+import BigSmileIcon from '@/components/icons/map/big-smile-icon';
 import BigStarIcon from '@/components/icons/map/big-star-icon';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 export type OpenStatusType = 'close' | 'open' | 'mid';
+
+const TOP_ICON_LIST = [
+  <BigSmileIcon key="big-smile" />,
+  <BigStarIcon key="big-star" />,
+  <BigHeartIcon key="big-heart" />,
+];
 
 interface OpenBoxProps {
   openStatus: OpenStatusType;
@@ -13,6 +23,12 @@ export default function OpenBox({
   openStatus,
   handleToggleOpen,
 }: OpenBoxProps) {
+  const [current, setCurrent] = useState<CurrentStep>(0);
+
+  const handleCurrent = (next: CurrentStep) => {
+    setCurrent(next);
+  };
+
   return (
     <Wrapper
       onClick={() => {
@@ -22,10 +38,12 @@ export default function OpenBox({
     >
       <InnerWrapper>
         <IconWrapper onClick={handleToggleOpen}>
-          <BigStarIcon />
+          {TOP_ICON_LIST[current]}
         </IconWrapper>
 
-        {openStatus === 'open' && <OpenStatus />}
+        {openStatus === 'open' && (
+          <OpenStatus current={current} handleCurrent={handleCurrent} />
+        )}
       </InnerWrapper>
     </Wrapper>
   );
