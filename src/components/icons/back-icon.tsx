@@ -4,9 +4,9 @@ export default function BackIcon() {
       <path
         d="M8.5 16L1 8.5L8.5 1"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

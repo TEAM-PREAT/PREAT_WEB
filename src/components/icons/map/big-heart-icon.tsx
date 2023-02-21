@@ -14,7 +14,7 @@ export default function BigHeartIcon() {
           r="33.5"
           fill="#FF60AC"
           stroke="white"
-          stroke-width="3"
+          strokeWidth="3"
         />
       </g>
       <g filter="url(#filter1_d_47_2)">
@@ -22,9 +22,9 @@ export default function BigHeartIcon() {
           d="M56.25 30.8125C56.25 26.049 52.2276 22.1875 47.2656 22.1875C43.5557 22.1875 40.371 24.3462 39 27.4266C37.629 24.3462 34.4443 22.1875 30.7344 22.1875C25.7724 22.1875 21.75 26.049 21.75 30.8125C21.75 44.6519 39 53.8125 39 53.8125C39 53.8125 56.25 44.6519 56.25 30.8125Z"
           fill="white"
           stroke="white"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </g>
       <defs>
