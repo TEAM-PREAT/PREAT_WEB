@@ -64,7 +64,7 @@ const Wrapper = styled.div<{ openStatus: OpenStatusType }>`
 
 const InnerWrapper = styled.div`
   position: relative;
-  padding-top: 50px;
+  padding: 50px 30px 0;
 `;
 
 const IconWrapper = styled.div`
