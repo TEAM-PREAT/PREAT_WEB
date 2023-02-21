@@ -1,4 +1,4 @@
-import ListEdit from '@/components/home/open-box/list-edit';
+import ListWrapper from '@/components/home/open-box/list-wrapper';
 import ToggleNav from '@/components/home/open-box/toggle-nav';
 import PenIcon from '@/components/home/pen-icon';
 import { CurrentStep } from '@/components/home/types';
@@ -18,12 +18,13 @@ export default function OpenStatus({
   current,
   handleCurrent,
 }: OpenStatusProps) {
-  // const [isSearchMode, setIsSearchMode] = useState(false);
   const [
     isSearchMode,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _,
     { toggleOn: searchModeOn, toggleOff: searchModeOff },
   ] = useToggle();
+
   const newRestaurantAdd = (obj: RestaurantItemType) => {
     console.log('obj: ', obj);
   };
@@ -47,7 +48,7 @@ export default function OpenStatus({
             맛집 리스트 수정하기
             <PenIcon />
           </ListEditButton>
-          <ListEdit />
+          <ListWrapper current={current} />
         </>
       )}
     </div>
