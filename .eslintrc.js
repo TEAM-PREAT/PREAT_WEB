@@ -21,11 +21,11 @@ module.exports = {
         tabWidth: 2,
         trailingComma: 'all',
         bracketSpacing: true,
-        parser: 'flow',
       },
     ],
     // 타입스크립트 interface안의 함수 매개변수 no-unused-vars 속성에 대해서 https://stackoverflow.com/a/61555310
     'no-unused-vars': 'off',
+    'no-unexpected-multiline': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
   },
   parserOptions: {

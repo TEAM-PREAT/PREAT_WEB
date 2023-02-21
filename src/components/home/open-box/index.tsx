@@ -1,3 +1,4 @@
+import OpenStatus from '@/components/home/open-box/open-status';
 import BigStarIcon from '@/components/icons/map/big-star-icon';
 import styled, { css } from 'styled-components';
 
@@ -5,16 +6,26 @@ export type OpenStatusType = 'close' | 'open' | 'mid';
 
 interface OpenBoxProps {
   openStatus: OpenStatusType;
-  onClick: () => void;
+  handleToggleOpen: () => void;
 }
 
-export default function OpenBox({ openStatus, onClick }: OpenBoxProps) {
+export default function OpenBox({
+  openStatus,
+  handleToggleOpen,
+}: OpenBoxProps) {
   return (
-    <Wrapper onClick={onClick} openStatus={openStatus}>
+    <Wrapper
+      onClick={() => {
+        openStatus === 'close' && handleToggleOpen();
+      }}
+      openStatus={openStatus}
+    >
       <InnerWrapper>
-        <IconWrapper>
+        <IconWrapper onClick={handleToggleOpen}>
           <BigStarIcon />
         </IconWrapper>
+
+        {openStatus === 'open' && <OpenStatus />}
       </InnerWrapper>
     </Wrapper>
   );
@@ -31,6 +42,7 @@ const Wrapper = styled.div<{ openStatus: OpenStatusType }>`
   background-color: #fff;
   transition: bottom 1s;
   z-index: 20;
+
   ${(props) =>
     props.openStatus === 'close' &&
     css`
@@ -52,6 +64,7 @@ const Wrapper = styled.div<{ openStatus: OpenStatusType }>`
 
 const InnerWrapper = styled.div`
   position: relative;
+  padding-top: 50px;
 `;
 
 const IconWrapper = styled.div`
@@ -61,4 +74,5 @@ const IconWrapper = styled.div`
   right: 0;
   margin: auto;
   width: fit-content;
+  cursor: pointer;
 `;

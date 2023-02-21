@@ -1,14 +1,13 @@
-import EvalutaionScore from '@/components/common/evaluation-score';
-import {
-  RestaurantItemType,
-  RestaurantScoreItemType,
-} from '@/components/join/types';
+import EvaluationScore from '@/components/common/evaluation-score';
+import { RestaurantScoreItemType } from '@/components/join/types';
 import { Flex, FlexColumn } from '@/styles/core';
 import Image from 'next/image';
 import styled from 'styled-components';
 
 interface RestaurantItemProps extends RestaurantScoreItemType {
-  handleReview: (id: number, score: number) => void;
+  handleReview?: (id: number, score: number) => void;
+  isChecked?: boolean;
+  toggleCheck: () => void;
 }
 
 export default function RestaurantItem({
@@ -17,11 +16,11 @@ export default function RestaurantItem({
   location,
   name,
   score,
-  handleReview,
   id,
+  handleReview,
 }: RestaurantItemProps) {
   const onReview = (score: number) => {
-    handleReview(id, score);
+    handleReview && handleReview(id, score);
   };
 
   return (
@@ -35,9 +34,9 @@ export default function RestaurantItem({
           <Type>{type}</Type>
         </TextWrapper>
 
-        <Loaction>{location}</Loaction>
+        <Location>{location}</Location>
         <StarListWrapper>
-          <EvalutaionScore score={score} onReview={onReview} />
+          <EvaluationScore score={score} onReview={onReview} />
         </StarListWrapper>
       </RightWrapper>
     </Wrapper>
@@ -70,6 +69,7 @@ const TextWrapper = styled(Flex)`
   align-items: flex-end;
   height: 29px;
 `;
+
 const Name = styled.div`
   font-weight: 900;
   font-size: 20px;
@@ -83,7 +83,7 @@ const Type = styled.div`
   line-height: 18px;
   color: #7d7d7d;
 `;
-const Loaction = styled.div`
+const Location = styled.div`
   font-weight: 500;
   font-size: 12px;
 

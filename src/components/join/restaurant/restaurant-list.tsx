@@ -1,4 +1,4 @@
-import RestaurantItem from '@/components/join/restaurant/restaurant-item';
+import RestaurantItem from '@/components/common/restaurant-item';
 import { RestaurantScoreItemType } from '@/components/join/types';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ export default function RestaurantList({
   return (
     <ListWrapper>
       {list.map((item) => (
-        <RestaurantItem {...item} handleReview={handleReview} />
+        <RestaurantItem key={item.id} {...item} handleReview={handleReview} />
       ))}
     </ListWrapper>
   );
