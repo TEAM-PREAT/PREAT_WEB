@@ -5,6 +5,23 @@ import SmallStarIcon from '@/components/icons/nav/small-star-icon';
 import SmileIcon from '@/components/icons/nav/smile-star';
 import styled, { css } from 'styled-components';
 
+const NAV_LIST = [
+  {
+    key: CurrentStep.Friend,
+    Icon: <SmileIcon />,
+    CurrentIcon: <SmileIcon color="#fff" />,
+  },
+  {
+    key: CurrentStep.My,
+    Icon: <OutlineStarIcon />,
+    CurrentIcon: <SmallStarIcon />,
+  },
+  {
+    key: CurrentStep.Heart,
+    Icon: <SmallHeartIcon />,
+    CurrentIcon: <SmallHeartIcon color="#fff" />,
+  },
+];
 interface ToggleNavProps {
   current: CurrentStep;
   handleCurrent: (next: CurrentStep) => void;
@@ -13,28 +30,18 @@ interface ToggleNavProps {
 export default function ToggleNav({ current, handleCurrent }: ToggleNavProps) {
   return (
     <Wrapper position={current}>
-      <Item
-        // isCurrent={current === CurrentStep.Friend}
-        onClick={() => handleCurrent(CurrentStep.Friend)}
-      >
-        <SmileIcon
-          color={current === CurrentStep.Friend ? '#fff' : '#BDBDBD'}
-        />
-      </Item>
-      <Item
-        // isCurrent={current === CurrentStep.My}
-        onClick={() => handleCurrent(CurrentStep.My)}
-      >
-        {current === CurrentStep.My ? <SmallStarIcon /> : <OutlineStarIcon />}
-      </Item>
-      <Item
-        // isCurrent={current === CurrentStep.Heart}
-        onClick={() => handleCurrent(CurrentStep.Heart)}
-      >
-        <SmallHeartIcon
-          color={current === CurrentStep.Heart ? '#fff' : '#BDBDBD'}
-        />
-      </Item>
+      {NAV_LIST.map(({ key, Icon, CurrentIcon }) => {
+        const isCurrent = current === key;
+        return (
+          <Item
+            key={key}
+            onClick={() => handleCurrent(key)}
+            isCurrent={isCurrent}
+          >
+            {isCurrent ? CurrentIcon : Icon}
+          </Item>
+        );
+      })}
     </Wrapper>
   );
 }
@@ -48,6 +55,10 @@ const Wrapper = styled.div<{ position?: number }>`
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
   border-radius: 17px;
 
+  svg {
+    z-index: 3;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -55,7 +66,7 @@ const Wrapper = styled.div<{ position?: number }>`
     transition: all 0.8s;
     transform: translateX(0);
     display: inline-block;
-    z-index: 1;
+    z-index: 2;
     box-shadow: 2px 0px 3px rgba(0, 0, 0, 0.25);
     width: 91px;
     height: 34px;
@@ -67,7 +78,6 @@ const Wrapper = styled.div<{ position?: number }>`
         transform: translateX(0);
         background: #14ec6a;
       `}
-
     ${(props) =>
       props.position === 1 &&
       css`
@@ -84,7 +94,7 @@ const Wrapper = styled.div<{ position?: number }>`
   }
 `;
 
-const Item = styled.div`
+const Item = styled.div<{ isCurrent: boolean }>`
   position: absolute;
   display: inline-block;
   width: 91px;
@@ -94,9 +104,9 @@ const Item = styled.div`
   top: 0;
   transition: all 0.2s ease-in;
   text-align: center;
-  z-index: 2;
   svg {
     position: relative;
+    z-index: ${(props) => (props.isCurrent ? 3 : 2)};
   }
 
   &:nth-child(1) {
