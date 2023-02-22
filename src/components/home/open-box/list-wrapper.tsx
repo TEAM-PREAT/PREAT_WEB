@@ -1,6 +1,6 @@
 import { RestaurantType } from '@/api/wishs';
-import MyList from '@/components/home/open-box/my-list';
-import MyListEdit from '@/components/home/open-box/my-list/edit-mode';
+import MyList from '@/components/home/open-box/my-step/my-list';
+import MyListEdit from '@/components/home/open-box/my-step/my-list/edit-mode';
 import { CurrentStep } from '@/components/home/types';
 import CircleXIcon from '@/components/icons/circle-x-icon';
 import { FlexAlignCenter } from '@/styles/core';
@@ -14,6 +14,7 @@ interface ListWrapperProps {
   handleToggleEditMode: () => void;
 }
 
+// TODO: 삭제
 export default function ListWrapper({
   current,
   searchModeOn,
