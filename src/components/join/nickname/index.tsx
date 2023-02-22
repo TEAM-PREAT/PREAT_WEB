@@ -31,6 +31,7 @@ function NickNameInputPage({ onNextStep }: NickNameInputPageProps) {
 
   const onAction = async () => {
     const isAvailable = await checkNicknameDuplicate(nickname);
+    // TODO: loading
     if (isAvailable) {
       setIsCorrect(false);
       setIsError(true);

@@ -1,20 +1,24 @@
 import StarIcon from '@/components/icons/star';
 import { Flex } from '@/styles/core';
 
-interface EvalutaionScoreProps {
+interface EvaluationScoreProps {
   score: number;
-  onReview: (score: number) => void;
+  onReview?: (score: number) => void;
+
+  iconColor?: string;
 }
 
-function EvalutaionScore({ score, onReview }: EvalutaionScoreProps) {
+function EvaluationScore({ score, onReview, iconColor }: EvaluationScoreProps) {
+  const fillColor = iconColor ?? '#FF6C3E';
+
   return (
     <Flex>
       {[0, 0, 0, 0, 0].map((_, idx) => (
-        <div onClick={() => onReview(idx + 1)}>
-          <StarIcon color={idx < score ? '#FF6C3E' : '#D9D9D9'} />{' '}
+        <div key={idx} onClick={() => onReview && onReview(idx + 1)}>
+          <StarIcon color={idx < score ? fillColor : '#D9D9D9'} />{' '}
         </div>
       ))}
     </Flex>
   );
 }
-export default EvalutaionScore;
+export default EvaluationScore;

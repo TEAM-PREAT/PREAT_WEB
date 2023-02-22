@@ -1,8 +1,17 @@
 import withLayout from '@/hoc/withLayout';
+import { HOME } from '@/utils/path';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 function LoginComplete() {
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => router.push(HOME), 2000);
+  }, [router]);
+
   return (
     <Wrapper>
       <Text>반가워요.</Text>

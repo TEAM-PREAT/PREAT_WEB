@@ -1,6 +1,4 @@
-interface IconProps {
-  color?: string;
-}
+import { IconProps } from '@/components/icons/types';
 
 function StarIcon({ color }: IconProps) {
   return (

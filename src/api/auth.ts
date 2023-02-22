@@ -1,11 +1,39 @@
-import { requestPOST } from '@/api';
+import { authenticationRequest, requestPOST } from '@/api';
 import { setStorage } from '@/utils/storage';
 const LOGIN_PATH = '/v1/auth/login';
+const SIGNUP_URL = '/v1/auth/signup';
 
 interface LoginProps {
   platform: 'kakao';
   socialToken: string;
 }
+
+interface ReviewType {
+  restaurantId: number;
+  rating: number;
+}
+
+interface SignupRequestType {
+  nickname: string;
+  sweet: number;
+  spicy: number;
+  salty: number;
+  hateFoods: number[];
+  reviews: ReviewType[];
+}
+
+export const signup = async (data: SignupRequestType) => {
+  try {
+    const response = await authenticationRequest.post(SIGNUP_URL, data);
+
+    const userId = response.data.data;
+    setStorage('userId', userId);
+
+    return response;
+  } catch (error) {
+    console.log('error: ', error);
+  }
+};
 
 export const login = async ({ platform, socialToken }: LoginProps) => {
   try {
@@ -28,6 +56,7 @@ export const requestKakaoLogin = async (kakao_access_token: string) => {
     });
 
     const { accessToken, isNewUser } = res.data;
+
     setStorage('accessToken', accessToken);
     return isNewUser;
   } catch (error) {

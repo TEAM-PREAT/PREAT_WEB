@@ -95,7 +95,8 @@ export default function RestaurantEvaluating({
       <div>
         <SearchBar
           isSearchMode={isSearchMode}
-          handleSearchMode={() => setIsSearchMode(true)}
+          searchModeOn={() => setIsSearchMode(true)}
+          searchModeOff={() => setIsSearchMode(false)}
           onAction={newRestaurantAdd}
         />
         {!isSearchMode && (

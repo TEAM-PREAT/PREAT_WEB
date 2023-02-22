@@ -1,20 +1,24 @@
+import SearchBackIcon from '@/components/icons/search-back-icon';
 import SearchIcon from '@/components/icons/search-icon';
 import SearchList from '@/components/join/restaurant/search-list';
 import SearchTagList from '@/components/join/restaurant/search-tag-list';
 import { RestaurantItemType } from '@/components/join/types';
+import { MaxItemContainer } from '@/styles/core';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 interface SearchBarProps {
-  handleSearchMode: () => void;
+  searchModeOn: () => void;
+  searchModeOff: () => void;
   isSearchMode: boolean;
   onAction: (obj: RestaurantItemType) => void;
 }
 
 export default function SearchBar({
-  handleSearchMode,
+  searchModeOn,
   isSearchMode,
   onAction,
+  searchModeOff,
 }: SearchBarProps) {
   const [searchKeyword, setSearchKeyword] = useState('');
 
@@ -25,17 +29,20 @@ export default function SearchBar({
   };
 
   return (
-    <Wrapper>
+    <MaxItemContainer>
       <InputWrapper>
         <Input
           value={searchKeyword}
           onChange={onInputChange}
-          onFocus={handleSearchMode}
+          onFocus={searchModeOn}
           placeholder="맛집을 검색해보세요"
         />
-        <IconWrapper>
+        <SearchBackIconWrapper onClick={searchModeOff}>
+          <SearchBackIcon />
+        </SearchBackIconWrapper>
+        <SearchIconWrapper>
           <SearchIcon />
-        </IconWrapper>
+        </SearchIconWrapper>
       </InputWrapper>
       {isSearchMode &&
         (isShowTagList ? (
@@ -43,11 +50,9 @@ export default function SearchBar({
         ) : (
           <SearchList onAction={onAction} />
         ))}
-    </Wrapper>
+    </MaxItemContainer>
   );
 }
-
-const Wrapper = styled.div``;
 
 const InputWrapper = styled.div`
   width: 290px;
@@ -59,10 +64,15 @@ const InputWrapper = styled.div`
   position: relative;
 `;
 
-const IconWrapper = styled.div`
+const SearchBackIconWrapper = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+`;
+const SearchIconWrapper = styled.div`
   position: absolute;
   top: 5px;
-  left: 10px;
+  right: 10px;
 `;
 
 const Input = styled.input`
