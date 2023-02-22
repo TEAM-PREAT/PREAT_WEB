@@ -1,4 +1,4 @@
-const USER_ME_WISHS_URL = '/v1/users/me/wishes';
+// const USER_ME_WISHS_URL = '/v1/users/me/wishes';
 
 export interface RestaurantType {
   id: number;

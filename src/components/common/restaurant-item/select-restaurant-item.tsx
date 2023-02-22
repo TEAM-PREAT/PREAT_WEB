@@ -1,3 +1,4 @@
+import { RestaurantType } from '@/api/wishs';
 import EvaluationScore from '@/components/common/evaluation-score';
 import {
   Wrapper,
@@ -9,23 +10,22 @@ import {
   StarListWrapper,
   Location,
 } from '@/components/common/restaurant-item/styled';
-import { RestaurantScoreItemType } from '@/components/join/types';
 import Image from 'next/image';
 import styled from 'styled-components';
 
-interface SelectRestaurantItemProps extends RestaurantScoreItemType {
+interface SelectRestaurantItemProps extends RestaurantType {
   checked: boolean;
   toggleCheck: () => void;
 }
 
 export default function SelectRestaurantItem({
-  src,
-  type,
-  location,
-  name,
-  score,
+  imageUrl,
+  category,
   checked,
+  name,
+  rating,
   toggleCheck,
+  address,
 }: SelectRestaurantItemProps) {
   return (
     <Wrapper>
@@ -47,17 +47,17 @@ export default function SelectRestaurantItem({
         )}
       </CheckWrapper>
       <ImageWrapper>
-        {src && <Image src={src} alt={name} width={92} height={92} />}
+        {imageUrl && <Image src={imageUrl} alt={name} width={92} height={92} />}
       </ImageWrapper>
       <RightWrapper>
         <TextWrapper>
           <Name>{name}</Name>
-          <Type>{type}</Type>
+          <Type>{category}</Type>
         </TextWrapper>
 
-        <Location>{location}</Location>
+        <Location>{address}</Location>
         <StarListWrapper>
-          <EvaluationScore score={score} />
+          <EvaluationScore score={rating.value} />
         </StarListWrapper>
       </RightWrapper>
     </Wrapper>

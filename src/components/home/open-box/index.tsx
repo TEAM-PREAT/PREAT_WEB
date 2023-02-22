@@ -1,5 +1,7 @@
+import { RestaurantType } from '@/api/wishs';
 import OpenStatus from '@/components/home/open-box/open-status';
 import { CurrentStep } from '@/components/home/types';
+import useGetRestaurantList from '@/components/home/useGetRestaurantList';
 import BigHeartIcon from '@/components/icons/map/big-heart-icon';
 import BigSmileIcon from '@/components/icons/map/big-smile-icon';
 import BigStarIcon from '@/components/icons/map/big-star-icon';
@@ -24,7 +26,8 @@ export default function OpenBox({
   handleToggleOpen,
 }: OpenBoxProps) {
   const [current, setCurrent] = useState<CurrentStep>(1);
-
+  const { wishs, mys, friends } = useGetRestaurantList();
+  const currentList: RestaurantType[] = [wishs, mys, friends][current];
   const handleCurrent = (next: CurrentStep) => {
     setCurrent(next);
   };
@@ -42,7 +45,11 @@ export default function OpenBox({
         </IconWrapper>
 
         {openStatus === 'open' && (
-          <OpenStatus current={current} handleCurrent={handleCurrent} />
+          <OpenStatus
+            list={currentList}
+            current={current}
+            handleCurrent={handleCurrent}
+          />
         )}
       </InnerWrapper>
     </Wrapper>

@@ -1,3 +1,4 @@
+import { RestaurantType } from '@/api/wishs';
 import MyList from '@/components/home/open-box/my-list';
 import PenIcon from '@/components/home/pen-icon';
 import { CurrentStep } from '@/components/home/types';
@@ -7,11 +8,13 @@ import styled from 'styled-components';
 interface ListWrapperProps {
   current: CurrentStep;
   searchModeOn: () => void;
+  list: RestaurantType[];
 }
 
 export default function ListWrapper({
   current,
   searchModeOn,
+  list,
 }: ListWrapperProps) {
   return (
     <Wrapper>
@@ -24,7 +27,7 @@ export default function ListWrapper({
         맛집 리스트 추가하기
       </ListAddWrapper>
       <ItemListWrapper>
-        {current === CurrentStep.My && <MyList />}
+        {current === CurrentStep.My && <MyList list={list} />}
       </ItemListWrapper>
     </Wrapper>
   );

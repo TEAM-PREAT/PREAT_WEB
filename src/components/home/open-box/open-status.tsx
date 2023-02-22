@@ -1,6 +1,6 @@
+import { RestaurantType } from '@/api/wishs';
 import ListWrapper from '@/components/home/open-box/list-wrapper';
 import ToggleNav from '@/components/home/open-box/toggle-nav';
-import PenIcon from '@/components/home/pen-icon';
 import { CurrentStep } from '@/components/home/types';
 import SearchBar from '@/components/join/restaurant/search-bar';
 import { RestaurantItemType } from '@/components/join/types';
@@ -12,11 +12,13 @@ const NAV_TITLE_LIST = ['내 맛집 리스트', '내 맛집 리스트', '내 맛
 interface OpenStatusProps {
   current: CurrentStep;
   handleCurrent: (next: CurrentStep) => void;
+  list: RestaurantType[];
 }
 
 export default function OpenStatus({
   current,
   handleCurrent,
+  list,
 }: OpenStatusProps) {
   const [
     isSearchMode,
@@ -44,7 +46,11 @@ export default function OpenStatus({
       )}
       {!isSearchMode && (
         <>
-          <ListWrapper current={current} searchModeOn={searchModeOn} />
+          <ListWrapper
+            list={list}
+            current={current}
+            searchModeOn={searchModeOn}
+          />
         </>
       )}
     </div>
