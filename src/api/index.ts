@@ -41,6 +41,23 @@ authenticationRequest.interceptors.request.use(
   },
 );
 
+authenticationRequest.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+
+  async function (error: unknown) {
+    if (error instanceof AxiosError) {
+      const { response } = error;
+
+      if (response != null) {
+        alert(response.data.message);
+      }
+    }
+    return await Promise.reject(error);
+  },
+);
+
 request.interceptors.response.use(
   function (response) {
     return response;
@@ -52,11 +69,6 @@ request.interceptors.response.use(
 
       if (response != null) {
         alert(response.data.message);
-        switch (response.status) {
-          case 401:
-          default:
-            return await Promise.reject(error);
-        }
       }
     }
     return await Promise.reject(error);
