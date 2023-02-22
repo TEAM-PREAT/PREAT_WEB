@@ -6,6 +6,9 @@ const GlobalStyle = createGlobalStyle`
       * {
         box-sizing: border-box;
       }
+      html{
+        overflow-y: overlay;
+      }
       body{
         font-family:'Noto Sans KR', -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
       
