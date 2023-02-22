@@ -17,6 +17,10 @@ export interface RestaurantType {
   // 내가 평가한 리뷰가 없으면 hasPredict true + 예상 별점 + 평가 별점 null
 }
 
+export interface FriendRestaurantType extends RestaurantType {
+  friend: string;
+}
+
 const RestaurantDummy: RestaurantType[] = [
   {
     id: 1,
@@ -135,12 +139,62 @@ const RestaurantPredictDummy: RestaurantType[] = [
   },
 ];
 
+const RestaurantFriendDummy: FriendRestaurantType[] = [
+  {
+    id: 21,
+    name: '식당1',
+    address: '식당1',
+    imageUrl: '/assets/images/bread.png',
+    category: '베이커리',
+    latitude: 100,
+    longitude: 100,
+    friend: '민정',
+
+    rating: {
+      hasPredict: true,
+      value: 2,
+    },
+  },
+  {
+    id: 22,
+    name: '식당2',
+    address: '식당1',
+    imageUrl: '/assets/images/bread.png',
+    category: '베이커리',
+    latitude: 100,
+    longitude: 100,
+    friend: '민정2',
+
+    rating: {
+      hasPredict: true,
+      value: 2,
+    },
+  },
+  {
+    id: 31,
+    name: '식당3',
+    address: '식당1',
+    imageUrl: '/assets/images/bread.png',
+    category: '베이커리',
+    latitude: 100,
+    longitude: 100,
+    friend: '민정4',
+
+    rating: {
+      hasPredict: true,
+      value: 4,
+    },
+  },
+];
+
 export const getWishRestaurantListAPI = async () => {
   return RestaurantPredictDummy;
 };
 
-export const getFriendRestaurantListAPI = async () => {
-  return RestaurantPredictDummy;
+export const getFriendRestaurantListAPI = async (): Promise<
+  FriendRestaurantType[]
+> => {
+  return RestaurantFriendDummy;
 };
 
 export const getMyReviewRestaurantListAPI = async () => {

@@ -3,7 +3,7 @@ import MyList from '@/components/home/open-box/my-step/my-list';
 import MyListEdit from '@/components/home/open-box/my-step/my-list/edit-mode';
 import { CurrentStep } from '@/components/home/types';
 import CircleXIcon from '@/components/icons/circle-x-icon';
-import { FlexAlignCenter } from '@/styles/core';
+import { FlexAlignCenter, MaxItemContainer } from '@/styles/core';
 import styled from 'styled-components';
 
 interface ListWrapperProps {
@@ -23,7 +23,7 @@ export default function ListWrapper({
   isEditMode,
 }: ListWrapperProps) {
   return (
-    <Wrapper>
+    <MaxItemContainer>
       <ListAddWrapper>
         <FlexAlignCenter onClick={searchModeOn}>
           <CircleXIcon />
@@ -35,14 +35,14 @@ export default function ListWrapper({
         {current === CurrentStep.My &&
           (isEditMode ? <MyListEdit list={list} /> : <MyList list={list} />)}
       </>
-    </Wrapper>
+    </MaxItemContainer>
   );
 }
 
-const Wrapper = styled.div`
-  max-width: 325px;
-  margin: 0 auto;
-`;
+// const Wrapper = styled.div`
+//   max-width: 325px;
+//   margin: 0 auto;
+// `;
 
 const ListAddWrapper = styled.div`
   font-size: 15px;

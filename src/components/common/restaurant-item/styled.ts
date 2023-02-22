@@ -1,13 +1,13 @@
-import { FlexColumn, Flex } from '@/styles/core';
+import { FlexColumn, Flex, MaxItemContainer } from '@/styles/core';
 import styled from 'styled-components';
 
-export const RestaurantItemWrapper = styled.div`
+export const RestaurantItemWrapper = styled(MaxItemContainer)`
   position: relative;
   display: flex;
   gap: 17px;
   padding: 12px 0;
-  max-width: 325px;
-  margin: 0 auto;
+  /* max-width: 325px;
+  margin: 0 auto; */
   & + & {
     border-top: 0.8px solid #cccccc;
   }

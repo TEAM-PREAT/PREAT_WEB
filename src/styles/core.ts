@@ -40,3 +40,9 @@ export const FlexAlignCenter = styled.div<{ gap?: number }>`
   align-items: center;
   gap: ${(props) => props?.gap ?? 10}px;
 `;
+
+// NOTE: max-with 논의가 필요함
+export const MaxItemContainer = styled.div`
+  max-width: 325px;
+  margin: 0 auto;
+`;

@@ -1,10 +1,10 @@
-import { RestaurantType } from '@/api/wishs';
+import { FriendRestaurantType } from '@/api/wishs';
 import FriendList from '@/components/home/open-box/friend-step/friend-list';
 import { NavTitle, StepWrapper } from '@/components/home/open-box/step-styled';
 import styled from 'styled-components';
 
 interface StepProps {
-  list: RestaurantType[];
+  list: FriendRestaurantType[];
 }
 
 function FriendStep({ list }: StepProps) {
@@ -18,6 +18,6 @@ function FriendStep({ list }: StepProps) {
   );
 }
 const FriendNavTitle = styled(NavTitle)`
-  margin-bottom: 60px;
+  margin-bottom: 38px;
 `;
 export default FriendStep;

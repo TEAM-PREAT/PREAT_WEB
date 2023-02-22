@@ -1,5 +1,7 @@
-import { RestaurantType } from '@/api/wishs';
-import OpenStatus from '@/components/home/open-box/open-status';
+import FriendStep from '@/components/home/open-box/friend-step';
+import MyStep from '@/components/home/open-box/my-step';
+import ToggleNav from '@/components/home/open-box/toggle-nav';
+import WishStep from '@/components/home/open-box/wish-step';
 import { CurrentStep } from '@/components/home/types';
 import useGetRestaurantList from '@/components/home/useGetRestaurantList';
 import BigHeartIcon from '@/components/icons/map/big-heart-icon';
@@ -25,9 +27,9 @@ export default function OpenBox({
   openStatus,
   handleToggleOpen,
 }: OpenBoxProps) {
-  const [current, setCurrent] = useState<CurrentStep>(0);
+  const [current, setCurrent] = useState<CurrentStep>(2);
   const { wishs, mys, friends } = useGetRestaurantList();
-  const currentList: RestaurantType[] = [wishs, mys, friends][current];
+  // const currentList: RestaurantType[] = [wishs, mys, friends][current];
   const handleCurrent = (next: CurrentStep) => {
     setCurrent(next);
   };
@@ -45,11 +47,12 @@ export default function OpenBox({
         </IconWrapper>
 
         {openStatus === 'open' && (
-          <OpenStatus
-            list={currentList}
-            current={current}
-            handleCurrent={handleCurrent}
-          />
+          <div>
+            <ToggleNav current={current} handleCurrent={handleCurrent} />
+            {current === CurrentStep.Friend && <FriendStep list={friends} />}
+            {current === CurrentStep.My && <MyStep list={mys} />}
+            {current === CurrentStep.Heart && <WishStep list={wishs} />}
+          </div>
         )}
       </InnerWrapper>
     </Wrapper>

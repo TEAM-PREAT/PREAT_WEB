@@ -17,12 +17,12 @@ export default function OpenStatus({
 }: OpenStatusProps) {
   return (
     <div>
-      <ToggleNav current={current} handleCurrent={handleCurrent} />
+      {/* <ToggleNav current={current} handleCurrent={handleCurrent} />
       {current === CurrentStep.Friend ? (
         <FriendStep list={list} />
       ) : (
         <MyStep list={list} />
-      )}
+      )} */}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import SearchIcon from '@/components/icons/search-icon';
 import SearchList from '@/components/join/restaurant/search-list';
 import SearchTagList from '@/components/join/restaurant/search-tag-list';
 import { RestaurantItemType } from '@/components/join/types';
+import { MaxItemContainer } from '@/styles/core';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
@@ -28,7 +29,7 @@ export default function SearchBar({
   };
 
   return (
-    <Wrapper>
+    <MaxItemContainer>
       <InputWrapper>
         <Input
           value={searchKeyword}
@@ -49,11 +50,9 @@ export default function SearchBar({
         ) : (
           <SearchList onAction={onAction} />
         ))}
-    </Wrapper>
+    </MaxItemContainer>
   );
 }
-
-const Wrapper = styled.div``;
 
 const InputWrapper = styled.div`
   width: 290px;

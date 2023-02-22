@@ -1,4 +1,4 @@
-import { RestaurantType } from '@/api/wishs';
+import { FriendRestaurantType } from '@/api/wishs';
 import EvaluationScore from '@/components/common/evaluation-score';
 import {
   RestaurantItemWrapper,
@@ -14,7 +14,7 @@ import { FlexAlignCenter } from '@/styles/core';
 import Image from 'next/image';
 import styled from 'styled-components';
 
-type SelectRestaurantItemProps = RestaurantType;
+// type PredictRestaurantItemProps = FriendRestaurantType;
 
 export default function PredictRestaurantItem({
   imageUrl,
@@ -22,7 +22,7 @@ export default function PredictRestaurantItem({
   name,
   rating,
   address,
-}: SelectRestaurantItemProps) {
+}: FriendRestaurantType) {
   return (
     <Wrapper>
       <TopWrapper>
