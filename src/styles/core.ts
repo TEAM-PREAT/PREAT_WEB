@@ -34,3 +34,9 @@ export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const FlexAlignCenter = styled.div<{ gap?: number }>`
+  display: flex;
+  align-items: center;
+  gap: ${(props) => props?.gap ?? 10}px;
+`;

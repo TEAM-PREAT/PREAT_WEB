@@ -26,6 +26,7 @@ export default function OpenStatus({
     _,
     { toggleOn: searchModeOn, toggleOff: searchModeOff },
   ] = useToggle();
+  const [isEditMode, handleToggleEditMode] = useToggle();
 
   const newRestaurantAdd = (obj: RestaurantItemType) => {
     console.log('obj: ', obj);
@@ -35,7 +36,11 @@ export default function OpenStatus({
     <div>
       <ToggleNav current={current} handleCurrent={handleCurrent} />
 
-      <Title>{NAV_TITLE_LIST[current]}</Title>
+      {isEditMode ? (
+        <Title>리스트 수정하기</Title>
+      ) : (
+        <Title>{NAV_TITLE_LIST[current]}</Title>
+      )}
       {isSearchMode && (
         <SearchBar
           isSearchMode={isSearchMode}
@@ -50,6 +55,8 @@ export default function OpenStatus({
             list={list}
             current={current}
             searchModeOn={searchModeOn}
+            isEditMode={isEditMode}
+            handleToggleEditMode={handleToggleEditMode}
           />
         </>
       )}

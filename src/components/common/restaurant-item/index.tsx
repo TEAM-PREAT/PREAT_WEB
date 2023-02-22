@@ -1,3 +1,4 @@
+import { RestaurantType } from '@/api/wishs';
 import EvaluationScore from '@/components/common/evaluation-score';
 import {
   Wrapper,
@@ -9,40 +10,31 @@ import {
   StarListWrapper,
   Location,
 } from '@/components/common/restaurant-item/styled';
-import { RestaurantScoreItemType } from '@/components/join/types';
 import Image from 'next/image';
 
-interface RestaurantItemProps extends RestaurantScoreItemType {
-  handleReview?: (id: number, score: number) => void;
-}
+type SelectRestaurantItemProps = RestaurantType;
 
 export default function RestaurantItem({
-  src,
-  type,
-  location,
+  imageUrl,
+  category,
   name,
-  score,
-  id,
-  handleReview,
-}: RestaurantItemProps) {
-  const onReview = (score: number) => {
-    handleReview && handleReview(id, score);
-  };
-
+  rating,
+  address,
+}: SelectRestaurantItemProps) {
   return (
     <Wrapper>
       <ImageWrapper>
-        {src && <Image src={src} alt={name} width={92} height={92} />}
+        {imageUrl && <Image src={imageUrl} alt={name} width={92} height={92} />}
       </ImageWrapper>
       <RightWrapper>
         <TextWrapper>
           <Name>{name}</Name>
-          <Type>{type}</Type>
+          <Type>{category}</Type>
         </TextWrapper>
 
-        <Location>{location}</Location>
+        <Location>{address}</Location>
         <StarListWrapper>
-          <EvaluationScore score={score} onReview={onReview} />
+          <EvaluationScore score={rating.value} />
         </StarListWrapper>
       </RightWrapper>
     </Wrapper>

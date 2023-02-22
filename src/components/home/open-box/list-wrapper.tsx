@@ -1,34 +1,39 @@
 import { RestaurantType } from '@/api/wishs';
 import MyList from '@/components/home/open-box/my-list';
-import PenIcon from '@/components/home/pen-icon';
+import MyListEdit from '@/components/home/open-box/my-list/edit-mode';
 import { CurrentStep } from '@/components/home/types';
 import CircleXIcon from '@/components/icons/circle-x-icon';
+import { FlexAlignCenter } from '@/styles/core';
 import styled from 'styled-components';
 
 interface ListWrapperProps {
   current: CurrentStep;
   searchModeOn: () => void;
   list: RestaurantType[];
+  isEditMode: boolean;
+  handleToggleEditMode: () => void;
 }
 
 export default function ListWrapper({
   current,
   searchModeOn,
   list,
+  handleToggleEditMode,
+  isEditMode,
 }: ListWrapperProps) {
   return (
     <Wrapper>
-      <ListEditButton>
-        맛집 리스트 수정하기
-        <PenIcon />
-      </ListEditButton>
-      <ListAddWrapper onClick={searchModeOn}>
-        <CircleXIcon />
-        맛집 리스트 추가하기
+      <ListAddWrapper>
+        <FlexAlignCenter onClick={searchModeOn}>
+          <CircleXIcon />
+          <span>맛집 리스트 추가하기</span>
+        </FlexAlignCenter>
+        <EditButton onClick={handleToggleEditMode}>편집</EditButton>
       </ListAddWrapper>
-      <ItemListWrapper>
-        {current === CurrentStep.My && <MyList list={list} />}
-      </ItemListWrapper>
+      <>
+        {current === CurrentStep.My &&
+          (isEditMode ? <MyListEdit list={list} /> : <MyList list={list} />)}
+      </>
     </Wrapper>
   );
 }
@@ -47,26 +52,36 @@ const ListAddWrapper = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
 `;
 
-const ItemListWrapper = styled.div`
+const EditButton = styled.div`
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 20px;
+
+  color: #8e8d8d;
+  width: 38px;
+  height: 21px;
+
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  text-align: center;
+
+  cursor: pointer;
+`;
+
+export const ItemListWrapper = styled.div`
   overflow-y: auto;
   height: calc(100vh - 400px);
   border-top: 0.8px solid #cccccc;
+  position: relative;
 `;
 
-const ListEditButton = styled.div`
-  font-weight: 500;
-  font-size: 10px;
-  margin: auto;
-  width: fit-content;
-  padding-bottom: 1px;
-  border-bottom: 1px solid #ff6c3e;
-  color: #8e8d8d;
+export const ItemListWrapperWithButton = styled.div`
+  overflow-y: auto;
+  height: calc(100vh - 500px);
+  border-top: 0.8px solid #cccccc;
   position: relative;
-  svg {
-    position: absolute;
-    right: -12px;
-    bottom: -1px;
-  }
 `;

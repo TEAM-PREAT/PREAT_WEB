@@ -60,6 +60,34 @@ const RestaurantDummy: RestaurantType[] = [
       value: 4,
     },
   },
+  {
+    id: 4,
+    name: '식당3',
+    address: '식당1',
+    imageUrl: '/assets/images/bread.png',
+    category: '베이커리',
+    latitude: 100,
+    longitude: 100,
+
+    rating: {
+      hasPredict: false,
+      value: 4,
+    },
+  },
+  {
+    id: 5,
+    name: '식당3',
+    address: '식당1',
+    imageUrl: '/assets/images/bread.png',
+    category: '베이커리',
+    latitude: 100,
+    longitude: 100,
+
+    rating: {
+      hasPredict: false,
+      value: 4,
+    },
+  },
 ];
 
 const RestaurantPredictDummy: RestaurantType[] = [
