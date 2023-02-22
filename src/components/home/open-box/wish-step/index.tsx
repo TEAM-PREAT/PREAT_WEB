@@ -15,9 +15,10 @@ import { FlexAlignCenter } from '@/styles/core';
 
 interface WishStepProps {
   list: RestaurantType[];
+  isFullPage?: boolean;
 }
 
-export default function WishStep({ list }: WishStepProps) {
+export default function WishStep({ list, isFullPage }: WishStepProps) {
   const [
     isSearchMode,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -57,9 +58,9 @@ export default function WishStep({ list }: WishStepProps) {
           </ListAddWrapper>
           <>
             {isEditMode ? (
-              <WishListEdit list={list} />
+              <WishListEdit isFullPage={isFullPage} list={list} />
             ) : (
-              <WishList list={list} />
+              <WishList isFullPage={isFullPage} list={list} />
             )}
           </>
         </StepWrapper>

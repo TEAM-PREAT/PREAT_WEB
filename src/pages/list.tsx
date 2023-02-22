@@ -28,7 +28,7 @@ function ListPage() {
         <ToggleNav current={current} handleCurrent={handleCurrent} />
         {current === CurrentStep.Friend && <FriendStep list={friends} />}
         {current === CurrentStep.My && <MyStep isFullPage list={mys} />}
-        {current === CurrentStep.Heart && <WishStep list={wishs} />}
+        {current === CurrentStep.Heart && <WishStep isFullPage list={wishs} />}
       </InnerWrapper>
     </Wrapper>
   );
@@ -37,6 +37,20 @@ function ListPage() {
 const Wrapper = styled.div`
   /* padding-top: 50px; */
   position: relative;
+  padding-bottom: 30px;
+
+  &::after {
+    content: '';
+    width: 100%;
+    max-width: 475px;
+    height: 30px;
+    position: fixed;
+    background: #ffffff;
+    border-top: 0.3px solid #8b8b8b;
+
+    display: block;
+    bottom: 0;
+  }
 `;
 
 const LocationIconWrapper = styled.div`

@@ -29,7 +29,7 @@ export default function OpenBox({
 }: OpenBoxProps) {
   const [current, setCurrent] = useState<CurrentStep>(2);
   const { wishs, mys, friends } = useGetRestaurantList();
-  // const currentList: RestaurantType[] = [wishs, mys, friends][current];
+
   const handleCurrent = (next: CurrentStep) => {
     setCurrent(next);
   };
@@ -76,18 +76,16 @@ const Wrapper = styled.div<{ openStatus: OpenStatusType }>`
     css`
       bottom: calc(-100vh + 77px);
     `}
-
   ${(props) =>
     props.openStatus === 'mid' &&
     css`
       bottom: calc(-100vh + 210px);
     `}
-
-  ${(props) =>
+    ${(props) =>
     props.openStatus === 'open' &&
     css`
       bottom: -200px;
-    `}
+    `};
 `;
 
 const InnerWrapper = styled.div`

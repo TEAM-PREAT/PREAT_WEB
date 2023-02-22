@@ -72,17 +72,3 @@ const EditButton = styled.div`
 
   cursor: pointer;
 `;
-
-// export const ItemListWrapper = styled.div`
-//   overflow-y: auto;
-//   height: calc(100vh - 400px);
-//   border-top: 0.8px solid #cccccc;
-//   position: relative;
-// `;
-
-// export const ItemListWrapperWithButton = styled.div`
-//   overflow-y: auto;
-//   height: calc(100vh - 500px);
-//   border-top: 0.8px solid #cccccc;
-//   position: relative;
-// `;

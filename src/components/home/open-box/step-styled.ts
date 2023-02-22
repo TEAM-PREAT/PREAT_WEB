@@ -58,9 +58,37 @@ export const ItemListWrapper = styled.div<{ isFullPage?: boolean }>`
         `}
 `;
 
-export const ItemListWrapperWithButton = styled.div`
+export const ItemListWrapperWithButton = styled.div<{ isFullPage?: boolean }>`
   overflow-y: auto;
-  height: calc(100vh - 500px);
+
   border-top: 0.8px solid #cccccc;
   position: relative;
+
+  ${(props) =>
+    props.isFullPage
+      ? css``
+      : css`
+          height: calc(100vh - 500px);
+        `}
+`;
+
+export const BottomBox = styled.div`
+  position: fixed;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  max-width: 475px;
+  height: 100px;
+
+  padding-top: 18px;
+  background-color: #fff;
+  text-align: center;
+  border-top: 0.3px solid #8b8b8b;
+
+  bottom: 0;
+  margin: auto;
+
+  button {
+    width: 232px;
+  }
 `;

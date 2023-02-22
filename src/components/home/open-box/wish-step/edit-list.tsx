@@ -1,14 +1,18 @@
 import { RestaurantType } from '@/api/wishs';
 import SelectRestaurantItem from '@/components/common/restaurant-item/select-restaurant-item';
-import { ItemListWrapperWithButton } from '@/components/home/open-box/list-wrapper';
+import {
+  BottomBox,
+  ItemListWrapperWithButton,
+} from '@/components/home/open-box/step-styled';
 import { ButtonStyled } from '@/styles/core';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 interface MyListProps {
   list: RestaurantType[];
+  isFullPage?: boolean;
 }
-export default function WishListEdit({ list }: MyListProps) {
+export default function WishListEdit({ list, isFullPage }: MyListProps) {
   const [checkList, setCheckList] = useState<number[]>([]);
 
   const handleCheck = (id: number) => {
@@ -26,7 +30,7 @@ export default function WishListEdit({ list }: MyListProps) {
   };
   return (
     <>
-      <ItemListWrapperWithButton>
+      <ItemListWrapperWithButton isFullPage={isFullPage}>
         {list.map((item) => (
           <SelectRestaurantItem
             key={item.id}
@@ -42,19 +46,3 @@ export default function WishListEdit({ list }: MyListProps) {
     </>
   );
 }
-const BottomBox = styled.div`
-  position: fixed;
-  right: 0;
-  left: 0;
-  width: 100vw;
-  max-width: 475px;
-  height: 100px;
-
-  padding-top: 18px;
-  background-color: #fff;
-  text-align: center;
-  border-top: 0.3px solid #8b8b8b;
-  button {
-    width: 232px;
-  }
-`;

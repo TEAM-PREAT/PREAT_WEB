@@ -56,7 +56,7 @@ export default function MyStep({ list, isFullPage }: MyStepProps) {
           </ListAddWrapper>
           <>
             {isEditMode ? (
-              <MyListEdit list={list} />
+              <MyListEdit isFullPage={isFullPage} list={list} />
             ) : (
               <MyList isFullPage={isFullPage} list={list} />
             )}
