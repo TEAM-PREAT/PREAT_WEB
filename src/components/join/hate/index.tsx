@@ -2,7 +2,6 @@ import { getHateFoodAPI, HateFoodType } from '@/api/join-setting';
 import FoodList from '@/components/join/hate/food-list';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import { StepStatueProps } from '@/components/join/types';
-import { ButtonStyled } from '@/styles/core';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -25,6 +24,7 @@ export default function HateSetting({
 
   const setHateFood = async () => {
     const hateFoodList: HateFoodType[] = await getHateFoodAPI();
+    console.log('hateFoodList: ', hateFoodList);
     setFoodList(hateFoodList);
   };
 

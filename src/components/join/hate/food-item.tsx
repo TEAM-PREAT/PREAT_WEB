@@ -10,6 +10,15 @@ interface FoodItemProps {
   id: number;
 }
 
+// TODO 삭제
+const checkSrc = (src?: string) => {
+  if (src) {
+    if (src.includes('ftcdn.net')) {
+      return true;
+    }
+  }
+  return false;
+};
 export default function FoodItem({
   label,
   src,
@@ -20,7 +29,9 @@ export default function FoodItem({
     <FoodItemWrapper onClick={onSelect}>
       <FoodImageWrapper>
         {/* TODO : 이미지 활성화 */}
-        {/* {src && <Image src={src} alt={label} width={96} height={94} />} */}
+        {checkSrc(src) && src && (
+          <Image src={src} alt={label} width={96} height={94} />
+        )}
         {isSelected && (
           <SelectedOverlay>
             <CheckIcon />
