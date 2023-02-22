@@ -1,5 +1,5 @@
 import { RestaurantType } from '@/api/wishs';
-import { ItemListWrapper } from '@/components/home/open-box/list-wrapper';
+import { ItemListWrapper } from '@/components/home/open-box/step-styled';
 import PredictRestaurantItem from '@/components/home/open-box/wish-step/predict-restauraunt-item';
 
 interface MyListProps {

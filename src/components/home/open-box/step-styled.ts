@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const NavTitle = styled.h2`
   font-weight: 900;
@@ -44,11 +44,18 @@ export const EditButton = styled.div`
   cursor: pointer;
 `;
 
-export const ItemListWrapper = styled.div`
+export const ItemListWrapper = styled.div<{ isFullPage?: boolean }>`
   overflow-y: auto;
-  height: calc(100vh - 400px);
+
   border-top: 0.8px solid #cccccc;
   position: relative;
+
+  ${(props) =>
+    props.isFullPage
+      ? css``
+      : css`
+          height: calc(100vh - 400px);
+        `}
 `;
 
 export const ItemListWrapperWithButton = styled.div`

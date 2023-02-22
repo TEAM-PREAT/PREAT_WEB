@@ -15,8 +15,9 @@ import { FlexAlignCenter } from '@/styles/core';
 
 interface MyStepProps {
   list: RestaurantType[];
+  isFullPage?: boolean;
 }
-export default function MyStep({ list }: MyStepProps) {
+export default function MyStep({ list, isFullPage }: MyStepProps) {
   const [
     isSearchMode,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -54,7 +55,11 @@ export default function MyStep({ list }: MyStepProps) {
             <EditButton onClick={handleToggleEditMode}>편집</EditButton>
           </ListAddWrapper>
           <>
-            {isEditMode ? <MyListEdit list={list} /> : <MyList list={list} />}
+            {isEditMode ? (
+              <MyListEdit list={list} />
+            ) : (
+              <MyList isFullPage={isFullPage} list={list} />
+            )}
           </>
         </StepWrapper>
       )}
