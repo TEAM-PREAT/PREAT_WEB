@@ -46,3 +46,12 @@ export const MaxItemContainer = styled.div`
   max-width: 325px;
   margin: 0 auto;
 `;
+
+export const FixedContainerStyled = styled.div`
+  position: fixed;
+  width: 100%;
+  max-width: 475px;
+  left: 0;
+  right: 0;
+  margin: auto;
+`;

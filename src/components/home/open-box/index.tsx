@@ -55,6 +55,9 @@ export default function OpenBox({
           </div>
         )}
       </InnerWrapper>
+      {/* <ConfirmModal label="삭제">
+        <span>3개의 장소를 리스트에서 삭제합니다.</span>
+      </ConfirmModal> */}
     </Wrapper>
   );
 }
