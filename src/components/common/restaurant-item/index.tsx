@@ -1,7 +1,7 @@
 import { RestaurantType } from '@/api/wishs';
 import EvaluationScore from '@/components/common/evaluation-score';
 import {
-  Wrapper,
+  RestaurantItemWrapper,
   ImageWrapper,
   RightWrapper,
   TextWrapper,
@@ -22,7 +22,7 @@ export default function RestaurantItem({
   address,
 }: SelectRestaurantItemProps) {
   return (
-    <Wrapper>
+    <RestaurantItemWrapper>
       <ImageWrapper>
         {imageUrl && <Image src={imageUrl} alt={name} width={92} height={92} />}
       </ImageWrapper>
@@ -37,6 +37,6 @@ export default function RestaurantItem({
           <EvaluationScore score={rating.value} />
         </StarListWrapper>
       </RightWrapper>
-    </Wrapper>
+    </RestaurantItemWrapper>
   );
 }

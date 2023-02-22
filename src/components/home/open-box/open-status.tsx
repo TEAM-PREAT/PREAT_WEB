@@ -1,8 +1,8 @@
 import { RestaurantType } from '@/api/wishs';
+import FriendStep from '@/components/home/open-box/friend-step';
 import MyStep from '@/components/home/open-box/my-step';
 import ToggleNav from '@/components/home/open-box/toggle-nav';
 import { CurrentStep } from '@/components/home/types';
-import styled from 'styled-components';
 
 interface OpenStatusProps {
   current: CurrentStep;
@@ -18,7 +18,11 @@ export default function OpenStatus({
   return (
     <div>
       <ToggleNav current={current} handleCurrent={handleCurrent} />
-      <MyStep list={list} />
+      {current === CurrentStep.Friend ? (
+        <FriendStep list={list} />
+      ) : (
+        <MyStep list={list} />
+      )}
     </div>
   );
 }

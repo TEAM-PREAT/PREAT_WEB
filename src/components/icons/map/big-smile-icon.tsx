@@ -12,7 +12,7 @@ export default function BigSmileIcon() {
           cx="39"
           cy="35"
           r="33.5"
-          fill="#14EC6A"
+          fill="#FFDA00"
           stroke="white"
           strokeWidth="3"
         />

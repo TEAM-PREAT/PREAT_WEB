@@ -76,7 +76,7 @@ const Wrapper = styled.div<{ position?: number }>`
       props.position === 0 &&
       css`
         transform: translateX(0);
-        background: #14ec6a;
+        background: #ffda00;
       `}
     ${(props) =>
       props.position === 1 &&

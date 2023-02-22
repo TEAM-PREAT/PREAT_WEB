@@ -1,6 +1,6 @@
 import EvaluationScore from '@/components/common/evaluation-score';
 import {
-  Wrapper,
+  RestaurantItemWrapper,
   ImageWrapper,
   RightWrapper,
   TextWrapper,
@@ -30,7 +30,7 @@ export default function ReviewRestaurantItem({
   };
 
   return (
-    <Wrapper>
+    <RestaurantItemWrapper>
       <ImageWrapper>
         {src && <Image src={src} alt={name} width={92} height={92} />}
       </ImageWrapper>
@@ -45,6 +45,6 @@ export default function ReviewRestaurantItem({
           <EvaluationScore score={score} onReview={onReview} />
         </StarListWrapper>
       </RightWrapper>
-    </Wrapper>
+    </RestaurantItemWrapper>
   );
 }

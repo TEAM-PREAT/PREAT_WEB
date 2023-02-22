@@ -1,7 +1,7 @@
 import { FlexColumn, Flex } from '@/styles/core';
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const RestaurantItemWrapper = styled.div`
   position: relative;
   display: flex;
   gap: 17px;

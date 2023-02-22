@@ -25,7 +25,7 @@ export default function OpenBox({
   openStatus,
   handleToggleOpen,
 }: OpenBoxProps) {
-  const [current, setCurrent] = useState<CurrentStep>(1);
+  const [current, setCurrent] = useState<CurrentStep>(0);
   const { wishs, mys, friends } = useGetRestaurantList();
   const currentList: RestaurantType[] = [wishs, mys, friends][current];
   const handleCurrent = (next: CurrentStep) => {

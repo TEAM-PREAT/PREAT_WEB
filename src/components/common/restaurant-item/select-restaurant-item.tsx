@@ -1,7 +1,7 @@
 import { RestaurantType } from '@/api/wishs';
 import EvaluationScore from '@/components/common/evaluation-score';
 import {
-  Wrapper,
+  RestaurantItemWrapper,
   ImageWrapper,
   RightWrapper,
   TextWrapper,
@@ -28,7 +28,7 @@ export default function SelectRestaurantItem({
   address,
 }: SelectRestaurantItemProps) {
   return (
-    <Wrapper>
+    <RestaurantItemWrapper>
       <CheckWrapper onClick={toggleCheck}>
         {checked ? (
           <Image
@@ -60,7 +60,7 @@ export default function SelectRestaurantItem({
           <EvaluationScore score={rating.value} />
         </StarListWrapper>
       </RightWrapper>
-    </Wrapper>
+    </RestaurantItemWrapper>
   );
 }
 
