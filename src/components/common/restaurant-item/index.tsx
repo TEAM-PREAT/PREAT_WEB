@@ -34,7 +34,7 @@ export default function RestaurantItem({
 
         <Location>{address}</Location>
         <StarListWrapper>
-          <EvaluationScore score={rating.value} />
+          <EvaluationScore score={rating.hasPredict ? 0 : rating.value} />
         </StarListWrapper>
       </RightWrapper>
     </RestaurantItemWrapper>

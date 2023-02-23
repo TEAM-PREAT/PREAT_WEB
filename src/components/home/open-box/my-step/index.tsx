@@ -14,9 +14,10 @@ import { FlexAlignCenter } from '@/styles/core';
 
 interface MyStepProps {
   list: RestaurantType[];
+  reload: () => void;
   isFullPage?: boolean;
 }
-export default function MyStep({ list, isFullPage }: MyStepProps) {
+export default function MyStep({ list, isFullPage, reload }: MyStepProps) {
   const [
     isSearchMode,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -24,10 +25,6 @@ export default function MyStep({ list, isFullPage }: MyStepProps) {
     { toggleOn: searchModeOn, toggleOff: searchModeOff },
   ] = useToggle();
   const [isEditMode, handleToggleEditMode] = useToggle();
-
-  const newRestaurantAdd = (obj: RestaurantType) => {
-    console.log('obj: ', obj);
-  };
 
   return (
     <div>
@@ -41,7 +38,7 @@ export default function MyStep({ list, isFullPage }: MyStepProps) {
           isSearchMode={isSearchMode}
           searchModeOn={searchModeOn}
           searchModeOff={searchModeOff}
-          onAction={newRestaurantAdd}
+          reload={reload}
         />
       )}
       {!isSearchMode && (

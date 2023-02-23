@@ -4,6 +4,7 @@ import SearchList from '@/components/home/open-box/search-list';
 import SearchBackIcon from '@/components/icons/search-back-icon';
 import SearchIcon from '@/components/icons/search-icon';
 import SearchTagList from '@/components/join/restaurant/search-tag-list';
+import { MaxItemContainer } from '@/styles/core';
 import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -11,13 +12,12 @@ interface SearchBarProps {
   searchModeOn: () => void;
   searchModeOff: () => void;
   isSearchMode: boolean;
-  onAction: (obj: RestaurantType) => void;
+  reload: () => void;
 }
 
 export default function SearchBar({
   searchModeOn,
   isSearchMode,
-  onAction,
   searchModeOff,
 }: SearchBarProps) {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -29,14 +29,24 @@ export default function SearchBar({
   };
 
   const isShowTagList = searchKeyword === '';
-
+  const handleSearch = (query: string) => {
+    setSearchKeyword(query);
+    searchRestaurant(query);
+  };
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(e.target.value);
-    searchRestaurant(e.target.value);
+    handleSearch(e.target.value);
+  };
+
+  const handleTagClick = (obj: RestaurantType) => {
+    handleSearch(obj.name);
+  };
+
+  const searchModeComplete = () => {
+    handleSearch(searchKeyword);
   };
 
   useEffect(() => {
-    searchRestaurant('');
+    handleSearch('');
   }, []);
 
   return (
@@ -57,15 +67,16 @@ export default function SearchBar({
       </InputWrapper>
       {isSearchMode &&
         (isShowTagList ? (
-          <SearchTagList list={list} onAction={onAction} />
+          <SearchTagList list={list} onAction={handleTagClick} />
         ) : (
-          <SearchList list={list} onAction={onAction} />
+          <SearchList list={list} onClose={searchModeComplete} />
         ))}
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div``;
+const Wrapper = styled(MaxItemContainer)``;
+
 const SearchIconWrapper = styled.div`
   position: absolute;
   top: 5px;

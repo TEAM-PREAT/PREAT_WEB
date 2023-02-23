@@ -68,7 +68,10 @@ function ReviewRestaurantItem({
 
         <Location>{address}</Location>
         <StarListWrapper>
-          <EvaluationScore score={rating.value} onReview={onReview} />
+          <EvaluationScore
+            score={rating.hasPredict ? 0 : rating.value}
+            onReview={onReview}
+          />
         </StarListWrapper>
       </RightWrapper>
     </RestaurantItemWrapper>
