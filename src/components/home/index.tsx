@@ -6,13 +6,14 @@ import Map from '@/components/common/map';
 import { MarkerType } from '@/hooks/useMap';
 import { RestaurantType } from '@/api/types';
 import { CurrentStep } from '@/components/home/types';
+import Sidebar from '@/components/home/sidebar';
 
 interface MapRestaurantType extends RestaurantType {
   marker: MarkerType;
 }
 
 const INIT_CURRENT: CurrentStep = 1;
-const INIT_OPEN_STATUS: OpenStatusType = 'open';
+const INIT_OPEN_STATUS: OpenStatusType = 'close';
 
 export default function Home() {
   const [openStatus, setOpenStatus] =
@@ -51,6 +52,7 @@ export default function Home() {
         handleCurrent={handleCurrent}
         midItem={midItem}
       />
+      <Sidebar />
     </Wrapper>
   );
 }
