@@ -24,7 +24,7 @@ function useMap() {
   useEffect(() => {
     if (typeof myLocation !== 'string') {
       // 현재 위치 추적
-      let currentPosition = [myLocation.latitude, myLocation.longitude];
+      const currentPosition = [myLocation.latitude, myLocation.longitude];
 
       // Naver Map 생성
       mapRef.current = new naver.maps.Map('map', {
