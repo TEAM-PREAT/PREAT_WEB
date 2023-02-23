@@ -13,9 +13,16 @@ import styled from 'styled-components';
 interface MyListProps {
   list: RestaurantType[];
   isFullPage?: boolean;
+  reload: () => void;
+  onClose: () => void;
 }
 
-export default function MyListEdit({ list, isFullPage }: MyListProps) {
+export default function MyListEdit({
+  list,
+  isFullPage,
+  reload,
+  onClose,
+}: MyListProps) {
   const [checkList, setCheckList] = useState<number[]>([]);
   const [isAllCheck, setIsAllCheck] = useState(false);
 
@@ -47,6 +54,9 @@ export default function MyListEdit({ list, isFullPage }: MyListProps) {
     for await (const checkId of checkList) {
       await restaurantReviewDelete(checkId);
     }
+
+    reload();
+    onClose();
   };
 
   return (

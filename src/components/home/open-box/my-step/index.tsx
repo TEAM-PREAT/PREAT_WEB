@@ -8,7 +8,6 @@ import {
   NavTitle,
   StepWrapper,
 } from '@/components/home/open-box/step-styled';
-import CircleCheckIcon from '@/components/icons/circle-check-icon';
 import CircleXIcon from '@/components/icons/circle-x-icon';
 import useToggle from '@/hooks/useToggle';
 import { FlexAlignCenter } from '@/styles/core';
@@ -47,7 +46,12 @@ export default function MyStep({ list, isFullPage, reload }: MyStepProps) {
         <StepWrapper>
           <>
             {isEditMode ? (
-              <MyListEdit isFullPage={isFullPage} list={list} />
+              <MyListEdit
+                isFullPage={isFullPage}
+                list={list}
+                reload={reload}
+                onClose={handleToggleEditMode}
+              />
             ) : (
               <>
                 <ListAddWrapper>
