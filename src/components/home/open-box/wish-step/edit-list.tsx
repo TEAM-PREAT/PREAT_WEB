@@ -6,7 +6,6 @@ import {
 } from '@/components/home/open-box/step-styled';
 import { ButtonStyled } from '@/styles/core';
 import { useState } from 'react';
-import styled from 'styled-components';
 
 interface MyListProps {
   list: RestaurantType[];

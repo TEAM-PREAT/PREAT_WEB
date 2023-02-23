@@ -17,11 +17,13 @@ import Image from 'next/image';
 interface MyListProps {
   list: RestaurantType[];
   isFullPage?: boolean;
+  reload: () => void;
 }
 
-export default function MyList({ list, isFullPage }: MyListProps) {
+export default function MyList({ list, isFullPage, reload }: MyListProps) {
   const handleReview = async (restaurantId: number, rating: number) => {
     await restaurantReviewUpdate(restaurantId, rating);
+    reload();
   };
 
   return (

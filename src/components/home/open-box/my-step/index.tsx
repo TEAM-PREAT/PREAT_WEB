@@ -8,6 +8,7 @@ import {
   NavTitle,
   StepWrapper,
 } from '@/components/home/open-box/step-styled';
+import CircleCheckIcon from '@/components/icons/circle-check-icon';
 import CircleXIcon from '@/components/icons/circle-x-icon';
 import useToggle from '@/hooks/useToggle';
 import { FlexAlignCenter } from '@/styles/core';
@@ -24,6 +25,7 @@ export default function MyStep({ list, isFullPage, reload }: MyStepProps) {
     _,
     { toggleOn: searchModeOn, toggleOff: searchModeOff },
   ] = useToggle();
+
   const [isEditMode, handleToggleEditMode] = useToggle();
 
   return (
@@ -43,18 +45,20 @@ export default function MyStep({ list, isFullPage, reload }: MyStepProps) {
       )}
       {!isSearchMode && (
         <StepWrapper>
-          <ListAddWrapper>
-            <FlexAlignCenter onClick={searchModeOn}>
-              <CircleXIcon />
-              <span>맛집 리스트 추가하기</span>
-            </FlexAlignCenter>
-            <EditButton onClick={handleToggleEditMode}>편집</EditButton>
-          </ListAddWrapper>
           <>
             {isEditMode ? (
               <MyListEdit isFullPage={isFullPage} list={list} />
             ) : (
-              <MyList isFullPage={isFullPage} list={list} />
+              <>
+                <ListAddWrapper>
+                  <FlexAlignCenter onClick={searchModeOn}>
+                    <CircleXIcon />
+                    <span>맛집 리스트 추가하기</span>
+                  </FlexAlignCenter>
+                  <EditButton onClick={handleToggleEditMode}>편집</EditButton>
+                </ListAddWrapper>
+                <MyList isFullPage={isFullPage} list={list} reload={reload} />
+              </>
             )}
           </>
         </StepWrapper>
