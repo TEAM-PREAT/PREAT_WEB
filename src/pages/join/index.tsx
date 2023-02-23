@@ -19,11 +19,13 @@ import {
 import { useEffect, useState } from 'react';
 import Final from '@/components/join/final';
 import { signup } from '@/api/auth';
+import { useRouter } from 'next/router';
 
 function JoinPage() {
   const [step, setStep] = useState<StepStatus>(0);
   const [settingValues, setSettingValues] =
     useState<SettingValueListType>(INIT_SETTING_VALUES);
+  const router = useRouter();
 
   const handleNextStep = (newSettingValues?: Record<string, unknown>) => {
     const nextStep = step + 1;
@@ -54,7 +56,8 @@ function JoinPage() {
   };
 
   const handleTasteNextStep = (spicyStep: number, sugarStep: number) => {
-    handleNextStep({ spicyStep, sugarStep });
+    // TODO:
+    handleNextStep({ spicy: spicyStep, sugar: sugarStep * 20 });
   };
 
   const handleRestaurantNextStep = (reviews: ReviewType[]) => {
@@ -63,10 +66,9 @@ function JoinPage() {
 
   const handleSubmit = async () => {
     const value = getStorage(JOIN_SETTING_VALUE_KEY);
-    console.log('value: ', value);
 
-    const res = await signup(value);
-    console.log('res: ', res);
+    await signup(value);
+    router.push('/home');
   };
 
   useEffect(() => {

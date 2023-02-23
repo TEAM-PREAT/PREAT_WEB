@@ -54,7 +54,8 @@ export default function RestaurantEvaluating({
   };
 
   const onButtonClick = () => {
-    onNextStep(reviewList);
+    const submitList = reviewList.filter(({ rating }) => rating);
+    onNextStep(submitList);
   };
 
   const getRestaurants = async () => {
