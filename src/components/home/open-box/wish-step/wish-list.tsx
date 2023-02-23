@@ -5,9 +5,10 @@ import PredictRestaurantItem from '@/components/home/open-box/wish-step/predict-
 interface MyListProps {
   list: RestaurantType[];
   isFullPage?: boolean;
+  reload: () => void;
 }
 
-export default function WishList({ list, isFullPage }: MyListProps) {
+export default function WishList({ list, isFullPage, reload }: MyListProps) {
   return (
     <ItemListWrapper isFullPage={isFullPage}>
       {list.map((item) => (

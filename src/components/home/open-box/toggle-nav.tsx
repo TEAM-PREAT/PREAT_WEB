@@ -112,19 +112,19 @@ const Item = styled.div<{ isCurrent: boolean }>`
   &:nth-child(1) {
     left: 0;
     svg {
-      top: 2px;
+      top: 4px;
     }
   }
   &:nth-child(2) {
     left: 64px;
     svg {
-      top: 1px;
+      top: 3px;
     }
   }
   &:nth-child(3) {
     right: 0;
     svg {
-      top: 2px;
+      top: 4px;
     }
   }
 `;

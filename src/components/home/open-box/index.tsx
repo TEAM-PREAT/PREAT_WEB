@@ -42,7 +42,7 @@ export default function OpenBox({
   current,
   handleClose,
 }: OpenBoxProps) {
-  const { wishs, mys, friends } = useGetRestaurantList();
+  const { wishs, mys, friends, reload } = useGetRestaurantList();
 
   if (openStatus === 'open') {
     return (
@@ -54,8 +54,12 @@ export default function OpenBox({
           <div>
             <ToggleNav current={current} handleCurrent={handleCurrent} />
             {current === CurrentStep.Friend && <FriendStep list={friends} />}
-            {current === CurrentStep.My && <MyStep list={mys} />}
-            {current === CurrentStep.Heart && <WishStep list={wishs} />}
+            {current === CurrentStep.My && (
+              <MyStep list={mys} reload={reload} />
+            )}
+            {current === CurrentStep.Heart && (
+              <WishStep reload={reload} list={wishs} />
+            )}
           </div>
         </InnerWrapper>
         {/* <ConfirmModal label="삭제">

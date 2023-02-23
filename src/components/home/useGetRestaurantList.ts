@@ -5,12 +5,13 @@ import {
   getFriendRestaurantListAPI,
   FriendRestaurantType,
 } from '@/api/wishs';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface UseGetRestaurantListReturns {
   wishs: RestaurantType[];
   mys: RestaurantType[];
   friends: FriendRestaurantType[];
+  reload: () => void;
 }
 
 export default function useGetRestaurantList(): UseGetRestaurantListReturns {
@@ -32,6 +33,11 @@ export default function useGetRestaurantList(): UseGetRestaurantListReturns {
     setFriends(res);
   };
 
+  const reload = useCallback(() => {
+    getWishRestaurantList();
+    getMyReviewRestaurantList();
+    getFriendRestaurantList();
+  }, []);
   useEffect(() => {
     // TODO : loading 추가
     getWishRestaurantList();
@@ -43,5 +49,6 @@ export default function useGetRestaurantList(): UseGetRestaurantListReturns {
     wishs,
     mys,
     friends,
+    reload,
   };
 }

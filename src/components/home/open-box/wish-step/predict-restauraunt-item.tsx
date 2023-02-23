@@ -21,6 +21,10 @@ export default function PredictRestaurantItem({
   rating,
   address,
 }: RestaurantType) {
+  const onReview = (rating: number) => {
+    // handleReview && handleReview(id, rating);
+  };
+
   return (
     <Wrapper>
       <TopWrapper>
@@ -42,7 +46,11 @@ export default function PredictRestaurantItem({
 
         <Location>{address}</Location>
         <StarListWrapper>
-          <EvaluationScore iconColor="#FF60AC" score={rating.value} />
+          <EvaluationScore
+            iconColor="#FF60AC"
+            score={rating.hasPredict ? 0 : rating.value}
+            onReview={onReview}
+          />
         </StarListWrapper>
       </RightWrapper>
     </Wrapper>

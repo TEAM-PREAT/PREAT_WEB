@@ -1,10 +1,15 @@
 // const USER_ME_WISHS_URL = '/v1/users/me/wishes';
 
-interface MapItemType {
-  me: RestaurantType[];
-  wish: RestaurantType[];
-  friend: FriendRestaurantType[];
-}
+import { authenticationRequest } from '@/api';
+const MY_LIST = '/v1/users/me/mylist';
+const FOLLOWS_LIST_URL = '/v1/users/me/follows-list';
+const WISH_LIST_URL = '/v1/users/me/wishes';
+
+// interface MapItemType {
+//   me: RestaurantType[];
+//   wish: RestaurantType[];
+//   friend: FriendRestaurantType[];
+// }
 
 export interface RestaurantType {
   id: number;
@@ -19,6 +24,7 @@ export interface RestaurantType {
     hasPredict: boolean; // 예상 별점 존재 유무
     value: number; //  예상 별점 or 평가 별점
   };
+
   // 내가 평가한 리뷰가 존재하면 hasPredict 는 false + 예상 별점 null + 평가 별점
   // 내가 평가한 리뷰가 없으면 hasPredict true + 예상 별점 + 평가 별점 null
 }
@@ -27,127 +33,40 @@ export interface FriendRestaurantType extends RestaurantType {
   friend: string;
 }
 
-// export interface FriendRestaurantType {
-//   id: number;
-//   nickname: string;
-//   imageUrl: string;
-//   restaurant: RestaurantType[];
-// }
+export const getWishRestaurantListAPI = async (): Promise<RestaurantType[]> => {
+  const response = await authenticationRequest.get(WISH_LIST_URL);
 
-const RestaurantDummy: RestaurantType[] = [
-  {
-    id: 1,
-    name: '식당1',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 36.36217624997313,
-    longitude: 127.34855794364547,
+  if (response.status === 200) {
+    return response.data.data ?? [];
+  }
 
-    rating: {
-      hasPredict: false,
-      value: 2,
-    },
-  },
-  {
-    id: 2,
-    name: '식당2',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 36.36140215902434,
-    longitude: 127.34200303225579,
+  throw new Error();
+};
 
-    rating: {
-      hasPredict: false,
-      value: 2,
-    },
-  },
-  {
-    id: 3,
-    name: '식당3',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 36.361037987349484,
-    longitude: 127.3432938976973,
+export const getFriendRestaurantListAPI = async (): Promise<
+  FriendRestaurantType[]
+> => {
+  const response = await authenticationRequest.get(FOLLOWS_LIST_URL);
 
-    rating: {
-      hasPredict: false,
-      value: 4,
-    },
-  },
-  {
-    id: 4,
-    name: '식당3',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 100,
-    longitude: 100,
+  if (response.status === 200) {
+    return response.data.data ?? [];
+  }
 
-    rating: {
-      hasPredict: false,
-      value: 4,
-    },
-  },
-  {
-    id: 5,
-    name: '식당3',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 100,
-    longitude: 100,
+  throw new Error();
+};
 
-    rating: {
-      hasPredict: false,
-      value: 4,
-    },
-  },
-  {
-    id: 6,
-    name: '식당3',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 100,
-    longitude: 100,
+export const getMyReviewRestaurantListAPI = async (): Promise<
+  RestaurantType[]
+> => {
+  // return RestaurantDummy;
+  const response = await authenticationRequest.get(MY_LIST);
 
-    rating: {
-      hasPredict: false,
-      value: 4,
-    },
-  },
-  {
-    id: 7,
-    name: '식당3',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 100,
-    longitude: 100,
+  if (response.status === 200) {
+    return response.data.data ?? [];
+  }
 
-    rating: {
-      hasPredict: false,
-      value: 4,
-    },
-  },
-  {
-    id: 9,
-    name: '식당3',
-    address: '식당1',
-    imageUrl: '/assets/images/bread.png',
-    category: '베이커리',
-    latitude: 100,
-    longitude: 100,
-
-    rating: {
-      hasPredict: false,
-      value: 4,
-    },
-  },
-];
+  throw new Error();
+};
 
 const RestaurantPredictDummy: RestaurantType[] = [
   {
@@ -241,19 +160,3 @@ const RestaurantFriendDummy: FriendRestaurantType[] = [
     },
   },
 ];
-
-export const getWishRestaurantListAPI = async (): Promise<RestaurantType[]> => {
-  return RestaurantPredictDummy;
-};
-
-export const getFriendRestaurantListAPI = async (): Promise<
-  FriendRestaurantType[]
-> => {
-  return RestaurantFriendDummy;
-};
-
-export const getMyReviewRestaurantListAPI = async (): Promise<
-  RestaurantType[]
-> => {
-  return RestaurantDummy;
-};

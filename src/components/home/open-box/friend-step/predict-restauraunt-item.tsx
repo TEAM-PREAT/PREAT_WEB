@@ -47,7 +47,10 @@ export default function PredictRestaurantItem({
 
         <Location>{address}</Location>
         <StarListWrapper>
-          <EvaluationScore iconColor="#FFDA00" score={rating.value} />
+          <EvaluationScore
+            iconColor="#FFDA00"
+            score={rating.hasPredict ? 0 : rating.value}
+          />
         </StarListWrapper>
       </RightWrapper>
     </Wrapper>

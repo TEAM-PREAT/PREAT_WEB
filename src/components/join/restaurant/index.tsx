@@ -32,7 +32,6 @@ export default function RestaurantEvaluating({
   const isButtonDisabled = reviewList.length < 2;
 
   const newRestaurantAdd = (obj: RestaurantType) => {
-    console.log('obj: ', obj);
     const restaurantKeyList = list.map(({ id }) => id);
     if (restaurantKeyList.includes(obj.id)) {
       alert('이미 선택된 식당입니다. ');

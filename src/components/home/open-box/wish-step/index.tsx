@@ -1,4 +1,5 @@
 import { RestaurantType } from '@/api/wishs';
+import SearchBar from '@/components/home/open-box/search-bar';
 import {
   ListAddWrapper,
   EditButton,
@@ -8,28 +9,23 @@ import {
 import WishListEdit from '@/components/home/open-box/wish-step/edit-list';
 import WishList from '@/components/home/open-box/wish-step/wish-list';
 import CircleXIcon from '@/components/icons/circle-x-icon';
-import SearchBar from '@/components/join/restaurant/search-bar';
-import { RestaurantItemType } from '@/components/join/types';
 import useToggle from '@/hooks/useToggle';
 import { FlexAlignCenter } from '@/styles/core';
 
 interface WishStepProps {
   list: RestaurantType[];
   isFullPage?: boolean;
+  reload: () => void;
 }
 
-export default function WishStep({ list, isFullPage }: WishStepProps) {
+export default function WishStep({ list, isFullPage, reload }: WishStepProps) {
+  const [isEditMode, handleToggleEditMode] = useToggle();
   const [
     isSearchMode,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _,
     { toggleOn: searchModeOn, toggleOff: searchModeOff },
   ] = useToggle();
-  const [isEditMode, handleToggleEditMode] = useToggle();
-
-  const newRestaurantAdd = (obj: RestaurantItemType) => {
-    console.log('obj: ', obj);
-  };
 
   return (
     <div>
@@ -43,8 +39,8 @@ export default function WishStep({ list, isFullPage }: WishStepProps) {
         <SearchBar
           isSearchMode={isSearchMode}
           searchModeOn={searchModeOn}
+          reload={reload}
           searchModeOff={searchModeOff}
-          onAction={newRestaurantAdd}
         />
       )}
       {!isSearchMode && (
@@ -60,7 +56,7 @@ export default function WishStep({ list, isFullPage }: WishStepProps) {
             {isEditMode ? (
               <WishListEdit isFullPage={isFullPage} list={list} />
             ) : (
-              <WishList isFullPage={isFullPage} list={list} />
+              <WishList isFullPage={isFullPage} list={list} reload={reload} />
             )}
           </>
         </StepWrapper>

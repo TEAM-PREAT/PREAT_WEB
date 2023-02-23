@@ -13,7 +13,7 @@ export type OpenStatusType = 'close' | 'open' | 'mid';
 
 function ListPage() {
   const [current, setCurrent] = useState<CurrentStep>(1);
-  const { wishs, mys, friends } = useGetRestaurantList();
+  const { wishs, mys, friends, reload } = useGetRestaurantList();
 
   const handleCurrent = (next: CurrentStep) => {
     setCurrent(next);
@@ -27,8 +27,12 @@ function ListPage() {
         </LocationIconWrapper>
         <ToggleNav current={current} handleCurrent={handleCurrent} />
         {current === CurrentStep.Friend && <FriendStep list={friends} />}
-        {current === CurrentStep.My && <MyStep isFullPage list={mys} />}
-        {current === CurrentStep.Heart && <WishStep isFullPage list={wishs} />}
+        {current === CurrentStep.My && (
+          <MyStep isFullPage list={mys} reload={reload} />
+        )}
+        {current === CurrentStep.Heart && (
+          <WishStep reload={reload} isFullPage list={wishs} />
+        )}
       </InnerWrapper>
     </Wrapper>
   );
