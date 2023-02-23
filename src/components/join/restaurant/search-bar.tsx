@@ -1,17 +1,18 @@
+import { searchRestaurantAPI } from '@/api/search';
+import { RestaurantType } from '@/api/types';
 import SearchBackIcon from '@/components/icons/search-back-icon';
 import SearchIcon from '@/components/icons/search-icon';
 import SearchList from '@/components/join/restaurant/search-list';
 import SearchTagList from '@/components/join/restaurant/search-tag-list';
-import { RestaurantItemType } from '@/components/join/types';
 import { MaxItemContainer } from '@/styles/core';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface SearchBarProps {
   searchModeOn: () => void;
   searchModeOff: () => void;
   isSearchMode: boolean;
-  onAction: (obj: RestaurantItemType) => void;
+  onAction: (obj: RestaurantType) => void;
 }
 
 export default function SearchBar({
@@ -21,12 +22,25 @@ export default function SearchBar({
   searchModeOff,
 }: SearchBarProps) {
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [list, setList] = useState<RestaurantType[]>([]);
+
+  const searchRestaurant = async (keyword: string) => {
+    const data = await searchRestaurantAPI(keyword);
+    const { results } = data;
+    console.log('results: ', results);
+    setList(results);
+  };
 
   const isShowTagList = searchKeyword === '';
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
+    searchRestaurant(e.target.value);
   };
+
+  useEffect(() => {
+    searchRestaurant('');
+  }, []);
 
   return (
     <MaxItemContainer>
@@ -46,9 +60,9 @@ export default function SearchBar({
       </InputWrapper>
       {isSearchMode &&
         (isShowTagList ? (
-          <SearchTagList onAction={onAction} />
+          <SearchTagList onAction={onAction} list={list} />
         ) : (
-          <SearchList onAction={onAction} />
+          <SearchList onAction={onAction} list={list} />
         ))}
     </MaxItemContainer>
   );

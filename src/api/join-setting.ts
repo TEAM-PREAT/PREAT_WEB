@@ -1,7 +1,8 @@
-import { request } from '@/api';
+import { authenticationRequest, request } from '@/api';
 
 const GET_HATE_FOOD_LIST_URL = '/v1/dislikes';
 const CHECK_NICKNAME_URL = '/v1/auth/nickname/check';
+const RESTAURANT_URL = '/v1/restaurants';
 
 export interface HateFoodType {
   food: string;
@@ -29,4 +30,12 @@ export const checkNicknameAPI = async (nickname: string) => {
   } catch (error) {
     console.log('error: ', error);
   }
+};
+
+export const getRestaurants = async () => {
+  const response = await authenticationRequest.get(RESTAURANT_URL);
+  if (response.status === 200) {
+    return response.data.data;
+  }
+  throw new Error();
 };

@@ -1,8 +1,8 @@
+import { RestaurantType } from '@/api/types';
 import SmallSearchIcon from '@/components/icons/small-search-icon';
-import { RestaurantItemType } from '@/components/join/types';
 import styled from 'styled-components';
 
-interface SearchItemProps extends RestaurantItemType {
+interface SearchItemProps extends RestaurantType {
   onClick: () => void;
 }
 export default function SearchItem({ name, onClick }: SearchItemProps) {

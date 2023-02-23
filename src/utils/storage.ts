@@ -24,3 +24,8 @@ export const getStorage = (key: string) => {
     return null;
   }
 };
+
+export const removeStorage = (key: string) => {
+  const item = localStorage.removeItem(key);
+  return item;
+};

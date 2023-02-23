@@ -1,5 +1,9 @@
 import { authenticationRequest, requestPOST } from '@/api';
-import { setStorage } from '@/utils/storage';
+import {
+  JOIN_SETTING_VALUE_KEY,
+  removeStorage,
+  setStorage,
+} from '@/utils/storage';
 const LOGIN_PATH = '/v1/auth/login';
 const SIGNUP_URL = '/v1/auth/signup';
 
@@ -25,7 +29,7 @@ interface SignupRequestType {
 export const signup = async (data: SignupRequestType) => {
   try {
     const response = await authenticationRequest.post(SIGNUP_URL, data);
-
+    removeStorage(JOIN_SETTING_VALUE_KEY);
     const userId = response.data.data;
     setStorage('userId', userId);
 

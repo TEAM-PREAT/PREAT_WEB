@@ -1,3 +1,4 @@
+import { RestaurantType } from '@/api/wishs';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import OverlayLogo from '@/components/join/restaurant/overlay-logo';
 import RestaurantList from '@/components/join/restaurant/restaurant-list';
@@ -59,7 +60,8 @@ export default function RestaurantEvaluating({
 
   const isButtonDisabled = reviewList.length < 2;
 
-  const newRestaurantAdd = (obj: RestaurantItemType) => {
+  const newRestaurantAdd = (obj: RestaurantType) => {
+    console.log('obj: ', obj);
     const restaurantKeyList = list.map(({ id }) => id);
     if (restaurantKeyList.includes(obj.id)) {
       alert('이미 선택된 식당입니다. ');

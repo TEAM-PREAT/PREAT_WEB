@@ -1,7 +1,7 @@
-import { RestaurantItemType } from '@/components/join/types';
+import { RestaurantType } from '@/api/wishs';
 import styled from 'styled-components';
 
-interface SearchTagProps extends RestaurantItemType {
+interface SearchTagProps extends RestaurantType {
   onClick: () => void;
 }
 

@@ -1,20 +1,18 @@
+import { RestaurantType } from '@/api/wishs';
 import SearchTag from '@/components/join/restaurant/search-tag';
-import { RestaurantItemType, SEARCH_DUMMY } from '@/components/join/types';
-import { useState } from 'react';
 import styled from 'styled-components';
 
 interface SearchTagListProps {
-  onAction: (obj: RestaurantItemType) => void;
+  onAction: (obj: RestaurantType) => void;
+  list: RestaurantType[];
 }
 
-export default function SearchTagList({ onAction }: SearchTagListProps) {
-  const [tagList, setTagList] = useState(SEARCH_DUMMY);
-
+export default function SearchTagList({ onAction, list }: SearchTagListProps) {
   return (
     <>
       <Title>다른 사용자가 많이 찾고있어요!</Title>
       <ListWrapper>
-        {tagList.map((tagData) => (
+        {list.map((tagData) => (
           <SearchTag
             key={tagData.id}
             {...tagData}
