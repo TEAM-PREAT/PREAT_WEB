@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 // import pinImage from '';
 
 const FriendIconURL = '/assets/svgs/map-friend.svg';
@@ -25,6 +25,7 @@ interface SetMakerProps {
 function useMap() {
   const mapRef = useRef<HTMLElement | null | any>(null);
   // TODO : 처음에 로딩이 필요할듯
+  const [isLoading, setIsLoading] = useState(true);
   const [myLocation, setMyLocation] = useState<{
     latitude: number;
     longitude: number;
@@ -67,22 +68,31 @@ function useMap() {
     }
   }, []);
 
-  useEffect(() => {
-    if (myLocation) {
-      // 현재 위치 추적
-      const currentPosition = [myLocation.latitude, myLocation.longitude];
-      const map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
-        // zoomControl: true,
-      });
-      // Naver Map 생성
-      mapRef.current = map;
-    }
+  const createMap = useCallback(() => {
+    if (!myLocation) return;
+
+    const currentPosition = [myLocation.latitude, myLocation.longitude];
+    const map = new naver.maps.Map('map', {
+      center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
+      // zoomControl: true,
+    });
+    // Naver Map 생성
+    mapRef.current = map;
+    setIsLoading(false);
   }, [myLocation]);
+
+  useEffect(() => {
+    createMap();
+  }, [createMap]);
+
+  // useEffect(() => {
+
+  // }, [createMap]);
 
   return {
     myLocation,
     setMaker,
+    isLoading,
   };
 }
 

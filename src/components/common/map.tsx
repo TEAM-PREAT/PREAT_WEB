@@ -1,6 +1,8 @@
 import { RestaurantType } from '@/api/types';
 import { getMyReviewRestaurantListAPI } from '@/api/wishs';
+import Loading from '@/components/common/loading';
 import useMap, { MarkerType } from '@/hooks/useMap';
+import { AbsoluteCenterStyled } from '@/styles/core';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -12,7 +14,7 @@ interface MapProps {
   handleMarkerClick: (item: MapRestaurantType) => void;
 }
 export default function Map({ handleMarkerClick }: MapProps) {
-  const { myLocation, setMaker } = useMap();
+  const { myLocation, setMaker, isLoading } = useMap();
   const [list, setList] = useState<MapRestaurantType[]>([]);
 
   const handleMarkerVisible = useCallback(
@@ -40,7 +42,15 @@ export default function Map({ handleMarkerClick }: MapProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myLocation]);
 
-  return <MapBox id="map"></MapBox>;
+  return (
+    <MapBox id="map">
+      {isLoading && (
+        <AbsoluteCenterStyled>
+          <Loading />
+        </AbsoluteCenterStyled>
+      )}
+    </MapBox>
+  );
 }
 
 const MapBox = styled.div`
