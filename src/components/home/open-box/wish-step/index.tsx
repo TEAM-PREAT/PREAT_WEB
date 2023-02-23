@@ -19,13 +19,13 @@ interface WishStepProps {
 }
 
 export default function WishStep({ list, isFullPage, reload }: WishStepProps) {
+  const [isEditMode, handleToggleEditMode] = useToggle();
   const [
     isSearchMode,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _,
     { toggleOn: searchModeOn, toggleOff: searchModeOff },
   ] = useToggle();
-  const [isEditMode, handleToggleEditMode] = useToggle();
 
   return (
     <div>
@@ -56,7 +56,7 @@ export default function WishStep({ list, isFullPage, reload }: WishStepProps) {
             {isEditMode ? (
               <WishListEdit isFullPage={isFullPage} list={list} />
             ) : (
-              <WishList isFullPage={isFullPage} list={list} />
+              <WishList isFullPage={isFullPage} list={list} reload={reload} />
             )}
           </>
         </StepWrapper>

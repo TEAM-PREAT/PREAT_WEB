@@ -19,6 +19,7 @@ export default function SearchBar({
   searchModeOn,
   isSearchMode,
   searchModeOff,
+  reload,
 }: SearchBarProps) {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [list, setList] = useState<RestaurantType[]>([]);
@@ -43,6 +44,7 @@ export default function SearchBar({
 
   const searchModeComplete = () => {
     handleSearch(searchKeyword);
+    reload();
   };
 
   useEffect(() => {

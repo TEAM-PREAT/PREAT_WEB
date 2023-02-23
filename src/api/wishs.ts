@@ -2,12 +2,14 @@
 
 import { authenticationRequest } from '@/api';
 const MY_LIST = '/v1/users/me/mylist';
+const FOLLOWS_LIST_URL = '/v1/users/me/follows-list';
+const WISH_LIST_URL = '/v1/users/me/wishes';
 
-interface MapItemType {
-  me: RestaurantType[];
-  wish: RestaurantType[];
-  friend: FriendRestaurantType[];
-}
+// interface MapItemType {
+//   me: RestaurantType[];
+//   wish: RestaurantType[];
+//   friend: FriendRestaurantType[];
+// }
 
 export interface RestaurantType {
   id: number;
@@ -31,21 +33,26 @@ export interface FriendRestaurantType extends RestaurantType {
   friend: string;
 }
 
-// export interface FriendRestaurantType {
-//   id: number;
-//   nickname: string;
-//   imageUrl: string;
-//   restaurant: RestaurantType[];
-// }
-
 export const getWishRestaurantListAPI = async (): Promise<RestaurantType[]> => {
-  return RestaurantPredictDummy;
+  const response = await authenticationRequest.get(WISH_LIST_URL);
+
+  if (response.status === 200) {
+    return response.data.data ?? [];
+  }
+
+  throw new Error();
 };
 
 export const getFriendRestaurantListAPI = async (): Promise<
   FriendRestaurantType[]
 > => {
-  return RestaurantFriendDummy;
+  const response = await authenticationRequest.get(FOLLOWS_LIST_URL);
+
+  if (response.status === 200) {
+    return response.data.data ?? [];
+  }
+
+  throw new Error();
 };
 
 export const getMyReviewRestaurantListAPI = async (): Promise<
@@ -55,7 +62,7 @@ export const getMyReviewRestaurantListAPI = async (): Promise<
   const response = await authenticationRequest.get(MY_LIST);
 
   if (response.status === 200) {
-    return response.data.data;
+    return response.data.data ?? [];
   }
 
   throw new Error();
