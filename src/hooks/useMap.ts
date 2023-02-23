@@ -17,23 +17,23 @@ const MarkerURL = {
 interface SetMakerProps {
   latitude: number;
   longitude: number;
+  onClick: () => void;
   markerType?: MarkerType;
 }
 
 function useMap() {
   const mapRef = useRef<HTMLElement | null | any>(null);
+  // TODO : 처음에 로딩이 필요할듯
   const [myLocation, setMyLocation] = useState<{
     latitude: number;
     longitude: number;
-  }>({
-    latitude: 37.4862618,
-    longitude: 127.1222903,
-  });
+  } | null>(null);
 
   const setMaker = ({
     latitude,
     longitude,
     markerType = 'marker',
+    onClick,
   }: SetMakerProps) => {
     const currentMarker = new naver.maps.Marker({
       position: new naver.maps.LatLng(latitude, longitude),
@@ -46,6 +46,9 @@ function useMap() {
         anchor: new naver.maps.Point(25, 26), // NOTE:   이건 왜 넣는거지
       },
     });
+
+    // NOTE: marker event 등록
+    currentMarker.addListener('click', onClick);
   };
 
   useEffect(() => {
@@ -64,7 +67,7 @@ function useMap() {
   }, []);
 
   useEffect(() => {
-    if (typeof myLocation !== 'string') {
+    if (myLocation) {
       // 현재 위치 추적
       const currentPosition = [myLocation.latitude, myLocation.longitude];
       const map = new naver.maps.Map('map', {
@@ -73,8 +76,6 @@ function useMap() {
       });
       // Naver Map 생성
       mapRef.current = map;
-
-      // setMaker({ latitude: currentPosition[0], longitude: currentPosition[1] });
     }
   }, [myLocation]);
 
