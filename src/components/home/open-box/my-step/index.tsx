@@ -26,7 +26,7 @@ export default function MyStep({ list, isFullPage }: MyStepProps) {
   ] = useToggle();
   const [isEditMode, handleToggleEditMode] = useToggle();
 
-  const newRestaurantAdd = (obj: RestaurantItemType) => {
+  const newRestaurantAdd = (obj: RestaurantType) => {
     console.log('obj: ', obj);
   };
 

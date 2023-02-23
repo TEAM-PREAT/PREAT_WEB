@@ -6,7 +6,8 @@ const StarIconURL = '/assets/svgs/map-star.svg';
 const WishIconURL = '/assets/svgs/map-wish.svg';
 const MarkerIconURL = '/assets/svgs/map-marker.svg';
 
-type MarkerType = 'friend' | 'star' | 'wish' | 'marker';
+export type MarkerType = 'friend' | 'star' | 'wish' | 'marker';
+
 const MarkerURL = {
   friend: FriendIconURL,
   star: StarIconURL,

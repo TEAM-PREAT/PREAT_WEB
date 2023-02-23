@@ -1,3 +1,5 @@
+import { RestaurantType } from '@/api/types';
+import RestaurantItem from '@/components/common/restaurant-item';
 import FriendStep from '@/components/home/open-box/friend-step';
 import MyStep from '@/components/home/open-box/my-step';
 import ToggleNav from '@/components/home/open-box/toggle-nav';
@@ -7,7 +9,7 @@ import useGetRestaurantList from '@/components/home/useGetRestaurantList';
 import BigHeartIcon from '@/components/icons/map/big-heart-icon';
 import BigSmileIcon from '@/components/icons/map/big-smile-icon';
 import BigStarIcon from '@/components/icons/map/big-star-icon';
-import { useState } from 'react';
+import { MarkerType } from '@/hooks/useMap';
 import styled, { css } from 'styled-components';
 
 export type OpenStatusType = 'close' | 'open' | 'mid';
@@ -18,46 +20,74 @@ const TOP_ICON_LIST = [
   <BigHeartIcon key="big-heart" />,
 ];
 
+interface MapRestaurantType extends RestaurantType {
+  marker: MarkerType;
+}
+
 interface OpenBoxProps {
   openStatus: OpenStatusType;
   handleToggleOpen: () => void;
+  handleClose: () => void;
+  midItem?: MapRestaurantType;
+
+  current: CurrentStep;
+  handleCurrent: (next: CurrentStep) => void;
 }
 
 export default function OpenBox({
   openStatus,
   handleToggleOpen,
+  midItem,
+  handleCurrent,
+  current,
+  handleClose,
 }: OpenBoxProps) {
-  const [current, setCurrent] = useState<CurrentStep>(2);
   const { wishs, mys, friends } = useGetRestaurantList();
 
-  const handleCurrent = (next: CurrentStep) => {
-    setCurrent(next);
-  };
-
-  return (
-    <Wrapper
-      onClick={() => {
-        openStatus === 'close' && handleToggleOpen();
-      }}
-      openStatus={openStatus}
-    >
-      <InnerWrapper>
-        <IconWrapper onClick={handleToggleOpen}>
-          {TOP_ICON_LIST[current]}
-        </IconWrapper>
-
-        {openStatus === 'open' && (
+  if (openStatus === 'open') {
+    return (
+      <Wrapper openStatus="open">
+        <InnerWrapper>
+          <IconWrapper onClick={handleClose}>
+            {TOP_ICON_LIST[current]}
+          </IconWrapper>
           <div>
             <ToggleNav current={current} handleCurrent={handleCurrent} />
             {current === CurrentStep.Friend && <FriendStep list={friends} />}
             {current === CurrentStep.My && <MyStep list={mys} />}
             {current === CurrentStep.Heart && <WishStep list={wishs} />}
           </div>
-        )}
+        </InnerWrapper>
+        {/* <ConfirmModal label="삭제">
+      <span>3개의 장소를 리스트에서 삭제합니다.</span>
+    </ConfirmModal> */}
+      </Wrapper>
+    );
+  }
+
+  if (openStatus === 'mid' && midItem) {
+    // const icon = MappingCurrentIcon(midItem.marker);
+    return (
+      <Wrapper openStatus="mid">
+        <InnerWrapper>
+          <IconWrapper onClick={handleClose}>
+            {TOP_ICON_LIST[current]}
+          </IconWrapper>
+        </InnerWrapper>
+        <MidItemWrapper>
+          <RestaurantItem key={midItem.id} {...midItem} />
+        </MidItemWrapper>
+      </Wrapper>
+    );
+  }
+
+  return (
+    <Wrapper onClick={handleToggleOpen} openStatus="close">
+      <InnerWrapper>
+        <IconWrapper onClick={handleToggleOpen}>
+          {TOP_ICON_LIST[current]}
+        </IconWrapper>
       </InnerWrapper>
-      {/* <ConfirmModal label="삭제">
-        <span>3개의 장소를 리스트에서 삭제합니다.</span>
-      </ConfirmModal> */}
     </Wrapper>
   );
 }
@@ -104,4 +134,11 @@ const IconWrapper = styled.div`
   margin: auto;
   width: fit-content;
   cursor: pointer;
+`;
+
+const MidItemWrapper = styled.div`
+  max-width: 325px;
+  padding: 0 10px;
+  margin: auto;
+  border-bottom: 0.8px solid rgba(204, 204, 204, 0.6);
 `;

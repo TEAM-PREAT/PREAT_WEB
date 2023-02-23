@@ -1,28 +1,35 @@
 import { RestaurantType } from '@/api/types';
 import { getMyReviewRestaurantListAPI } from '@/api/wishs';
-import useMap from '@/hooks/useMap';
+import useMap, { MarkerType } from '@/hooks/useMap';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export default function Map() {
+interface MapRestaurantType extends RestaurantType {
+  marker: MarkerType;
+}
+
+interface MapProps {
+  handleMarkerClick: (item: MapRestaurantType) => void;
+}
+export default function Map({ handleMarkerClick }: MapProps) {
   const { myLocation, setMaker } = useMap();
-  const [list, setList] = useState<RestaurantType[]>([]);
+  const [list, setList] = useState<MapRestaurantType[]>([]);
 
   const handleMarkerVisible = useCallback(
-    (item: RestaurantType) => {
-      setMaker({ ...item, onClick: () => handleMarkerClick(item.id) });
+    (item: MapRestaurantType) => {
+      setMaker({
+        ...item,
+        onClick: () => handleMarkerClick(item),
+        markerType: item.marker,
+      });
     },
-    [setMaker],
+    [handleMarkerClick, setMaker],
   );
-
-  const handleMarkerClick = (id: number) => {
-    // TODO : 구현
-    console.log('handleMarkerClick: ', id);
-  };
 
   const getList = async () => {
     const res = await getMyReviewRestaurantListAPI();
-    setList(res);
+
+    setList(res.map((item) => ({ ...item, marker: 'star' })));
   };
   useEffect(() => {
     getList();
@@ -30,7 +37,8 @@ export default function Map() {
     list.forEach((item) => {
       handleMarkerVisible(item);
     });
-  }, [handleMarkerVisible, list, myLocation]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myLocation]);
 
   return <MapBox id="map"></MapBox>;
 }
