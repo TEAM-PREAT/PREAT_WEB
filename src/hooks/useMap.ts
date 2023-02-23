@@ -1,10 +1,57 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+// import pinImage from '';
+
+const FriendIconURL = '/assets/svgs/map-friend.svg';
+const StarIconURL = '/assets/svgs/map-star.svg';
+const WishIconURL = '/assets/svgs/map-wish.svg';
+const MarkerIconURL = '/assets/svgs/map-marker.svg';
+
+export type MarkerType = 'friend' | 'star' | 'wish' | 'marker';
+
+const MarkerURL = {
+  friend: FriendIconURL,
+  star: StarIconURL,
+  wish: WishIconURL,
+  marker: MarkerIconURL,
+};
+
+interface SetMakerProps {
+  latitude: number;
+  longitude: number;
+  onClick: () => void;
+  markerType?: MarkerType;
+}
 
 function useMap() {
   const mapRef = useRef<HTMLElement | null | any>(null);
-  const [myLocation, setMyLocation] = useState<
-    { latitude: number; longitude: number } | string
-  >('');
+  // TODO : 처음에 로딩이 필요할듯
+  const [isLoading, setIsLoading] = useState(true);
+  const [myLocation, setMyLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
+
+  const setMaker = ({
+    latitude,
+    longitude,
+    markerType = 'marker',
+    onClick,
+  }: SetMakerProps) => {
+    const currentMarker = new naver.maps.Marker({
+      position: new naver.maps.LatLng(latitude, longitude),
+      map: mapRef.current,
+      // 원하는 이미지로 마커 커스텀
+      icon: {
+        url: MarkerURL[markerType],
+        size: new naver.maps.Size(50, 50),
+        origin: new naver.maps.Point(0, 0),
+        anchor: new naver.maps.Point(25, 26), // NOTE:   이건 왜 넣는거지
+      },
+    });
+
+    // NOTE: marker event 등록
+    currentMarker.addListener('click', onClick);
+  };
 
   useEffect(() => {
     // geolocation 이용 현재 위치 확인, 위치 미동의 시 기본 위치로 지정
@@ -21,21 +68,31 @@ function useMap() {
     }
   }, []);
 
-  useEffect(() => {
-    if (typeof myLocation !== 'string') {
-      // 현재 위치 추적
-      const currentPosition = [myLocation.latitude, myLocation.longitude];
+  const createMap = useCallback(() => {
+    if (!myLocation) return;
 
-      // Naver Map 생성
-      mapRef.current = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
-        // zoomControl: true,
-      });
-    }
+    const currentPosition = [myLocation.latitude, myLocation.longitude];
+    const map = new naver.maps.Map('map', {
+      center: new naver.maps.LatLng(currentPosition[0], currentPosition[1]),
+      // zoomControl: true,
+    });
+    // Naver Map 생성
+    mapRef.current = map;
+    setIsLoading(false);
   }, [myLocation]);
+
+  useEffect(() => {
+    createMap();
+  }, [createMap]);
+
+  // useEffect(() => {
+
+  // }, [createMap]);
 
   return {
     myLocation,
+    setMaker,
+    isLoading,
   };
 }
 

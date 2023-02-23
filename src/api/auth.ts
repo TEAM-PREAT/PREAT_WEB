@@ -1,4 +1,4 @@
-import { authenticationRequest, requestPOST } from '@/api';
+import { authenticationRequest, request, requestPOST } from '@/api';
 import {
   JOIN_SETTING_VALUE_KEY,
   removeStorage,
@@ -29,6 +29,7 @@ interface SignupRequestType {
 export const signup = async (data: SignupRequestType) => {
   try {
     const response = await authenticationRequest.post(SIGNUP_URL, data);
+    console.log('response: ', response);
     removeStorage(JOIN_SETTING_VALUE_KEY);
     const userId = response.data.data;
     setStorage('userId', userId);

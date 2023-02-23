@@ -2,12 +2,33 @@ import OpenBox, { OpenStatusType } from '@/components/home/open-box';
 import TopBox from '@/components/home/top-box';
 import { useState } from 'react';
 import styled from 'styled-components';
+import Map from '@/components/common/map';
+import { MarkerType } from '@/hooks/useMap';
+import { RestaurantType } from '@/api/types';
+import { CurrentStep } from '@/components/home/types';
+
+interface MapRestaurantType extends RestaurantType {
+  marker: MarkerType;
+}
 
 export default function Home() {
-  const [openStatus, setOpenStatus] = useState<OpenStatusType>('open');
+  const [openStatus, setOpenStatus] = useState<OpenStatusType>('close');
+  const [current, setCurrent] = useState<CurrentStep>(2);
+  const [midItem, setMidItem] = useState<MapRestaurantType>();
 
   const handleOpenStatus = (status: OpenStatusType) => {
     setOpenStatus(status);
+  };
+
+  const handleCurrent = (next: CurrentStep) => {
+    setCurrent(next);
+  };
+
+  const handleMidOpen = (item: MapRestaurantType) => {
+    // TODO : 수정할수있을까
+    setMidItem(item);
+    setOpenStatus('mid');
+    setCurrent(MappingCurrentIcon(item.marker));
   };
 
   return (
@@ -15,16 +36,27 @@ export default function Home() {
       <TopBoxWrapper>
         <TopBox />
       </TopBoxWrapper>
-      {/* <Map /> */}
+      <Map handleMarkerClick={handleMidOpen} />
       <OpenBox
         openStatus={openStatus}
         handleToggleOpen={() =>
           handleOpenStatus(openStatus === 'open' ? 'close' : 'open')
         }
+        handleClose={() => handleOpenStatus('close')}
+        current={current}
+        handleCurrent={handleCurrent}
+        midItem={midItem}
       />
     </Wrapper>
   );
 }
+
+const MappingCurrentIcon = (marker: MarkerType) => {
+  if (marker === 'star') return 1;
+  if (marker === 'wish') return 2;
+  if (marker === 'friend') return 0;
+  return 0;
+};
 
 const Wrapper = styled.div`
   height: 100%;

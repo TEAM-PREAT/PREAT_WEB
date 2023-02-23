@@ -1,5 +1,11 @@
 // const USER_ME_WISHS_URL = '/v1/users/me/wishes';
 
+interface MapItemType {
+  me: RestaurantType[];
+  wish: RestaurantType[];
+  friend: FriendRestaurantType[];
+}
+
 export interface RestaurantType {
   id: number;
   name: string;
@@ -21,6 +27,13 @@ export interface FriendRestaurantType extends RestaurantType {
   friend: string;
 }
 
+// export interface FriendRestaurantType {
+//   id: number;
+//   nickname: string;
+//   imageUrl: string;
+//   restaurant: RestaurantType[];
+// }
+
 const RestaurantDummy: RestaurantType[] = [
   {
     id: 1,
@@ -28,8 +41,8 @@ const RestaurantDummy: RestaurantType[] = [
     address: '식당1',
     imageUrl: '/assets/images/bread.png',
     category: '베이커리',
-    latitude: 100,
-    longitude: 100,
+    latitude: 36.36217624997313,
+    longitude: 127.34855794364547,
 
     rating: {
       hasPredict: false,
@@ -42,8 +55,8 @@ const RestaurantDummy: RestaurantType[] = [
     address: '식당1',
     imageUrl: '/assets/images/bread.png',
     category: '베이커리',
-    latitude: 100,
-    longitude: 100,
+    latitude: 36.36140215902434,
+    longitude: 127.34200303225579,
 
     rating: {
       hasPredict: false,
@@ -56,8 +69,8 @@ const RestaurantDummy: RestaurantType[] = [
     address: '식당1',
     imageUrl: '/assets/images/bread.png',
     category: '베이커리',
-    latitude: 100,
-    longitude: 100,
+    latitude: 36.361037987349484,
+    longitude: 127.3432938976973,
 
     rating: {
       hasPredict: false,
@@ -229,7 +242,7 @@ const RestaurantFriendDummy: FriendRestaurantType[] = [
   },
 ];
 
-export const getWishRestaurantListAPI = async () => {
+export const getWishRestaurantListAPI = async (): Promise<RestaurantType[]> => {
   return RestaurantPredictDummy;
 };
 
@@ -239,6 +252,8 @@ export const getFriendRestaurantListAPI = async (): Promise<
   return RestaurantFriendDummy;
 };
 
-export const getMyReviewRestaurantListAPI = async () => {
+export const getMyReviewRestaurantListAPI = async (): Promise<
+  RestaurantType[]
+> => {
   return RestaurantDummy;
 };
