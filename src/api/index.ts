@@ -27,7 +27,6 @@ export const request = axios.create({
 authenticationRequest.interceptors.request.use(
   function (config) {
     const access_token = localStorage.getItem('accessToken');
-    console.log('access_token: ', access_token);
 
     if (access_token === null) {
       throw new Error('access token이 없습니다.');

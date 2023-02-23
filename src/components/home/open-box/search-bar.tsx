@@ -1,28 +1,43 @@
+import { searchRestaurantAPI } from '@/api/search';
+import { RestaurantType } from '@/api/types';
+import SearchList from '@/components/home/open-box/search-list';
+import SearchBackIcon from '@/components/icons/search-back-icon';
 import SearchIcon from '@/components/icons/search-icon';
-import SearchList from '@/components/join/restaurant/search-list';
 import SearchTagList from '@/components/join/restaurant/search-tag-list';
-import { RestaurantItemType } from '@/components/join/types';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface SearchBarProps {
-  handleSearchMode: () => void;
+  searchModeOn: () => void;
+  searchModeOff: () => void;
   isSearchMode: boolean;
-  onAction: (obj: RestaurantItemType) => void;
+  onAction: (obj: RestaurantType) => void;
 }
 
 export default function SearchBar({
-  handleSearchMode,
+  searchModeOn,
   isSearchMode,
   onAction,
+  searchModeOff,
 }: SearchBarProps) {
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [list, setList] = useState<RestaurantType[]>([]);
+
+  const searchRestaurant = async (keyword: string) => {
+    const results = await searchRestaurantAPI(keyword);
+    setList(results);
+  };
 
   const isShowTagList = searchKeyword === '';
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
+    searchRestaurant(e.target.value);
   };
+
+  useEffect(() => {
+    searchRestaurant('');
+  }, []);
 
   return (
     <Wrapper>
@@ -30,25 +45,32 @@ export default function SearchBar({
         <Input
           value={searchKeyword}
           onChange={onInputChange}
-          onFocus={handleSearchMode}
+          onFocus={searchModeOn}
           placeholder="맛집을 검색해보세요"
         />
-        <IconWrapper>
+        <SearchBackIconWrapper onClick={searchModeOff}>
+          <SearchBackIcon />
+        </SearchBackIconWrapper>
+        <SearchIconWrapper>
           <SearchIcon />
-        </IconWrapper>
+        </SearchIconWrapper>
       </InputWrapper>
       {isSearchMode &&
         (isShowTagList ? (
-          <SearchTagList onAction={onAction} />
+          <SearchTagList list={list} onAction={onAction} />
         ) : (
-          <SearchList onAction={onAction} />
+          <SearchList list={list} onAction={onAction} />
         ))}
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div``;
-
+const SearchIconWrapper = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 10px;
+`;
 const InputWrapper = styled.div`
   width: 290px;
   height: 34px;
@@ -86,4 +108,10 @@ const Input = styled.input`
   &:focus {
     background: #ffffff;
   }
+`;
+
+const SearchBackIconWrapper = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
 `;

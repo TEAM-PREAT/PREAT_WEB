@@ -11,9 +11,13 @@ interface MapRestaurantType extends RestaurantType {
   marker: MarkerType;
 }
 
+const INIT_CURRENT: CurrentStep = 1;
+const INIT_OPEN_STATUS: OpenStatusType = 'open';
+
 export default function Home() {
-  const [openStatus, setOpenStatus] = useState<OpenStatusType>('close');
-  const [current, setCurrent] = useState<CurrentStep>(2);
+  const [openStatus, setOpenStatus] =
+    useState<OpenStatusType>(INIT_OPEN_STATUS);
+  const [current, setCurrent] = useState<CurrentStep>(INIT_CURRENT);
   const [midItem, setMidItem] = useState<MapRestaurantType>();
 
   const handleOpenStatus = (status: OpenStatusType) => {

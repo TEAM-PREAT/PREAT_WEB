@@ -1,6 +1,7 @@
 import { RestaurantType } from '@/api/wishs';
 import MyList from '@/components/home/open-box/my-step/my-list';
 import MyListEdit from '@/components/home/open-box/my-step/my-list/edit-mode';
+import SearchBar from '@/components/home/open-box/search-bar';
 import {
   ListAddWrapper,
   EditButton,
@@ -8,8 +9,6 @@ import {
   StepWrapper,
 } from '@/components/home/open-box/step-styled';
 import CircleXIcon from '@/components/icons/circle-x-icon';
-import SearchBar from '@/components/join/restaurant/search-bar';
-import { RestaurantItemType } from '@/components/join/types';
 import useToggle from '@/hooks/useToggle';
 import { FlexAlignCenter } from '@/styles/core';
 

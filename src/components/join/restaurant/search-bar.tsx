@@ -1,4 +1,3 @@
-import { searchRestaurantAPI } from '@/api/search';
 import { RestaurantType } from '@/api/types';
 import SearchBackIcon from '@/components/icons/search-back-icon';
 import SearchIcon from '@/components/icons/search-icon';
