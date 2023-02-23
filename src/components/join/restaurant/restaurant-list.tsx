@@ -1,9 +1,9 @@
+import { JoinRestaurantType } from '@/api/join-setting';
 import ReviewRestaurantItem from '@/components/common/restaurant-item/review-restaurant-item';
-import { RestaurantScoreItemType } from '@/components/join/types';
 import styled from 'styled-components';
 
 interface RestaurantListProps {
-  list: RestaurantScoreItemType[];
+  list: JoinRestaurantType[];
   handleReview: (id: number, score: number) => void;
 }
 

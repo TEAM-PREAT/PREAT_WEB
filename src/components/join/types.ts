@@ -1,5 +1,3 @@
-import { RestaurantType } from '@/api/types';
-
 export enum StepStatus {
   Nickname,
   NicknameComplete,
@@ -42,10 +40,6 @@ export interface RestaurantItemType {
   type: string;
   location: string;
   src?: string;
-}
-
-export interface RestaurantScoreItemType extends RestaurantType {
-  score: number;
 }
 
 export const SEARCH_DUMMY: RestaurantItemType[] = [

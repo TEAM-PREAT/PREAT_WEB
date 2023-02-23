@@ -1,3 +1,4 @@
+import { JoinRestaurantType } from '@/api/join-setting';
 import EvaluationScore from '@/components/common/evaluation-score';
 import {
   RestaurantItemWrapper,
@@ -9,40 +10,39 @@ import {
   StarListWrapper,
   Location,
 } from '@/components/common/restaurant-item/styled';
-import { RestaurantScoreItemType } from '@/components/join/types';
 import Image from 'next/image';
 
-interface RestaurantItemProps extends RestaurantScoreItemType {
-  handleReview?: (id: number, score: number) => void;
+interface RestaurantItemProps extends JoinRestaurantType {
+  handleReview?: (id: number, rating: number) => void;
 }
 
 export default function ReviewRestaurantItem({
-  src,
-  type,
-  location,
+  imageUrl,
+  category,
+  address,
   name,
-  score,
+  rating,
   id,
   handleReview,
 }: RestaurantItemProps) {
-  const onReview = (score: number) => {
-    handleReview && handleReview(id, score);
+  const onReview = (rating: number) => {
+    handleReview && handleReview(id, rating);
   };
 
   return (
     <RestaurantItemWrapper>
       <ImageWrapper>
-        {src && <Image src={src} alt={name} width={92} height={92} />}
+        {imageUrl && <Image src={imageUrl} alt={name} width={92} height={92} />}
       </ImageWrapper>
       <RightWrapper>
         <TextWrapper>
           <Name>{name}</Name>
-          <Type>{type}</Type>
+          <Type>{category}</Type>
         </TextWrapper>
 
-        <Location>{location}</Location>
+        <Location>{address}</Location>
         <StarListWrapper>
-          <EvaluationScore score={score} onReview={onReview} />
+          <EvaluationScore score={rating} onReview={onReview} />
         </StarListWrapper>
       </RightWrapper>
     </RestaurantItemWrapper>

@@ -24,7 +24,6 @@ export default function HateSetting({
 
   const setHateFood = async () => {
     const hateFoodList: HateFoodType[] = await getHateFoodAPI();
-    console.log('hateFoodList: ', hateFoodList);
     setFoodList(hateFoodList);
   };
 

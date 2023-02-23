@@ -1,41 +1,12 @@
+import { getRestaurantsAPI, JoinRestaurantType } from '@/api/join-setting';
 import { RestaurantType } from '@/api/wishs';
 import SettingContainer from '@/components/join/layout/ContainerWithHeading';
 import OverlayLogo from '@/components/join/restaurant/overlay-logo';
 import RestaurantList from '@/components/join/restaurant/restaurant-list';
 import SearchBar from '@/components/join/restaurant/search-bar';
 import useOverlayLogo from '@/components/join/restaurant/useOverlayLogo';
-import {
-  RestaurantItemType,
-  RestaurantScoreItemType,
-  ReviewType,
-  StepStatueProps,
-} from '@/components/join/types';
-import { useMemo, useState } from 'react';
-
-const DUMMY: RestaurantScoreItemType[] = [
-  {
-    id: 1,
-    name: '성심당 본점',
-    type: '베이커리',
-    location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
-    src: '/assets/images/bread.png',
-    score: 1,
-  },
-  {
-    id: 2,
-    name: '성심당 본점',
-    type: '베이커리',
-    location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
-    score: 5,
-  },
-  {
-    id: 3,
-    name: '성심당 본점',
-    type: '베이커리',
-    location: '대전광역시 ㅇㅇㅇㅇㅇㅇㅇ',
-    score: 0,
-  },
-];
+import { ReviewType, StepStatueProps } from '@/components/join/types';
+import { useEffect, useMemo, useState } from 'react';
 
 interface RestaurantEvaluatingProps extends StepStatueProps {
   onNextStep: (reviews: ReviewType[]) => void;
@@ -47,13 +18,13 @@ export default function RestaurantEvaluating({
 }: RestaurantEvaluatingProps) {
   const [isSearchMode, setIsSearchMode] = useState(false);
   const { isVisibleLogo, handleVisibleLogo } = useOverlayLogo(2500);
-  const [list, setList] = useState<RestaurantScoreItemType[]>(DUMMY);
+  const [list, setList] = useState<JoinRestaurantType[]>([]);
 
   const reviewList: ReviewType[] = useMemo(
     () =>
-      list.map(({ id, score }) => ({
+      list.map(({ id, rating }) => ({
         restaurantId: id,
-        rating: score,
+        rating: rating,
       })),
     [list],
   );
@@ -68,16 +39,16 @@ export default function RestaurantEvaluating({
       return;
     }
 
-    const newRestaurant = { ...obj, score: 0 };
+    const newRestaurant = { ...obj, rating: 0 };
     setList([...list, newRestaurant]);
     setIsSearchMode(false);
     handleVisibleLogo();
   };
 
-  const handleReview = (newReviewId: number, score: number) => {
+  const handleReview = (newReviewId: number, rating: number) => {
     const newList = list.map((item) => {
       if (item.id !== newReviewId) return item;
-      return { ...item, score };
+      return { ...item, rating };
     });
     setList(newList);
   };
@@ -85,6 +56,16 @@ export default function RestaurantEvaluating({
   const onButtonClick = () => {
     onNextStep(reviewList);
   };
+
+  const getRestaurants = async () => {
+    const data = await getRestaurantsAPI();
+    console.log('data: ', data);
+    setList(data);
+  };
+
+  useEffect(() => {
+    getRestaurants();
+  }, []);
 
   return (
     <SettingContainer
