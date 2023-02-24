@@ -32,7 +32,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <ProfileWrapper>
             <ProfileImageWrapper>
               <Image
-                src="/assets/images/preat_2.png"
+                src="/assets/images/profile.png"
                 width={82}
                 height={82}
                 alt="preat"
@@ -136,6 +136,5 @@ const ProfileImageWrapper = styled.div`
   height: 82px;
   border-radius: 50%;
   border: 1px solid #e5e5e5;
-  /* background-color: #e5e5e5; */
   overflow: hidden;
 `;
