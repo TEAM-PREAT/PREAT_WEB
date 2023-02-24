@@ -15,6 +15,9 @@ function TopBox({ onSidebarOpen }: TopBoxProps) {
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
+
+    // TODO
+    alert('검색 기능은 추후에 추가될 예정입니다.');
   };
 
   return (
