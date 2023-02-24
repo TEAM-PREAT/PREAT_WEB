@@ -12,7 +12,7 @@ interface MapRestaurantType extends RestaurantType {
 }
 
 const INIT_CURRENT: CurrentStep = 1;
-const INIT_OPEN_STATUS: OpenStatusType = 'open';
+const INIT_OPEN_STATUS: OpenStatusType = 'close';
 
 export default function Home() {
   const [openStatus, setOpenStatus] =

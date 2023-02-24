@@ -59,7 +59,6 @@ export default function RestaurantEvaluating({
 
   const getRestaurants = async () => {
     const data = await getRestaurantsAPI();
-    console.log('data: ', data);
     setList(data);
   };
 

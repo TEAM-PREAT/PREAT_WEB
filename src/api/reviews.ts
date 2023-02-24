@@ -12,7 +12,6 @@ export const restaurantReviewCreate = async (
     `${RESTAURANT_URL}/${restaurantId}/reviews`,
     { rating },
   );
-  console.log('response: ', response);
 
   if (response.status === 200) {
     return response.data.data;
@@ -58,7 +57,6 @@ export const myReviewsDelete = async (idList: number[]) => {
 
 export const getMyList = async () => {
   const response = await authenticationRequest.patch(MY_LIST);
-  console.log('response: ', response);
 
   if (response.status === 200) {
     return response.data.data;

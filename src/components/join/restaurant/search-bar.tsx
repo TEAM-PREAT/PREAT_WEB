@@ -1,3 +1,4 @@
+import { SignupSearchRestaurantAPI } from '@/api/search';
 import { RestaurantType } from '@/api/types';
 import SearchBackIcon from '@/components/icons/search-back-icon';
 import SearchIcon from '@/components/icons/search-icon';
@@ -24,11 +25,8 @@ export default function SearchBar({
   const [list, setList] = useState<RestaurantType[]>([]);
 
   const searchRestaurant = async (keyword: string) => {
-    // const data = await searchRestaurantAPI(keyword);
-    // const { results } = data;
-    // console.log('results: ', results);
-    // setList(results);
-    setList([]);
+    const data = await SignupSearchRestaurantAPI(keyword);
+    setList(data);
   };
 
   const isShowTagList = searchKeyword === '';

@@ -5,22 +5,45 @@ import styled from 'styled-components';
 interface ConfirmModalProps {
   children: ReactNode;
   label: string;
+
+  onClose: () => void;
+  onAction: () => void;
 }
 
-function ConfirmModal({ children, label }: ConfirmModalProps) {
+function ConfirmModal({
+  children,
+  label,
+  onClose,
+  onAction,
+}: ConfirmModalProps) {
   return (
-    <OuterOverlay>
+    <OuterWrapper>
+      <OuterOverlay></OuterOverlay>
       <Wrapper>
         <div>{children}</div>
         <ButtonWrapper>
-          <button>취소</button>
-          <button>{label}</button>
+          <button onClick={onClose}>취소</button>
+          <button onClick={onAction}>{label}</button>
         </ButtonWrapper>
       </Wrapper>
-    </OuterOverlay>
+    </OuterWrapper>
   );
 }
 
+const OuterWrapper = styled(FixedContainerStyled)`
+  height: 110vh;
+  bottom: 0;
+  width: 110vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+
+  top: -10vh;
+
+  z-index: 100; //modal
+`;
 const Wrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -33,6 +56,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   padding: 36px;
+  z-index: 101;
 `;
 
 const ButtonWrapper = styled.div`
@@ -52,16 +76,22 @@ const ButtonWrapper = styled.div`
     }
   }
 `;
-const OuterOverlay = styled(FixedContainerStyled)`
-  height: 100vh;
-  top: 0;
+const OuterOverlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 110vh;
   bottom: 0;
-  background: #5c5c5c;
-  mix-blend-mode: multiply;
-
-  display: flex;
+  background: #000000;
+  opacity: 0.5;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+
+  /* position: absolute;
+
+  top: -100px;
+
+  z-index: 100; //modal */
 `;
 
 export default ConfirmModal;

@@ -1,11 +1,13 @@
 import { restaurantReviewDelete } from '@/api/reviews';
 import { RestaurantType } from '@/api/wishs';
+import ConfirmModal from '@/components/common/confirm-modal';
 import SelectRestaurantItem from '@/components/common/restaurant-item/select-restaurant-item';
 import {
   ItemListWrapperWithButton,
   ListAddWrapper,
 } from '@/components/home/open-box/step-styled';
 import CircleCheckIcon from '@/components/icons/circle-check-icon';
+import useToggle from '@/hooks/useToggle';
 import { ButtonStyled, FlexAlignCenter } from '@/styles/core';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -25,6 +27,7 @@ export default function MyListEdit({
 }: MyListProps) {
   const [checkList, setCheckList] = useState<number[]>([]);
   const [isAllCheck, setIsAllCheck] = useState(false);
+  const [isModalVisible, toggleModalVisible] = useToggle();
 
   const handleCheck = (id: number) => {
     if (checkList.includes(id)) {
@@ -50,6 +53,9 @@ export default function MyListEdit({
     setIsAllCheck(!isAllCheck);
   };
 
+  const openConfirmModal = () => {
+    toggleModalVisible();
+  };
   const onAction = async () => {
     for await (const checkId of checkList) {
       await restaurantReviewDelete(checkId);
@@ -79,8 +85,17 @@ export default function MyListEdit({
         ))}
       </ItemListWrapperWithButton>
       <BottomBox isFullPage={isFullPage}>
-        <ButtonStyled onClick={onAction}>확인</ButtonStyled>
+        <ButtonStyled onClick={openConfirmModal}>확인</ButtonStyled>
       </BottomBox>
+      {isModalVisible && (
+        <ConfirmModal
+          label="삭제"
+          onClose={toggleModalVisible}
+          onAction={onAction}
+        >
+          <span>{checkList.length}개의 장소를 리스트에서 삭제합니다.</span>
+        </ConfirmModal>
+      )}
     </Wrapper>
   );
 }

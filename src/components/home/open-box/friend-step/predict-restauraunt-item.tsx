@@ -73,7 +73,7 @@ const TopWrapper = styled(FlexAlignCenter)`
 const FriendLabelBox = styled.div`
   width: fit-content;
   background: #ffda00;
-  mix-blend-mode: multiply;
+  /* mix-blend-mode: multiply; */
   border-radius: 3px;
   color: #5a5a5a;
   font-weight: 700;

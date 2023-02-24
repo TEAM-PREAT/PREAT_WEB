@@ -22,35 +22,13 @@ export const searchRestaurantAPI = async (
   throw new Error();
 };
 
-export const SignInSearchRestaurantAPI = async (
-  keyword: string,
-): Promise<SearchRestaurantReturnType> => {
+export const SignupSearchRestaurantAPI = async (keyword: string) => {
   // TODO : 해야댐
   const response = await request.get(
-    `${SIGN_IN_RESTAURANT_SEARCH_URL}?keyword=${keyword}`,
+    `${SIGN_IN_RESTAURANT_SEARCH_URL}?query=${keyword}`,
   );
   if (response.status === 200) {
-    const { hasResults, results } = response.data.data;
-
-    const res: RestaurantType[] = results.map(
-      ({
-        restaurantId,
-        restaurantName,
-        imgUrl,
-        ...rest
-      }: {
-        restaurantId: number;
-        restaurantName: string;
-        imgUrl: string;
-      }) => ({
-        ...rest,
-        id: restaurantId,
-        name: restaurantName,
-        rating: { value: 0 },
-        imageUrl: imgUrl,
-      }),
-    );
-    return { hasResults, results: res };
+    return response.data.data ?? [];
   }
   throw new Error();
 };

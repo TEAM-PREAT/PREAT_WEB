@@ -14,7 +14,7 @@ export interface ReviewType {
 
 export interface SettingValueListType {
   nickname: string;
-  // salty: number;
+  salty: number;
   sweet: number;
   spicy: number;
   hateFoods: number[];
@@ -23,7 +23,7 @@ export interface SettingValueListType {
 
 export const INIT_SETTING_VALUES = {
   nickname: '',
-  // salty: 0,
+  salty: 0,
   sweet: 0,
   spicy: 0,
   hateFoods: [],

@@ -47,7 +47,6 @@ function JoinPage() {
   };
 
   const handleNickNameNextStep = (nickname: string) => {
-    console.log('nickname: ', nickname);
     handleNextStep({ nickname });
   };
 

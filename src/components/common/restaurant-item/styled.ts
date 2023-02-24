@@ -22,6 +22,7 @@ export const ImageWrapper = styled.div`
   height: 92px;
   background-color: #d9d9d9;
   border-radius: 12px;
+  min-width: 92px;
 `;
 
 export const TextWrapper = styled(Flex)`
@@ -36,6 +37,10 @@ export const Name = styled.div`
   line-height: normal;
 
   color: #000000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
 `;
 export const Type = styled.div`
   font-weight: 500;
