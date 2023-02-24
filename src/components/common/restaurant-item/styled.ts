@@ -11,6 +11,10 @@ export const RestaurantItemWrapper = styled(MaxItemContainer)`
   & + & {
     border-top: 0.8px solid #cccccc;
   }
+
+  img {
+    min-width: 92px;
+  }
 `;
 
 export const RightWrapper = styled(FlexColumn)`
