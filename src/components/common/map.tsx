@@ -1,5 +1,9 @@
 import { RestaurantType } from '@/api/types';
-import { getMyReviewRestaurantListAPI } from '@/api/wishs';
+import {
+  FriendRestaurantType,
+  getHomeListAPI,
+  getMyReviewRestaurantListAPI,
+} from '@/api/wishs';
 import Loading from '@/components/common/loading';
 import useMap, { MarkerType } from '@/hooks/useMap';
 import { AbsoluteCenterStyled } from '@/styles/core';
@@ -29,12 +33,21 @@ export default function Map({ handleMarkerClick }: MapProps) {
   );
 
   const getList = async () => {
-    const res = await getMyReviewRestaurantListAPI();
+    const res = await getHomeListAPI();
+    console.log('res: ', res);
 
-    setList(res.map((item) => ({ ...item, marker: 'star' })));
+    const myList: MapRestaurantType[] =
+      res.mylist?.map((item) => ({ ...item, marker: 'star' })) ?? [];
+    const wishes: MapRestaurantType[] =
+      res.wishes?.map((item) => ({ ...item, marker: 'wish' })) ?? [];
+    // const follows =
+    //   res.follows?.map((item) => ({ ...item, marker: 'star' })) ?? [];
+
+    setList([...myList, ...wishes]);
   };
   useEffect(() => {
     getList();
+
     // 내 위치에 마커 찍기
     list.forEach((item) => {
       handleMarkerVisible(item);

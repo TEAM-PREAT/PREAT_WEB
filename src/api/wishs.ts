@@ -4,13 +4,18 @@ import { authenticationRequest } from '@/api';
 const MY_LIST = '/v1/users/me/mylist';
 const FOLLOWS_LIST_URL = '/v1/users/me/follows-list';
 const WISH_LIST_URL = '/v1/users/me/wishes';
+const GET_MAP_LIST_URL = '/v1/home';
 
 // interface MapItemType {
 //   me: RestaurantType[];
 //   wish: RestaurantType[];
 //   friend: FriendRestaurantType[];
 // }
-
+interface MapListReturnType {
+  mylist: RestaurantType[];
+  wishes: RestaurantType[];
+  follows: FriendRestaurantType[];
+}
 export interface RestaurantType {
   id: number;
   name: string;
@@ -32,6 +37,16 @@ export interface RestaurantType {
 export interface FriendRestaurantType extends RestaurantType {
   friend: string;
 }
+
+export const getHomeListAPI = async (): Promise<MapListReturnType> => {
+  const response = await authenticationRequest.get(GET_MAP_LIST_URL);
+
+  if (response.status === 200) {
+    return response.data.data;
+  }
+
+  throw new Error();
+};
 
 export const getWishRestaurantListAPI = async (): Promise<RestaurantType[]> => {
   const response = await authenticationRequest.get(WISH_LIST_URL);
