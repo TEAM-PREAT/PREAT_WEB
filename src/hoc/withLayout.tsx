@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
   min-height: 100vh;
   position: relative;
-
+  overflow-x: hidden;
   /*  NOTE: 삭제 */
   background-color: #fff;
 `;

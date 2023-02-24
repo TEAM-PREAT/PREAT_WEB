@@ -6,16 +6,23 @@ import RingIcon from '@/components/icons/sidebar/ring-icon';
 import SettingIcon from '@/components/icons/sidebar/setting-icon';
 import { FixedContainerStyled, FlexAlignCenter } from '@/styles/core';
 import Image from 'next/image';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export default function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
-    <OuterWrapper>
-      <Overlay></Overlay>
+    <OuterWrapper isOpen={isOpen}>
+      {isOpen && <Overlay></Overlay>}
       <Wrapper>
         <InnerWrapper>
           <TopWrapper>
-            <BackIcon />
+            <span onClick={onClose}>
+              <BackIcon />
+            </span>
+
             <FlexAlignCenter>
               <RingIcon />
               <SettingIcon />
@@ -23,7 +30,14 @@ export default function Sidebar() {
           </TopWrapper>
 
           <ProfileWrapper>
-            <ProfileImageWrapper>{/* <Image  /> */}</ProfileImageWrapper>
+            <ProfileImageWrapper>
+              <Image
+                src="/assets/images/preat_2.png"
+                width={82}
+                height={82}
+                alt="preat"
+              />
+            </ProfileImageWrapper>
 
             <FlexAlignCenter gap={16}>
               <span>맛집매니아</span>
@@ -46,12 +60,23 @@ export default function Sidebar() {
 const Divider = styled.hr`
   border: 0.8px solid #cccccc;
 `;
-const OuterWrapper = styled(FixedContainerStyled)`
+
+const OuterWrapper = styled(FixedContainerStyled)<{ isOpen: boolean }>`
   height: 100vh;
   top: 0;
   bottom: 0;
 
   z-index: 100;
+  transform: translateX(300px);
+  display: none;
+  /* TODO : open 수정 필요 */
+  ${(props) =>
+    props.isOpen &&
+    css`
+      display: block;
+      transform: translateX(0);
+      opacity: 1;
+    `}
 `;
 
 const Overlay = styled(FixedContainerStyled)`
@@ -97,7 +122,7 @@ const TopWrapper = styled.div`
 `;
 
 const ProfileWrapper = styled.div`
-  padding: 0 14px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
   gap: 22px;
@@ -110,5 +135,7 @@ const ProfileImageWrapper = styled.div`
   width: 82px;
   height: 82px;
   border-radius: 50%;
-  background-color: #e5e5e5;
+  border: 1px solid #e5e5e5;
+  /* background-color: #e5e5e5; */
+  overflow: hidden;
 `;

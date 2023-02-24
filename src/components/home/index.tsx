@@ -7,6 +7,7 @@ import { MarkerType } from '@/hooks/useMap';
 import { RestaurantType } from '@/api/types';
 import { CurrentStep } from '@/components/home/types';
 import Sidebar from '@/components/home/sidebar';
+import useToggle from '@/hooks/useToggle';
 
 interface MapRestaurantType extends RestaurantType {
   marker: MarkerType;
@@ -20,6 +21,8 @@ export default function Home() {
     useState<OpenStatusType>(INIT_OPEN_STATUS);
   const [current, setCurrent] = useState<CurrentStep>(INIT_CURRENT);
   const [midItem, setMidItem] = useState<MapRestaurantType>();
+  const [isOpen, toggleIsOpen] = useToggle();
+  console.log('isOpen: ', isOpen);
 
   const handleOpenStatus = (status: OpenStatusType) => {
     setOpenStatus(status);
@@ -39,7 +42,7 @@ export default function Home() {
   return (
     <Wrapper>
       <TopBoxWrapper>
-        <TopBox />
+        <TopBox onSidebarOpen={toggleIsOpen} />
       </TopBoxWrapper>
       <Map handleMarkerClick={handleMidOpen} />
       <OpenBox
@@ -52,7 +55,7 @@ export default function Home() {
         handleCurrent={handleCurrent}
         midItem={midItem}
       />
-      <Sidebar />
+      <Sidebar isOpen={isOpen} onClose={toggleIsOpen} />
     </Wrapper>
   );
 }

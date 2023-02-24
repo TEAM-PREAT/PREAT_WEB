@@ -4,7 +4,10 @@ import ListIcon from '@/components/icons/list-icon';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
-function TopBox() {
+interface TopBoxProps {
+  onSidebarOpen: () => void;
+}
+function TopBox({ onSidebarOpen }: TopBoxProps) {
   const [keyword, setKeyword] = useState('');
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +19,9 @@ function TopBox() {
       <TopWrapper>
         <ListIcon />
         <Title>지도</Title>
-        <HamburgerIcon />
+        <span onClick={onSidebarOpen}>
+          <HamburgerIcon />
+        </span>
       </TopWrapper>
       <InputWrapper>
         <SearchInput

@@ -10,8 +10,8 @@ function NextIcon() {
       <path
         d="M1 1L6 6L1 11"
         stroke="#A0A0A0"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
