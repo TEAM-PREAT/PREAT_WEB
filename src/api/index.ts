@@ -29,7 +29,10 @@ authenticationRequest.interceptors.request.use(
     const access_token = localStorage.getItem('accessToken');
 
     if (access_token === null) {
-      throw new Error('access token이 없습니다.');
+      alert('로그인이 필요합니다. ');
+      window.location.href = '/login';
+
+      // throw new Error('access token이 없습니다.');
     }
 
     config.headers['Content-Type'] = 'application/json';
