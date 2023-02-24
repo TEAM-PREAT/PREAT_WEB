@@ -6,6 +6,7 @@ import RingIcon from '@/components/icons/sidebar/ring-icon';
 import SettingIcon from '@/components/icons/sidebar/setting-icon';
 import { FixedContainerStyled, FlexAlignCenter } from '@/styles/core';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import styled, { css } from 'styled-components';
 
 interface SidebarProps {
@@ -13,6 +14,8 @@ interface SidebarProps {
   onClose: () => void;
 }
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const router = useRouter();
+
   return (
     <OuterWrapper isOpen={isOpen}>
       {isOpen && <Overlay></Overlay>}
@@ -29,7 +32,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             </FlexAlignCenter>
           </TopWrapper>
 
-          <ProfileWrapper>
+          <ProfileWrapper onClick={() => router.push('/my')}>
             <ProfileImageWrapper>
               <Image
                 src="/assets/images/profile.png"

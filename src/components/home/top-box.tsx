@@ -1,6 +1,7 @@
 import SearchInput from '@/components/common/search-input';
 import HamburgerIcon from '@/components/icons/hamburger-icon';
 import ListIcon from '@/components/icons/list-icon';
+import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
@@ -8,6 +9,8 @@ interface TopBoxProps {
   onSidebarOpen: () => void;
 }
 function TopBox({ onSidebarOpen }: TopBoxProps) {
+  const router = useRouter();
+
   const [keyword, setKeyword] = useState('');
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +20,9 @@ function TopBox({ onSidebarOpen }: TopBoxProps) {
   return (
     <Wrapper>
       <TopWrapper>
-        <ListIcon />
+        <span onClick={() => router.push('/list')}>
+          <ListIcon />
+        </span>
         <Title>지도</Title>
         <span onClick={onSidebarOpen}>
           <HamburgerIcon />

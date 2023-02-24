@@ -8,10 +8,12 @@ import styled from 'styled-components';
 import ToggleNav from '@/components/home/open-box/toggle-nav';
 import withLayout from '@/hoc/withLayout';
 import LocationIcon from '@/components/icons/location-icon';
+import { useRouter } from 'next/router';
 
 export type OpenStatusType = 'close' | 'open' | 'mid';
 
 function ListPage() {
+  const router = useRouter();
   const [current, setCurrent] = useState<CurrentStep>(1);
   const { wishs, mys, friends, reload } = useGetRestaurantList();
 
@@ -23,7 +25,9 @@ function ListPage() {
     <Wrapper>
       <InnerWrapper>
         <LocationIconWrapper>
-          <LocationIcon />
+          <span onClick={() => router.push('/home')}>
+            <LocationIcon />
+          </span>
         </LocationIconWrapper>
         <ToggleNav current={current} handleCurrent={handleCurrent} />
         {current === CurrentStep.Friend && <FriendStep list={friends} />}
@@ -39,7 +43,6 @@ function ListPage() {
 }
 
 const Wrapper = styled.div`
-  /* padding-top: 50px; */
   position: relative;
   padding-bottom: 30px;
 

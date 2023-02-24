@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
         font-family:'Noto Sans KR', -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
       
         /* NOTE: 삭제 */
-        background-color: #353535;
+        /* background-color: #353535; */
       }
       a {
         color: inherit;

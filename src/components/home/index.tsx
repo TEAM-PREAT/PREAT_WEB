@@ -8,6 +8,7 @@ import { RestaurantType } from '@/api/types';
 import { CurrentStep } from '@/components/home/types';
 import Sidebar from '@/components/home/sidebar';
 import useToggle from '@/hooks/useToggle';
+import { useRouter } from 'next/router';
 
 interface MapRestaurantType extends RestaurantType {
   marker: MarkerType;
@@ -22,7 +23,6 @@ export default function Home() {
   const [current, setCurrent] = useState<CurrentStep>(INIT_CURRENT);
   const [midItem, setMidItem] = useState<MapRestaurantType>();
   const [isOpen, toggleIsOpen] = useToggle();
-  console.log('isOpen: ', isOpen);
 
   const handleOpenStatus = (status: OpenStatusType) => {
     setOpenStatus(status);
@@ -71,7 +71,7 @@ const Wrapper = styled.div`
   height: 100%;
   min-height: 100vh;
   position: relative;
-  background-color: #353553;
+  /* background-color: #353553; */
   overflow: hidden;
 `;
 

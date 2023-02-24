@@ -1,11 +1,11 @@
-import { ButtonStyled, FlexAlignCenter } from '@/styles/core';
+import { ButtonStyled } from '@/styles/core';
 import styled from 'styled-components';
 
 export default function FriendList() {
   return (
     <div>
       <Heading>친구 목록</Heading>
-      <Desc>36명의 친구</Desc>
+      <Desc>2명의 친구</Desc>
 
       <ItemWrapper>
         <ImageWrapper></ImageWrapper>
