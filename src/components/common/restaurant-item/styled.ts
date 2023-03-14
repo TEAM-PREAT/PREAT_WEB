@@ -12,6 +12,7 @@ export const RestaurantItemWrapper = styled(MaxItemContainer)`
     border-top: 0.8px solid #cccccc;
   }
 
+  /* NOTE: 제거 필요 */
   img {
     min-width: 92px;
   }

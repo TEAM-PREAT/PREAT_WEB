@@ -17,6 +17,7 @@ interface MapRestaurantType extends RestaurantType {
 interface MapProps {
   handleMarkerClick: (item: MapRestaurantType) => void;
 }
+
 export default function Map({ handleMarkerClick }: MapProps) {
   const { myLocation, setMaker, isLoading } = useMap();
   const [list, setList] = useState<MapRestaurantType[]>([]);
